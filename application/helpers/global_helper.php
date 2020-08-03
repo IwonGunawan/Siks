@@ -55,3 +55,20 @@
 
 		return "";
 	}
+
+	function judul($id=0) {
+		$ci = get_instance();
+
+		$title = "";
+		if ($id > 0) 
+		{
+			$ci->db->select("judul");
+			$ci->db->from("bidang_ajar");
+			$ci->db->where("id", $id);
+
+			$result = $ci->db->get()->row_array();
+			$title = $result['judul'];
+		}
+
+		return $title;
+	}

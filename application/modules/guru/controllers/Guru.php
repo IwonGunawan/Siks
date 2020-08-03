@@ -42,13 +42,6 @@ class Guru extends CI_Controller
           $no++;
           $content = array();
 
-            <th>Nama Lengkap</th>
-                            <th>NIP</th>
-                            <th>JK</th>
-                            <th>Email</th>
-                            <th>Pendidikan Terakhir</th>
-                            <th>Tgl dibuat</th>
-
           $uuid     = $row['uuid'];
           $nama     = $row['nama'];
 
@@ -82,6 +75,7 @@ class Guru extends CI_Controller
     {
       $data["page"]       = "Create";
       $data["content"]    = "guru/v_create";
+      $data["list_ajar"]= $this->M_guru->listBidangAjar();
       
       $this->load->view("app_template", $data);
     }
@@ -131,6 +125,8 @@ class Guru extends CI_Controller
         $data["page"]       = "Edit";
         $data["content"]    = "guru/v_create";
         $data["row"]        = $this->M_guru->edit($guru_uuid);
+        $data["list_ajar"]  = $this->M_guru->listBidangAjar();
+
 
         $this->load->view("app_template", $data);
       }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 03, 2020 at 02:20 AM
+-- Generation Time: Aug 03, 2020 at 04:39 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.1.27
 
@@ -66,7 +66,7 @@ CREATE TABLE `guru` (
   `uuid` char(36) NOT NULL,
   `nama` varchar(225) NOT NULL,
   `nip` varchar(225) NOT NULL,
-  `jk` char(1) NOT NULL DEFAULT '0' COMMENT '0=pria, 1=wanita',
+  `jk` char(1) NOT NULL DEFAULT '0' COMMENT 'M=pria, F=wanita',
   `tempat_lahir` varchar(225) NOT NULL,
   `tgl_lahir` date DEFAULT NULL,
   `alamat` text NOT NULL,

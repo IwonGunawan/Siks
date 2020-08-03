@@ -35,7 +35,7 @@ else {
                   <div class="row">
                     <div class="col-md-6">
                         <div class="row form-group">
-                          <div class="col col-md-3"><label class="form-control-label font-bold font-bold">No Induk</label></div>
+                          <div class="col col-md-3"><label class="form-control-label font-bold">No Induk</label></div>
                           <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['no_induk'];?></p>
                           </div>
                         </div>

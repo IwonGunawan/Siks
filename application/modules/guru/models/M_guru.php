@@ -5,13 +5,6 @@
 */
 class M_guru extends CI_Model
 {
-  <th>Nama Lengkap</th>
-                            <th>NIP</th>
-                            <th>JK</th>
-                            <th>Email</th>
-                            <th>Pendidikan Terakhir</th>
-                            <th>Tgl dibuat</th>
-
 
 	var $table = 'guru';
   var $column_order 	= array(
@@ -123,7 +116,7 @@ class M_guru extends CI_Model
         "email"           => $post['email'],
         "nohp"            => $post['nohp'],
         "pendidikan_terakhir"   => $post['pendidikan_terakhir'],
-        "bidang_ajar"     => $post['bidang_ajar'],
+        "bidang_ajar"     => json_encode($post['bidang_ajar']),
 				"dibuat_oleh"			=> $users_id, 
 				"dibuat_tgl"			=> $datenow, 
 			);
@@ -131,7 +124,7 @@ class M_guru extends CI_Model
 			$this->db->set("uuid", "UUID()", FALSE); 
 			$saved = $this->db->insert("guru", $data);
 			
-			return $saved; // I AM HERE
+			return $saved; 
 		} 
 	}
 
@@ -140,7 +133,7 @@ class M_guru extends CI_Model
     $result   = array();
     if ($guru_uuid !="") 
     {
-      $this->db->where("guru_uuid", $guru_uuid);
+      $this->db->where("uuid", $guru_uuid);
       $this->db->where("deleted", config("NOT_DELETED"));
       $query    = $this->db->get("guru");
       $result   = $query->row_array();
@@ -157,24 +150,21 @@ class M_guru extends CI_Model
       $datenow  = date("Y-m-d H:i:s");
 
       $data 	= array(
-				"guru_name"          => $post['guru_name'],
-        "guru_gender"        => $post['guru_gender'],
-        "guru_brithplace"    => $post['guru_brithplace'],
-        "guru_brithdate"     => $post['guru_brithdate'],
-        "guru_address"       => $post['guru_address'],
-        "guru_nohp"          => $post['guru_nohp'],
-        "guru_email"         => $post['guru_email'],
-        "guru_last_education"=> $post['guru_last_education'],
-        "guru_majors"        => $post['guru_majors'],
-        "guru_universitas"   => $post['guru_universitas'],
-        "guru_graduation_year"       => $post['guru_graduation_year'],
-        "guru_institution_name"      => $post['guru_institution_name'],
-        "guru_longtime_teaching"     => $post['guru_longtime_teaching'],
-				"modified_by"				      => $users_id, 
-				"modified_date"			      => $datenow, 
+				"nama"            => $post['nama'],
+        "nip"             => $post['nip'],
+        "jk"              => $post['jk'],
+        "tempat_lahir"    => $post['tempat_lahir'],
+        "tgl_lahir"       => $post['tgl_lahir'],
+        "alamat"          => $post['alamat'],
+        "email"           => $post['email'],
+        "nohp"            => $post['nohp'],
+        "pendidikan_terakhir"   => $post['pendidikan_terakhir'],
+        "bidang_ajar"     => json_encode($post['bidang_ajar']),
+				"diubah_oleh"     => $users_id, 
+				"diubah_tgl"      => $datenow, 
 			);
       
-      $this->db->where("guru_uuid", $post['guru_uuid']);
+      $this->db->where("uuid", $post['uuid']);
       $update = $this->db->update("guru", $data);
       
       return $update;
@@ -186,8 +176,8 @@ class M_guru extends CI_Model
   	
   	if (count($rowData) > 0) 
   	{
-  		$rowData['created_by']		= $this->changeBy($rowData['created_by']);
-  		$rowData['modified_by']	  = ($rowData['modified_by'] == null) ? "" : $this->changeBy($rowData['modified_by']);
+  		$rowData['dibuat_oleh']		= $this->changeBy($rowData['dibuat_oleh']);
+  		$rowData['diubah_oleh']	  = ($rowData['diubah_oleh'] == null) ? "" : $this->changeBy($rowData['diubah_oleh']);
   	}
 
   	return $rowData;
@@ -198,7 +188,7 @@ class M_guru extends CI_Model
     if ($uuid != "") 
     {
       $this->db->set("deleted", 1);
-      $this->db->where("guru_uuid", $uuid);
+      $this->db->where("uuid", $uuid);
       $delete   = $this->db->update("guru");
 
       return TRUE;
@@ -222,6 +212,16 @@ class M_guru extends CI_Model
   	}
 
   	return $result;
+  }
+
+  public function listBidangAjar() {
+    $this->db->select("id, judul");
+    $this->db->from("bidang_ajar");
+    $this->db->where("deleted", config("NOT_DELETED"));
+    $get = $this->db->get();
+
+    $result = $get->result_array();
+    return $result;
   }
 
 	
