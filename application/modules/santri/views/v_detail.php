@@ -1,16 +1,24 @@
 
+
 <?php
-$modified_date = $data['modified_date'];
-if ($modified_date != NULL) {
-  $modified_date = date("d-m-Y H:i:s", strtotime($data['modified_date']));
+$diubah_tgl = $data['diubah_tgl'];
+if ($diubah_tgl != NULL) {
+  $diubah_tgl = date("d-m-Y H:i:s", strtotime($data['diubah_tgl']));
 }
 else {
-  $modified_date = "-";
+  $diubah_tgl = "-";
 }
-
-
 ?>
 
+<style type="text/css">
+  .form-group {
+    margin-bottom: unset !important;
+  }
+
+  .font-bold {
+    font-weight: bold;
+  }
+</style>
 
 
 <div class="content mt-3">
@@ -27,76 +35,124 @@ else {
                   <div class="row">
                     <div class="col-md-6">
                         <div class="row form-group">
-                          <div class="col col-md-3"><label class=" form-control-label">Nama Depan</label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['santri_first_name'];?></p>
+                          <div class="col col-md-3"><label class="form-control-label font-bold font-bold">No Induk</label></div>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['no_induk'];?></p>
                           </div>
                         </div>
 
                         <div class="row form-group">
-                          <div class="col col-md-3"><label class=" form-control-label">Nama Belakang</label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['santri_last_name'];?></p>
+                          <div class="col col-md-3"><label class=" form-control-label font-bold">NISN</label></div>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['nisn'];?></p>
                           </div>
                         </div>
 
                         <div class="row form-group">
-                          <div class="col col-md-3"><label class=" form-control-label">Jenis Kelamin</label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=($data['santri_gender']=="M") ? "Pria" : "Wanita";?></p>
+                          <div class="col col-md-3"><label class=" form-control-label font-bold">Nama Lengkap</label></div>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['nama'];?></p>
                           </div>
                         </div>
 
                         <div class="row form-group">
-                          <div class="col col-md-3"><label class=" form-control-label">Tempat, Tgl Lahir</label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['santri_birthplace'].", ".date("d-m-Y", strtotime($data['santri_birthdate']));?></p>
+                          <div class="col col-md-3"><label class=" form-control-label font-bold">Jenis Kelamin</label></div>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=($data['jk']=="M") ? "Pria" : "Wanita";?></p>
                           </div>
                         </div>
 
                         <div class="row form-group">
-                          <div class="col col-md-3"><label class=" form-control-label">Alamat</label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['santri_address'];?></p>
+                          <div class="col col-md-3"><label class=" form-control-label font-bold">Tempat, Tgl Lahir</label></div>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['tempat_lahir'].", ".date("d-m-Y", strtotime($data['tgl_lahir']));?></p>
                           </div>
                         </div>
 
                         <div class="row form-group">
-                          <div class="col col-md-3"><label class=" form-control-label">No Hp</label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['santri_nohp'];?></p>
+                          <div class="col col-md-3"><label class=" form-control-label font-bold">Agama</label></div>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['agama'];?></p>
+                          </div>
+                        </div>
+
+                        <div class="row form-group">
+                          <div class="col col-md-3"><label class=" form-control-label font-bold">Status dlm Keluarga</label></div>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['status'];?></p>
+                          </div>
+                        </div>
+
+                        <div class="row form-group">
+                          <div class="col col-md-3"><label class=" form-control-label font-bold">Anak ke </label></div>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['anak_ke'];?></p>
+                          </div>
+                        </div>
+
+                        <div class="row form-group">
+                          <div class="col col-md-3"><label class=" form-control-label font-bold">Alamat</label></div>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['alamat'];?></p>
+                          </div>
+                        </div>
+
+                        <div class="row form-group">
+                          <div class="col col-md-3"><label class=" form-control-label font-bold">Asal Sekolah</label></div>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['asal_sekolah'];?></p>
                           </div>
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="row form-group">
-                          <div class="col col-md-3"><label class=" form-control-label">Nama Ayah</label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['santri_father_name'];?></p>
+                          <div class="col col-md-3"><label class=" form-control-label font-bold">diterima dikelas</label></div>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['diterima_dikelas'];?></p>
                           </div>
                         </div>
 
                         <div class="row form-group">
-                          <div class="col col-md-3"><label class=" form-control-label">Pekerjaan Ayah</label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['santri_father_job'];?></p>
+                          <div class="col col-md-3"><label class=" form-control-label font-bold">Tanggal diterima</label></div>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['tgl_terima'];?></p>
                           </div>
                         </div>
 
                         <div class="row form-group">
-                          <div class="col col-md-3"><label class=" form-control-label">Nama Ibu</label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['santri_mother_name'];?></p>
+                          <div class="col col-md-3"><label class=" form-control-label font-bold">Nama Ayah</label></div>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['ayah'];?></p>
                           </div>
                         </div>
 
                         <div class="row form-group">
-                          <div class="col col-md-3"><label class=" form-control-label">Pekerjaan Ibu</label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['santri_mother_job'];?></p>
+                          <div class="col col-md-3"><label class=" form-control-label font-bold">Pekerjaan Ayah</label></div>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['ayah_pekerjaan'];?></p>
                           </div>
                         </div>
 
                         <div class="row form-group">
-                          <div class="col col-md-3"><label class=" form-control-label">Tanggal dibuat</label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=date("d-m-Y H:i:s", strtotime($data['created_date']));?></p>
+                          <div class="col col-md-3"><label class=" form-control-label font-bold">Nama Ibu</label></div>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['ibu'];?></p>
                           </div>
                         </div>
 
                         <div class="row form-group">
-                          <div class="col col-md-3"><label class=" form-control-label">Tanggal diubah </label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$modified_date; ?></p>
+                          <div class="col col-md-3"><label class=" form-control-label font-bold">Pekerjaan Ibu</label></div>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['ibu_pekerjaan'];?></p>
+                          </div>
+                        </div>
+
+                        <div class="row form-group">
+                          <div class="col col-md-3"><label class=" form-control-label font-bold">Nama Wali</label></div>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['wali'];?></p>
+                          </div>
+                        </div>
+
+                        <div class="row form-group">
+                          <div class="col col-md-3"><label class=" form-control-label font-bold">Pekerjaan Wali</label></div>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['wali_pekerjaan'];?></p>
+                          </div>
+                        </div>
+
+                        <div class="row form-group">
+                          <div class="col col-md-3"><label class=" form-control-label font-bold">Tanggal dibuat</label></div>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=date("d-m-Y H:i:s", strtotime($data['dibuat_tgl']));?></p>
+                          </div>
+                        </div>
+
+                        <div class="row form-group">
+                          <div class="col col-md-3"><label class=" form-control-label font-bold">Tanggal diubah </label></div>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$diubah_tgl; ?></p>
                           </div>
                         </div>
                     </div>

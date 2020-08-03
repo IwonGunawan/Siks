@@ -2,7 +2,7 @@
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 
-class Teacher extends CI_Controller 
+class Guru extends CI_Controller 
 {
     public function __construct() 
     {
@@ -11,7 +11,7 @@ class Teacher extends CI_Controller
       is_login();
 
       // library and model
-      $this->load->model("M_teacher");
+      $this->load->model("M_guru");
       $this->load->helper('global');
       $this->load->helper('config');
       $this->load->library('session');
@@ -25,14 +25,14 @@ class Teacher extends CI_Controller
  
     public function index()
     {
-      $data["page"]      = "Teacher";
-      $data["content"]   = "teacher/v_index";
+      $data["page"]      = "Guru";
+      $data["content"]   = "guru/v_index";
       $this->load->view("app_template", $data);
     } 
 
     public function ajax_list()
     {
-      $list = $this->M_teacher->getData();
+      $list = $this->M_guru->getData();
       
       
       $data = array();
@@ -42,21 +42,27 @@ class Teacher extends CI_Controller
           $no++;
           $content = array();
 
+            <th>Nama Lengkap</th>
+                            <th>NIP</th>
+                            <th>JK</th>
+                            <th>Email</th>
+                            <th>Pendidikan Terakhir</th>
+                            <th>Tgl dibuat</th>
 
-          $teacher_uuid = $row['teacher_uuid'];
-          $teacher_name = $row['teacher_name'];
+          $uuid     = $row['uuid'];
+          $nama     = $row['nama'];
 
-          $content[] = "<a href='".base_url('teacher/detail/'.$teacher_uuid)."'>".$teacher_name."</a>";
-          $content[] = $row['teacher_nohp'];
-          $content[] = $row['teacher_email'];
-          $content[] = $row['teacher_last_education'];
-          $content[] = $row['teacher_majors'];
-          $content[] = date("Y-m-d H:i:s", strtotime($row['created_date']));
+          $content[] = "<a href='".base_url('guru/detail/'.$uuid)."'>".$nama."</a>";
+          $content[] = $row['nip'];
+          $content[] = ($row['jk'] == "M") ? "Laki-laki" : "Perempuan";
+          $content[] = $row['email'];
+          $content[] = $row['pendidikan_terakhir'];
+          $content[] = date("d-m-Y H:i", strtotime($row['dibuat_tgl']));
 
           
           $btn = "
-                  <a class='table-action hover-primary' href='".base_url('teacher/edit/'.$teacher_uuid)."'><i class='ti-pencil'></i> Edit </a> | 
-                  <a class='table-action hover-danger' href='".base_url('teacher/delete/'.$teacher_uuid)."' onclick='return confirm(\"DELETE DATA ?\")'><i class='ti-trash'></i> Del</a>
+                  <a class='table-action hover-primary' href='".base_url('guru/edit/'.$uuid)."'><i class='ti-pencil'></i> Edit </a> | 
+                  <a class='table-action hover-danger' href='".base_url('guru/delete/'.$uuid)."' onclick='return confirm(\"HAPUS DATA ?\")'><i class='ti-trash'></i> Del</a>
                 ";
           $content[]  = $btn;
 
@@ -65,8 +71,8 @@ class Teacher extends CI_Controller
 
       $output = array(
                       "draw" => $_POST['draw'],
-                      "recordsTotal" => $this->M_teacher->count_all(),
-                      "recordsFiltered" => $this->M_teacher->count_filtered(),
+                      "recordsTotal" => $this->M_guru->count_all(),
+                      "recordsFiltered" => $this->M_guru->count_filtered(),
                       "data" => $data,
               );
       echo json_encode($output);
@@ -75,7 +81,7 @@ class Teacher extends CI_Controller
     public function create()
     {
       $data["page"]       = "Create";
-      $data["content"]    = "teacher/v_create";
+      $data["content"]    = "guru/v_create";
       
       $this->load->view("app_template", $data);
     }
@@ -85,11 +91,11 @@ class Teacher extends CI_Controller
       $post   = $this->input->post();
       
       $msg  = "Failed, try again!";
-      $url  = "teacher";
+      $url  = "guru";
 
       if (count($post) > 0) 
       {
-        $process  = $this->M_teacher->save($post, $this->sess['users_id']);
+        $process  = $this->M_guru->save($post, $this->sess['users_id']);
         if ($process > 0) 
         {
           $msg      = "Data saved successfully";
@@ -100,38 +106,38 @@ class Teacher extends CI_Controller
       redirect(base_url($url));
     }
 
-    public function detail($teacher_uuid="") 
+    public function detail($guru_uuid="") 
     {
-      $rowData            = $this->M_teacher->edit($teacher_uuid);
-      $data["page"]       = "Detail ".$rowData['teacher_name'];
-      $data["content"]    = "teacher/v_detail";
+      $rowData            = $this->M_guru->edit($guru_uuid);
+      $data["page"]       = "Detail ".$rowData['nama'];
+      $data["content"]    = "guru/v_detail";
 
       if (count($rowData) > 0) 
       {
-        $data["data"]       = $this->M_teacher->detail($rowData);
+        $data["data"]       = $this->M_guru->detail($rowData);
         
         $this->load->view("app_template", $data); 
       }
       else 
       {
-        redirect(base_url('teacher'));  
+        redirect(base_url('guru'));  
       }
     }
 
-    public function edit($teacher_uuid="")
+    public function edit($guru_uuid="")
     {
-      if ($teacher_uuid != "") 
+      if ($guru_uuid != "") 
       {
         $data["page"]       = "Edit";
-        $data["content"]    = "teacher/v_create";
-        $data["row"]        = $this->M_teacher->edit($teacher_uuid);
+        $data["content"]    = "guru/v_create";
+        $data["row"]        = $this->M_guru->edit($guru_uuid);
 
         $this->load->view("app_template", $data);
       }
       else
       {
         $this->session->set_flashdata("msg", "Data not found");
-        return redirect(base_url("teacher"));
+        return redirect(base_url("guru"));
       }
     }
 
@@ -140,11 +146,11 @@ class Teacher extends CI_Controller
       $post   = $this->input->post();
       
       $msg  = "Failed, try again!";
-      $url  = "teacher";
+      $url  = "guru";
 
       if (count($post) > 0) 
       {
-        $process  = $this->M_teacher->update($post, $this->sess['users_id']);
+        $process  = $this->M_guru->update($post, $this->sess['users_id']);
         if ($process > 0) 
         {
           $msg      = "Data has been changed";
@@ -155,11 +161,11 @@ class Teacher extends CI_Controller
       redirect(base_url($url));
     }
 
-    public function delete($teacher_uuid="")
+    public function delete($guru_uuid="")
     {
-      if ($teacher_uuid != "") 
+      if ($guru_uuid != "") 
       {
-        $process = $this->M_teacher->delete($teacher_uuid);
+        $process = $this->M_guru->delete($guru_uuid);
         if ($process == TRUE) 
         {
           $msg = "Data deleted";
@@ -174,7 +180,7 @@ class Teacher extends CI_Controller
       }
 
       $this->session->set_flashdata("danger", $msg);
-      return redirect(base_url("teacher"));
+      return redirect(base_url("guru"));
     }    
     /* END CRUD */
     

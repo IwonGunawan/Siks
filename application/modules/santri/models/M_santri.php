@@ -8,25 +8,29 @@ class M_santri extends CI_Model
 
 	var $table = 'santri';
   var $column_order 	= array(
-  								'santri_first_name',
-  								'santri_last_name',
-                  'santri_gender', 
-                  'santri_birthplace',
-  								'santri_birthdate',
-                  'santri_father_name', 
-                  'santri_mother_name', 
-                  'created_date' 
+  								'no_induk',
+  								'nisn',
+                  'nama', 
+                  'jk',
+  								'tempat_lahir',
+                  'tgl_lahir',
+                  'ayah', 
+                  'ibu',
+                  'wali', 
+                  'dibuat_tgl' 
   							); 
   var $column_search 	= array(
-  								'santri_first_name',
-                  'santri_last_name',
-                  'santri_gender', 
-                  'santri_birthplace',
-                  'santri_birthdate',
-                  'santri_father_name', 
-                  'santri_mother_name'
+  								'no_induk',
+                  'nisn',
+                  'nama', 
+                  'jk',
+                  'tempat_lahir',
+                  'tgl_lahir',
+                  'ayah', 
+                  'ibu',
+                  'wali'
   							);
-  var $order = array('created_date' => 'DESC'); // default order 
+  var $order = array('dibuat_tgl' => 'DESC'); // default order 
 
 
 
@@ -112,34 +116,42 @@ class M_santri extends CI_Model
 			$datenow 	= date("Y-m-d H:i:s");
 
 			$data 	= array(
-				"santri_first_name"       => $post['santri_first_name'], 
-				"santri_last_name"        => $post['santri_last_name'], 
-				"santri_gender"           => $post['santri_gender'],
-        "santri_birthplace"       => $post['santri_birthplace'],
-        "santri_birthdate"        => $post['santri_birthdate'], 
-				"santri_address"		      => $post['santri_address'], 
-        "santri_nohp"             => $post['santri_nohp'], 
-        "santri_father_name"      => $post['santri_father_name'], 
-        "santri_father_job"       => $post['santri_father_job'], 
-        "santri_mother_name"      => $post['santri_mother_name'], 
-        "santri_mother_job"       => $post['santri_mother_job'],
-				"created_by"				=> $users_id, 
-				"created_date"			=> $datenow, 
+				"no_induk"        => $post['no_induk'], 
+				"nisn"            => $post['nisn'], 
+				"nama"            => $post['nama'],
+        "jk"              => $post['jk'],
+        "tempat_lahir"    => $post['tempat_lahir'], 
+				"tgl_lahir"		    => $post['tgl_lahir'], 
+        "agama"           => $post['agama'], 
+        "status"          => $post['status'], 
+        "anak_ke"         => $post['anak_ke'], 
+        "alamat"          => $post['alamat'], 
+        "asal_sekolah"    => $post['asal_sekolah'],
+        "diterima_dikelas"  => $post['diterima_dikelas'], 
+        "tgl_terima"      => $post['tgl_terima'],
+        "ayah"            => $post['ayah'], 
+        "ayah_pekerjaan"  => $post['ayah_pekerjaan'],
+        "ibu"             => $post['ibu'], 
+        "ibu_pekerjaan"   => $post['ibu_pekerjaan'], 
+        "wali"            => $post['wali'],
+        "wali_pekerjaan"  => $post['wali_pekerjaan'],
+				"dibuat_oleh"			=> $users_id, 
+				"dibuat_tgl"		  => $datenow, 
 			);
 		
-			$this->db->set("santri_uuid", "UUID()", FALSE); 
+			$this->db->set("uuid", "UUID()", FALSE); 
 			$saved = $this->db->insert("santri", $data);
 			
 			return $saved;
 		}
 	}
 
-  public function edit($santri_uuid="")
+  public function edit($uuid="")
   {
     $result   = array();
-    if ($santri_uuid !="") 
+    if ($uuid !="") 
     {
-      $this->db->where("santri_uuid", $santri_uuid);
+      $this->db->where("uuid", $uuid);
       $this->db->where("deleted", config("NOT_DELETED"));
       $query    = $this->db->get("santri");
       $result   = $query->row_array();
@@ -156,22 +168,30 @@ class M_santri extends CI_Model
       $datenow  = date("Y-m-d H:i:s");
 
       $data 	= array(
-				"santri_first_name"       => $post['santri_first_name'], 
-        "santri_last_name"        => $post['santri_last_name'], 
-        "santri_gender"           => $post['santri_gender'],
-        "santri_birthplace"       => $post['santri_birthplace'],
-        "santri_birthdate"        => $post['santri_birthdate'], 
-        "santri_address"          => $post['santri_address'], 
-        "santri_nohp"             => $post['santri_nohp'], 
-        "santri_father_name"      => $post['santri_father_name'], 
-        "santri_father_job"       => $post['santri_father_job'], 
-        "santri_mother_name"      => $post['santri_mother_name'], 
-        "santri_mother_job"       => $post['santri_mother_job'],
-				"modified_by"				      => $users_id, 
-				"modified_date"			      => $datenow, 
+				"no_induk"        => $post['no_induk'], 
+        "nisn"            => $post['nisn'], 
+        "nama"            => $post['nama'],
+        "jk"              => $post['jk'],
+        "tempat_lahir"    => $post['tempat_lahir'], 
+        "tgl_lahir"       => $post['tgl_lahir'], 
+        "agama"           => $post['agama'], 
+        "status"          => $post['status'], 
+        "anak_ke"         => $post['anak_ke'], 
+        "alamat"          => $post['alamat'], 
+        "asal_sekolah"    => $post['asal_sekolah'],
+        "diterima_dikelas"  => $post['diterima_dikelas'], 
+        "tgl_terima"      => $post['tgl_terima'],
+        "ayah"            => $post['ayah'], 
+        "ayah_pekerjaan"  => $post['ayah_pekerjaan'],
+        "ibu"             => $post['ibu'], 
+        "ibu_pekerjaan"   => $post['ibu_pekerjaan'], 
+        "wali"            => $post['wali'],
+        "wali_pekerjaan"  => $post['wali_pekerjaan'],
+				"diubah_oleh"			=> $users_id, 
+				"diubah_tgl"			=> $datenow, 
 			);
       
-      $this->db->where("santri_uuid", $post['santri_uuid']);
+      $this->db->where("uuid", $post['uuid']);
       $update = $this->db->update("santri", $data);
       
       return $update;
@@ -183,8 +203,8 @@ class M_santri extends CI_Model
   	
   	if (count($rowData) > 0) 
   	{
-  		$rowData['created_by']		= $this->changeBy($rowData['created_by']);
-  		$rowData['modified_by']	  = ($rowData['modified_by'] == null) ? "" : $this->changeBy($rowData['modified_by']);
+  		$rowData['dibuat_oleh']		= $this->changeBy($rowData['dibuat_oleh']);
+  		$rowData['diubah_oleh']	  = ($rowData['diubah_oleh'] == null) ? "" : $this->changeBy($rowData['diubah_oleh']);
   	}
 
   	return $rowData;
@@ -195,7 +215,7 @@ class M_santri extends CI_Model
     if ($uuid != "") 
     {
       $this->db->set("deleted", 1);
-      $this->db->where("santri_uuid", $uuid);
+      $this->db->where("uuid", $uuid);
       $delete   = $this->db->update("santri");
 
       return TRUE;

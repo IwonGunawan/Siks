@@ -31,13 +31,16 @@
                   <table id="datatable" class="table table-bordered dt-responsive nowrap">
                       <thead>
                         <tr>
+                            <th>No Induk</th>
+                            <th>NISN</th>
                             <th>Nama Lengkap</th>
                             <th>JK</th>
                             <th>Tanggal Lahir</th>
-                            <th>Nama Ayah</th>
-                            <th>Nama Ibu</th>
+                            <th>Ayah</th>
+                            <th>Ibu</th>
+                            <th>Wali</th>
                             <th>Tgl dibuat</th>
-                            <th>Action</th>
+                            <th></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -79,7 +82,7 @@
       //Set column definition initialisation properties.
       "columnDefs": [
       { 
-          "targets": [ 6 ], //first column / numbering column
+          "targets": [ 9 ], //first column / numbering column
           "orderable": false, //set not orderable
       },
       ],

@@ -1,29 +1,34 @@
 <?php
 
 /**
-* Model teacher
+* Model guru
 */
-class M_teacher extends CI_Model
+class M_guru extends CI_Model
 {
-	var $table = 'teacher';
+  <th>Nama Lengkap</th>
+                            <th>NIP</th>
+                            <th>JK</th>
+                            <th>Email</th>
+                            <th>Pendidikan Terakhir</th>
+                            <th>Tgl dibuat</th>
+
+
+	var $table = 'guru';
   var $column_order 	= array(
-  								'teacher_name',
-  								'teacher_nohp',
-                  'teacher_email', 
-                  'teacher_last_education',
-  								'teacher_majors',
-                  'teacher_graduation_year', 
-                  'created_date' 
+  								'nama',
+  								'nip',
+                  'jk', 
+                  'email',
+  								'pendidikan_terakhir' 
   							); 
   var $column_search 	= array(
-  								'teacher_name',
-                  'teacher_nohp',
-                  'teacher_email', 
-                  'teacher_last_education',
-                  'teacher_majors',
-                  'teacher_graduation_year', 
+  								'nama',
+                  'nip',
+                  'jk', 
+                  'email',
+                  'pendidikan_terakhir' 
   							);
-  var $order = array('created_date' => 'DESC'); // default order 
+  var $order = array('dibuat_tgl' => 'DESC'); // default order 
 
 
 
@@ -51,7 +56,7 @@ class M_teacher extends CI_Model
 	public function _query()
   {
     $this->db->select("*");
-    $this->db->from("teacher");
+    $this->db->from("guru");
     $this->db->where("deleted", config("NOT_DELETED"));
 
     $i = 0;
@@ -109,38 +114,35 @@ class M_teacher extends CI_Model
 			$datenow 	= date("Y-m-d H:i:s");
 
 			$data 	= array(
-        "teacher_name"          => $post['teacher_name'],
-        "teacher_gender"        => $post['teacher_gender'],
-        "teacher_brithplace"    => $post['teacher_brithplace'],
-        "teacher_brithdate"     => $post['teacher_brithdate'],
-        "teacher_address"       => $post['teacher_address'],
-        "teacher_nohp"          => $post['teacher_nohp'],
-        "teacher_email"         => $post['teacher_email'],
-        "teacher_last_education"=> $post['teacher_last_education'],
-        "teacher_majors"        => $post['teacher_majors'],
-        "teacher_universitas"   => $post['teacher_universitas'],
-        "teacher_graduation_year"       => $post['teacher_graduation_year'],
-        "teacher_institution_name"      => $post['teacher_institution_name'],
-        "teacher_longtime_teaching"   => $post['teacher_longtime_teaching'],
-				"created_by"				=> $users_id, 
-				"created_date"			=> $datenow, 
+        "nama"            => $post['nama'],
+        "nip"             => $post['nip'],
+        "jk"              => $post['jk'],
+        "tempat_lahir"    => $post['tempat_lahir'],
+        "tgl_lahir"       => $post['tgl_lahir'],
+        "alamat"          => $post['alamat'],
+        "email"           => $post['email'],
+        "nohp"            => $post['nohp'],
+        "pendidikan_terakhir"   => $post['pendidikan_terakhir'],
+        "bidang_ajar"     => $post['bidang_ajar'],
+				"dibuat_oleh"			=> $users_id, 
+				"dibuat_tgl"			=> $datenow, 
 			);
 		
-			$this->db->set("teacher_uuid", "UUID()", FALSE); 
-			$saved = $this->db->insert("teacher", $data);
+			$this->db->set("uuid", "UUID()", FALSE); 
+			$saved = $this->db->insert("guru", $data);
 			
-			return $saved;
+			return $saved; // I AM HERE
 		} 
 	}
 
-  public function edit($teacher_uuid="")
+  public function edit($guru_uuid="")
   {
     $result   = array();
-    if ($teacher_uuid !="") 
+    if ($guru_uuid !="") 
     {
-      $this->db->where("teacher_uuid", $teacher_uuid);
+      $this->db->where("guru_uuid", $guru_uuid);
       $this->db->where("deleted", config("NOT_DELETED"));
-      $query    = $this->db->get("teacher");
+      $query    = $this->db->get("guru");
       $result   = $query->row_array();
     }
 
@@ -155,25 +157,25 @@ class M_teacher extends CI_Model
       $datenow  = date("Y-m-d H:i:s");
 
       $data 	= array(
-				"teacher_name"          => $post['teacher_name'],
-        "teacher_gender"        => $post['teacher_gender'],
-        "teacher_brithplace"    => $post['teacher_brithplace'],
-        "teacher_brithdate"     => $post['teacher_brithdate'],
-        "teacher_address"       => $post['teacher_address'],
-        "teacher_nohp"          => $post['teacher_nohp'],
-        "teacher_email"         => $post['teacher_email'],
-        "teacher_last_education"=> $post['teacher_last_education'],
-        "teacher_majors"        => $post['teacher_majors'],
-        "teacher_universitas"   => $post['teacher_universitas'],
-        "teacher_graduation_year"       => $post['teacher_graduation_year'],
-        "teacher_institution_name"      => $post['teacher_institution_name'],
-        "teacher_longtime_teaching"     => $post['teacher_longtime_teaching'],
+				"guru_name"          => $post['guru_name'],
+        "guru_gender"        => $post['guru_gender'],
+        "guru_brithplace"    => $post['guru_brithplace'],
+        "guru_brithdate"     => $post['guru_brithdate'],
+        "guru_address"       => $post['guru_address'],
+        "guru_nohp"          => $post['guru_nohp'],
+        "guru_email"         => $post['guru_email'],
+        "guru_last_education"=> $post['guru_last_education'],
+        "guru_majors"        => $post['guru_majors'],
+        "guru_universitas"   => $post['guru_universitas'],
+        "guru_graduation_year"       => $post['guru_graduation_year'],
+        "guru_institution_name"      => $post['guru_institution_name'],
+        "guru_longtime_teaching"     => $post['guru_longtime_teaching'],
 				"modified_by"				      => $users_id, 
 				"modified_date"			      => $datenow, 
 			);
       
-      $this->db->where("teacher_uuid", $post['teacher_uuid']);
-      $update = $this->db->update("teacher", $data);
+      $this->db->where("guru_uuid", $post['guru_uuid']);
+      $update = $this->db->update("guru", $data);
       
       return $update;
     }
@@ -196,8 +198,8 @@ class M_teacher extends CI_Model
     if ($uuid != "") 
     {
       $this->db->set("deleted", 1);
-      $this->db->where("teacher_uuid", $uuid);
-      $delete   = $this->db->update("teacher");
+      $this->db->where("guru_uuid", $uuid);
+      $delete   = $this->db->update("guru");
 
       return TRUE;
     }

@@ -23,19 +23,19 @@
               ?>
 
               <div class="card-header">
-                  <a href="<?=base_url('teacher/create'); ?>" class="btn btn-primary"><i class="fa fa-plus"></i>&nbsp; Create New</a>
+                  <a href="<?=base_url('guru/create'); ?>" class="btn btn-primary"><i class="fa fa-plus"></i>&nbsp; Create New</a>
               </div>
               <div class="card-body">
                   <table id="datatable" class="table table-bordered dt-responsive nowrap">
                       <thead>
                         <tr>
                             <th>Nama Lengkap</th>
-                            <th>NoHp</th>
+                            <th>NIP</th>
+                            <th>JK</th>
                             <th>Email</th>
                             <th>Pendidikan Terakhir</th>
-                            <th>Jurusan</th>
                             <th>Tgl dibuat</th>
-                            <th>Action</th>
+                            <th></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -70,7 +70,7 @@
 
       // Load data for the table's content from an Ajax source
       "ajax": {
-          "url": "<?php echo site_url('teacher/ajax_list'); ?>",
+          "url": "<?php echo site_url('guru/ajax_list'); ?>",
           "type": "POST"
       },
 

@@ -49,21 +49,24 @@ class Santri extends CI_Controller
           $no++;
           $content = array();
 
-          $santri_uuid = $row['santri_uuid'];
-          $santri_name = $row['santri_first_name']." ".$row['santri_last_name'];
-          $birthdate   = $row['santri_birthplace'].", ".date("Y-m-d", strtotime($row['santri_birthdate']));
+          $uuid  = $row['uuid'];
+          $ttl   = $row['tempat_lahir'].", ".date("Y-m-d", strtotime($row['tgl_lahir']));
 
-          $content[] = "<a href='".base_url('santri/detail/'.$santri_uuid)."'>".$santri_name."</a>";
-          $content[] = ($row['santri_gender'] == "F") ? "Wanita" : "Pria";
-          $content[] = $birthdate;
-          $content[] = $row['santri_father_name'];
-          $content[] = $row['santri_mother_name'];
-          $content[] = date("Y-m-d H:i:s", strtotime($row['created_date']));
+
+          $content[] = "<a href='".base_url('santri/detail/'.$uuid)."'>".$row['nama']."</a>";
+          $content[] = $row['no_induk'];
+          $content[] = $row['nisn'];
+          $content[] = ($row['jk'] == "F") ? "Wanita" : "Pria";
+          $content[] = $ttl;
+          $content[] = $row['ayah'];
+          $content[] = $row['ibu'];
+          $content[] = $row['wali'];
+          $content[] = date("d/m/Y H:i", strtotime($row['dibuat_tgl']));
 
           
           $btn = "
-                  <a class='table-action hover-primary' href='".base_url('santri/edit/'.$santri_uuid)."'><i class='ti-pencil'></i> Edit </a> | 
-                  <a class='table-action hover-danger' href='".base_url('santri/delete/'.$santri_uuid)."' onclick='return confirm(\"DELETE DATA ?\")'><i class='ti-trash'></i> Del</a>
+                  <a class='table-action hover-primary' href='".base_url('santri/edit/'.$uuid)."'><i class='ti-pencil'></i> Edit </a> | 
+                  <a class='table-action hover-danger' href='".base_url('santri/delete/'.$uuid)."' onclick='return confirm(\"HAPUS DATA ?\")'><i class='ti-trash'></i> Del</a>
                 ";
           $content[]  = $btn;
 
@@ -110,7 +113,7 @@ class Santri extends CI_Controller
     public function detail($santri_uuid="") 
     {
       $rowData            = $this->M_santri->edit($santri_uuid);
-      $data["page"]       = "Detail ".$rowData['santri_first_name'];
+      $data["page"]       = "Detail ".$rowData['nama'];
       $data["content"]    = "santri/v_detail";
 
       if (count($rowData) > 0) 
@@ -215,17 +218,26 @@ class Santri extends CI_Controller
 
       $spreadsheet->setActiveSheetIndex(0)
                   ->setCellValue('A1', 'No')
-                  ->setCellValue('B1', 'Nama Depan')
-                  ->setCellValue('C1', 'Nama Belakang')
-                  ->setCellValue('D1', 'JK')
-                  ->setCellValue('E1', 'Tempat Lahir')
-                  ->setCellValue('F1', 'Tanggal Lahir')
-                  ->setCellValue('G1', 'Alamat')
-                  ->setCellValue('H1', 'No Hp')
-                  ->setCellValue('I1', 'Nama Ayah')
-                  ->setCellValue('J1', 'Pekerjaan Ayah')
-                  ->setCellValue('K1', 'Nama Ibu')
-                  ->setCellValue('L1', 'Pekerjaan Ibu');
+                  ->setCellValue('B1', 'Nama Lengkap')
+                  ->setCellValue('C1', 'No Induk')
+                  ->setCellValue('D1', 'NISN')
+                  ->setCellValue('E1', 'JK')
+                  ->setCellValue('F1', 'Tempat Lahir')
+                  ->setCellValue('G1', 'Tanggal Lahir')
+                  ->setCellValue('H1', 'Agama')
+                  ->setCellValue('I1', 'Status dlm Keluarga')
+                  ->setCellValue('J1', 'Anak ke-')
+                  ->setCellValue('K1', 'Alamat')
+                  ->setCellValue('L1', 'Asal Sekolah')
+                  ->setCellValue('M1', 'Diterima dikelas')
+                  ->setCellValue('N1', 'Tgl diterima')
+                  ->setCellValue('O1', 'Ayah')
+                  ->setCellValue('P1', 'Pekerjaan Ayah')
+                  ->setCellValue('Q1', 'Ibu')
+                  ->setCellValue('R1', 'Pekerjaan Ibu')
+                  ->setCellValue('S1', 'Wali')
+                  ->setCellValue('T1', 'Pekerjaan Wali');
+                  
 
       $column = 2;
       $number = 1;
@@ -233,17 +245,25 @@ class Santri extends CI_Controller
       {
          $spreadsheet->setActiveSheetIndex(0)
                      ->setCellValue('A' . $column, $number)
-                     ->setCellValue('B' . $column, $row['santri_first_name'])
-                     ->setCellValue('C' . $column, $row['santri_last_name'])
-                     ->setCellValue('D' . $column, $row['santri_gender'])
-                     ->setCellValue('E' . $column, $row['santri_birthplace'])
-                     ->setCellValue('F' . $column, $row['santri_birthdate'])
-                     ->setCellValue('G' . $column, $row['santri_address'])
-                     ->setCellValue('H' . $column, $row['santri_nohp'])
-                     ->setCellValue('I' . $column, $row['santri_father_name'])
-                     ->setCellValue('J' . $column, $row['santri_father_job'])
-                     ->setCellValue('K' . $column, $row['santri_mother_name'])
-                     ->setCellValue('L' . $column, $row['santri_mother_job']);
+                     ->setCellValue('B' . $column, $row['nama'])
+                     ->setCellValue('C' . $column, $row['no_induk'])
+                     ->setCellValue('D' . $column, $row['nisn'])
+                     ->setCellValue('E' . $column, $row['jk'])
+                     ->setCellValue('F' . $column, $row['tempat_lahir'])
+                     ->setCellValue('G' . $column, $row['tgl_lahir'])
+                     ->setCellValue('H' . $column, $row['agama'])
+                     ->setCellValue('I' . $column, $row['status'])
+                     ->setCellValue('J' . $column, $row['anak_ke'])
+                     ->setCellValue('K' . $column, $row['alamat'])
+                     ->setCellValue('L' . $column, $row['asal_sekolah'])
+                     ->setCellValue('M' . $column, $row['diterima_dikelas'])
+                     ->setCellValue('N' . $column, $row['tgl_terima'])
+                     ->setCellValue('O' . $column, $row['ayah'])
+                     ->setCellValue('P' . $column, $row['ayah_pekerjaan'])
+                     ->setCellValue('Q' . $column, $row['ibu'])
+                     ->setCellValue('R' . $column, $row['ibu_pekerjaan'])
+                     ->setCellValue('S' . $column, $row['wali'])
+                     ->setCellValue('T' . $column, $row['wali_pekerjaan']);
 
            $column++;
            $number++;
@@ -289,62 +309,96 @@ class Santri extends CI_Controller
                     <small>Total Data: '.$rowTotal.'</small>
                     <table class="table table-striped table-bordered">
                      <tr>
-                        <th>Nama Depan</th>
-                        <th>Nama Belakang</th>
+                        <th>Nama Lengkap</th>
+                        <th>No Induk</th>
+                        <th>NISN</th>
                         <th>JK</th>
                         <th>Tmp Lahir</th>
                         <th>Tgl Lahir</th>
+                        <th>Agama</th>
+                        <th>Status dlm Keluarga</th>
+                        <th>Anak ke-</th>
                         <th>Alamat</th>
-                        <th>No HP</th>
-                        <th>Nama Ayah</th>
+                        <th>Asal Sekolah</th>
+                        <th>Diterima dikelas</th>
+                        <th>Tgl diterima</th>
+                        <th>Ayah</th>
                         <th>Pekerjaan Ayah</th>
-                        <th>Nama Ibu</th>
+                        <th>Ibu</th>
                         <th>Pekerjaan Ibu</th>
+                        <th>Wali</th>
+                        <th>Pekerjaan Wali</th>
                      </tr>';
 
                     for($row=2; $row<=$highestRow; $row++)
                     {
 
-                       $first_name      = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
-                       $last_name       = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
-                       $gender          = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
-                       $birthplace      = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
-                       $birthdate       = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
-                       $address         = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
-                       $nohp            = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
-                       $father_name     = $worksheet->getCellByColumnAndRow(7, $row)->getValue();
-                       $father_job      = $worksheet->getCellByColumnAndRow(8, $row)->getValue();
-                       $mother_name     = $worksheet->getCellByColumnAndRow(9, $row)->getValue();
-                       $mother_job      = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
+                       $nama          = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+                       $no_induk      = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                       $nisn          = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                       $jk            = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                       $tempat_lahir  = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+                       $tgl_lahir     = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+                       $agama         = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
+                       $status        = $worksheet->getCellByColumnAndRow(7, $row)->getValue();
+                       $anak_ke       = $worksheet->getCellByColumnAndRow(8, $row)->getValue();
+                       $alamat        = $worksheet->getCellByColumnAndRow(9, $row)->getValue();
+                       $asal_sekolah  = $worksheet->getCellByColumnAndRow(10, $row)->getValue();
+                       $diterima_dikelas          = $worksheet->getCellByColumnAndRow(11, $row)->getValue();
+                       $tgl_terima    = $worksheet->getCellByColumnAndRow(12, $row)->getValue();
+                       $ayah          = $worksheet->getCellByColumnAndRow(13, $row)->getValue();
+                       $ayah_pekerjaan            = $worksheet->getCellByColumnAndRow(14, $row)->getValue();
+                       $ibu           = $worksheet->getCellByColumnAndRow(15, $row)->getValue();
+                       $ibu_pekerjaan = $worksheet->getCellByColumnAndRow(16, $row)->getValue();
+                       $wali          = $worksheet->getCellByColumnAndRow(17, $row)->getValue();
+                       $wali_pekerjaan            = $worksheet->getCellByColumnAndRow(18, $row)->getValue();
                        
                        $data[] = array(
-                                'santri_uuid'    => $this->uuid->v4(),
-                                'santri_first_name'    => $first_name,
-                                'santri_last_name'   => $last_name,
-                                'santri_gender'  => $gender,
-                                'santri_birthplace' => $birthplace, 
-                                'santri_birthdate' => $birthdate, 
-                                'santri_address' => $address, 
-                                'santri_nohp' => $nohp, 
-                                'santri_father_name' => $father_name, 
-                                'santri_father_job' => $father_job, 
-                                'santri_mother_name' => $mother_name, 
-                                'santri_mother_job' => $mother_job
+                                'uuid'    => $this->uuid->v4(),
+                                'nama'          => $nama,
+                                'no_induk'      => $no_induk,
+                                'nisn'          => $nisn,
+                                'jk'            => $jk, 
+                                'tempat_lahir'  => $tempat_lahir, 
+                                'tgl_lahir'     => $tgl_lahir, 
+                                'agama'         => $agama, 
+                                'status'        => $status, 
+                                'anak_ke'       => $anak_ke, 
+                                'alamat'        => $alamat,
+                                'asal_sekolah'  => $asal_sekolah, 
+                                'diterima_dikelas'    => $diterima_dikelas, 
+                                'tgl_terima'    => $tgl_terima, 
+                                'ayah'          => $ayah, 
+                                'ayah_pekerjaan'      => $ayah_pekerjaan, 
+                                'ibu'           => $ibu, 
+                                'ibu_pekerjaan' => $ibu_pekerjaan, 
+                                'wali'          => $wali, 
+                                'wali_pekerjaan'      => $wali_pekerjaan, 
+                                'dibuat_tgl'    => date("Y-m-d H:i:s"), 
+                                'dibuat_oleh'   => $this->sess['users_id']
                               );
 
           $output .= '
                       <tr>
-                        <td>'.$first_name.'</td>
-                        <td>'.$last_name.'</td>
-                        <td>'.$gender.'</td>
-                        <td>'.$birthplace.'</td>
-                        <td>'.$birthdate.'</td>
-                        <td>'.$address.'</td>
-                        <td>'.$nohp.'</td>
-                        <td>'.$father_name.'</td>
-                        <td>'.$father_job.'</td>
-                        <td>'.$mother_name.'</td>
-                        <td>'.$mother_job.'</td>
+                        <td>'.$nama.'</td>
+                        <td>'.$no_induk.'</td>
+                        <td>'.$nisn.'</td>
+                        <td>'.$jk.'</td>
+                        <td>'.$tempat_lahir.'</td>
+                        <td>'.$tgl_lahir.'</td>
+                        <td>'.$agama.'</td>
+                        <td>'.$status.'</td>
+                        <td>'.$anak_ke.'</td>
+                        <td>'.$alamat.'</td>
+                        <td>'.$asal_sekolah.'</td>
+                        <td>'.$diterima_dikelas.'</td>
+                        <td>'.$tgl_terima.'</td>
+                        <td>'.$ayah.'</td>
+                        <td>'.$ayah_pekerjaan.'</td>
+                        <td>'.$ibu.'</td>
+                        <td>'.$ibu_pekerjaan.'</td>
+                        <td>'.$wali.'</td>
+                        <td>'.$wali_pekerjaan.'</td>
                         </tr>
                         ';
                     } // end for

@@ -1,36 +1,52 @@
 
 <?php
 
-$action               = "santri/save";
-$santri_uuid          = "";
-$santri_first_name    = "";
-$santri_last_name     = "";
-$santri_gender        = "";
-$santri_birthplace    = "";
-$santri_birthdate     = "";
-$santri_address       = "";
-$santri_nohp          = "";
-$santri_father_name   = "";
-$santri_father_job    = "";
-$santri_mother_name   = "";
-$santri_mother_job    = "";
+$action           = "santri/save";
+$uuid             = "";
+$nama             = "";
+$no_induk         = "";
+$nisn             = "";
+$jk               = "";
+$tempat_lahir     = "";
+$tgl_lahir        = "";
+$agama            = "";
+$status           = "";
+$anak_ke          = "";
+$alamat           = "";
+$asal_sekolah     = "";
+$diterima_dikelas = "";
+$tgl_terima       = "";
+$ayah             = "";
+$ayah_pekerjaan   = "";
+$ibu              = "";
+$ibu_pekerjaan    = "";
+$wali             = "";
+$wali_pekerjaan   = "";
 
 
 if ($page == "Edit") 
 {
-  $action               = "santri/update";
-  $santri_uuid          = $row['santri_uuid'];
-  $santri_first_name    = $row['santri_first_name'];
-  $santri_last_name     = $row['santri_last_name'];
-  $santri_gender        = $row['santri_gender'];
-  $santri_birthplace    = $row['santri_birthplace'];
-  $santri_birthdate     = $row['santri_birthdate'];
-  $santri_address       = $row['santri_address'];
-  $santri_nohp          = $row['santri_nohp'];
-  $santri_father_name   = $row['santri_father_name'];
-  $santri_father_job    = $row['santri_father_job'];
-  $santri_mother_name   = $row['santri_mother_name'];
-  $santri_mother_job    = $row['santri_mother_job'];
+    $action           = "santri/update";
+    $uuid             = $row['uuid'];
+    $nama             = $row['nama'];
+    $no_induk         = $row['no_induk'];
+    $nisn             = $row['nisn'];
+    $jk               = $row['jk'];
+    $tempat_lahir     = $row['tempat_lahir'];
+    $tgl_lahir        = $row['tgl_lahir'];
+    $agama            = $row['agama'];
+    $status           = $row['status'];
+    $anak_ke          = $row['anak_ke'];
+    $alamat           = $row['alamat'];
+    $asal_sekolah     = $row['asal_sekolah'];
+    $diterima_dikelas = $row['diterima_dikelas'];
+    $tgl_terima       = $row['tgl_terima'];
+    $ayah             = $row['ayah'];
+    $ayah_pekerjaan   = $row['ayah_pekerjaan'];
+    $ibu              = $row['ibu'];
+    $ibu_pekerjaan    = $row['ibu_pekerjaan'];
+    $wali             = $row['wali'];
+    $wali_pekerjaan   = $row['wali_pekerjaan'];
 }
 ?>
 
@@ -50,59 +66,91 @@ if ($page == "Edit")
 
               <form action="<?=base_url($action);?>" method="post" class="form-horizontal">
 
-                <input type="hidden" name="santri_uuid" value="<?=$santri_uuid;?>">
+                <input type="hidden" name="uuid" value="<?=$uuid;?>">
 
                 <div class="card-body card-block">
                       <div class="row form-group">
-                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama Depan</label></div>
-                          <div class="col-12 col-md-9"><input type="text" name="santri_first_name" class="form-control" value="<?=$santri_first_name;?>" required=""></div>
+                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama Lengkap</label></div>
+                          <div class="col-12 col-md-9"><input type="text" name="nama" class="form-control" value="<?=$nama;?>" required=""></div>
                       </div>
                       <div class="row form-group">
-                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama Belakang</label></div>
-                          <div class="col-12 col-md-9"><input type="text" name="santri_last_name" class="form-control" value="<?=$santri_last_name;?>" required=""></div>
+                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">No Induk</label></div>
+                          <div class="col-12 col-md-9"><input type="text" name="no_induk" class="form-control" value="<?=$no_induk;?>" required=""></div>
+                      </div>
+                      <div class="row form-group">
+                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">NISN</label></div>
+                          <div class="col-12 col-md-9"><input type="text" name="nisn" class="form-control" value="<?=$nisn;?>" required=""></div>
                       </div>
                       <div class="row form-group">
                           <div class="col col-md-3"><label for="text-input" class=" form-control-label">Jenis Kelamin</label></div>
                           <div class="col-12 col-md-9">
-                            <select name="santri_gender" id="santri_gender" class="form-control">
-                                <option value="M" <?= ($santri_gender == "M") ? "selected" : "" ?> >Pria</option>
-                                <option value="F" <?= ($santri_gender == "F") ? "selected" : "" ?> >Wanita</option>
+                            <select name="jk" id="jk" class="form-control">
+                                <option value="M" <?= ($jk == "M") ? "selected" : "" ?> >Pria</option>
+                                <option value="F" <?= ($jk == "F") ? "selected" : "" ?> >Wanita</option>
                             </select>
                           </div>
                       </div>
                       <div class="row form-group">
                           <div class="col col-md-3"><label for="text-input" class=" form-control-label">Tempat lahir</label></div>
-                          <div class="col-12 col-md-9"><input type="text" name="santri_birthplace" class="form-control" value="<?=$santri_birthplace;?>" required=""></div>
+                          <div class="col-12 col-md-9"><input type="text" name="tempat_lahir" class="form-control" value="<?=$tempat_lahir;?>" required=""></div>
                       </div>
                       <div class="row form-group">
                           <div class="col col-md-3"><label for="text-input" class=" form-control-label">Tanggal Lahir</label></div>
-                          <div class="col-12 col-md-9"><input type="text" name="santri_birthdate" class="form-control floating-label" id="date" value="<?=$santri_birthdate;?>" required=""></div>
+                          <div class="col-12 col-md-9"><input type="text" name="tgl_lahir" class="form-control floating-label" id="date" value="<?=$tgl_lahir;?>" required=""></div>
                       </div>
                       <div class="row form-group">
-                          <div class="col col-md-3"><label for="disabled-input" class=" form-control-label">Address</label></div>
+                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Agama</label></div>
+                          <div class="col-12 col-md-9"><input type="text" name="agama" class="form-control" value="<?=$agama;?>" required=""></div>
+                      </div>
+                      <div class="row form-group">
+                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Status dlm Keluarga</label></div>
+                          <div class="col-12 col-md-9"><input type="text" name="status" class="form-control" value="<?=$status;?>" required=""></div>
+                      </div>
+                      <div class="row form-group">
+                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Anak ke</label></div>
+                          <div class="col-12 col-md-9"><input type="text" name="anak_ke" class="form-control" value="<?=$anak_ke;?>" required=""></div>
+                      </div>
+                      <div class="row form-group">
+                          <div class="col col-md-3"><label for="disabled-input" class=" form-control-label">Alamat</label></div>
                           <div class="col-12 col-md-9">
-                            <textarea name="santri_address" class="form-control" cols="10" rows="5" required=""><?=$santri_address;?></textarea>
+                            <textarea name="alamat" class="form-control" cols="10" rows="5" required=""><?=$alamat;?></textarea>
                           </div>
                       </div>
                       <div class="row form-group">
-                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">No Hp</label></div>
-                          <div class="col-12 col-md-9"><input type="text" name="santri_nohp" class="form-control" value="<?=$santri_nohp;?>" required=""></div>
+                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Asal Sekolah</label></div>
+                          <div class="col-12 col-md-9"><input type="text" name="asal_sekolah" class="form-control" value="<?=$asal_sekolah;?>" required=""></div>
+                      </div>
+                      <div class="row form-group">
+                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">diterima dikelas</label></div>
+                          <div class="col-12 col-md-9"><input type="text" name="diterima_dikelas" class="form-control" value="<?=$diterima_dikelas;?>" required=""></div>
+                      </div>
+                      <div class="row form-group">
+                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Tanggal diterima</label></div>
+                          <div class="col-12 col-md-9"><input type="text" name="tgl_terima" class="form-control floating-label" id="date2" value="<?=$tgl_terima;?>" required=""></div>
                       </div>
                       <div class="row form-group">
                           <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama Ayah</label></div>
-                          <div class="col-12 col-md-9"><input type="text" name="santri_father_name" class="form-control" value="<?=$santri_father_name;?>" required=""></div>
+                          <div class="col-12 col-md-9"><input type="text" name="ayah" class="form-control" value="<?=$ayah;?>" required=""></div>
                       </div>
                       <div class="row form-group">
                           <div class="col col-md-3"><label for="text-input" class=" form-control-label">Pekerjaa Ayah</label></div>
-                          <div class="col-12 col-md-9"><input type="text" name="santri_father_job" class="form-control" value="<?=$santri_father_job;?>" required=""></div>
+                          <div class="col-12 col-md-9"><input type="text" name="ayah_pekerjaan" class="form-control" value="<?=$ayah_pekerjaan;?>" required=""></div>
                       </div>
                       <div class="row form-group">
                           <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama Ibu</label></div>
-                          <div class="col-12 col-md-9"><input type="text" name="santri_mother_name" class="form-control" value="<?=$santri_mother_name;?>" required=""></div>
+                          <div class="col-12 col-md-9"><input type="text" name="ibu" class="form-control" value="<?=$ibu;?>" required=""></div>
                       </div>
                       <div class="row form-group">
                           <div class="col col-md-3"><label for="text-input" class=" form-control-label">Pekerjaan Ibu</label></div>
-                          <div class="col-12 col-md-9"><input type="text" name="santri_mother_job" class="form-control" value="<?=$santri_mother_job;?>" required=""></div>
+                          <div class="col-12 col-md-9"><input type="text" name="ibu_pekerjaan" class="form-control" value="<?=$ibu_pekerjaan;?>" required=""></div>
+                      </div>
+                      <div class="row form-group">
+                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama Wali</label></div>
+                          <div class="col-12 col-md-9"><input type="text" name="wali" class="form-control" value="<?=$wali;?>" required=""></div>
+                      </div>
+                      <div class="row form-group">
+                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Pekerjaan Wali</label></div>
+                          <div class="col-12 col-md-9"><input type="text" name="wali_pekerjaan" class="form-control" value="<?=$wali_pekerjaan;?>" required=""></div>
                       </div>
                 </div>
                 <div class="card-footer">

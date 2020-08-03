@@ -57,6 +57,8 @@
         // Date Picker
         $('#date').bootstrapMaterialDatePicker({ weekStart : 0, time: false });
 
+        $('#date2').bootstrapMaterialDatePicker({ weekStart : 0, time: false });
+
         $('#time-picker').bootstrapMaterialDatePicker({ date: false, time: true });
 
         $('#date-format').bootstrapMaterialDatePicker({ format : 'dddd DD MMMM YYYY - HH:mm' });

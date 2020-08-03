@@ -18,7 +18,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="<?=base_url('teacher');?>" class="waves-effect">
+                    <a href="<?=base_url('guru');?>" class="waves-effect">
                         <i class="mdi mdi-account-settings"></i><span> Data Guru </span>
                     </a>
                 </li>
