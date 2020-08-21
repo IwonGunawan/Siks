@@ -52,11 +52,11 @@ if ($page == "Edit")
 
                 <div class="card-body card-block">
                       <div class="row form-group">
-                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama Lengkap</label></div>
+                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama Lengkap*</label></div>
                           <div class="col-12 col-md-9"><input type="text" name="nama" class="form-control" value="<?=$nama;?>" required=""></div>
                       </div>
                       <div class="row form-group">
-                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">NIP</label></div>
+                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">NIP*</label></div>
                           <div class="col-12 col-md-9"><input type="text" name="nip" class="form-control" value="<?=$nip;?>" required=""></div>
                       </div>
                       <div class="row form-group">
@@ -69,30 +69,30 @@ if ($page == "Edit")
                           </div>
                       </div>
                       <div class="row form-group">
-                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Tempat lahir</label></div>
+                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Tempat lahir*</label></div>
                           <div class="col-12 col-md-9"><input type="text" name="tempat_lahir" class="form-control" value="<?=$tempat_lahir;?>" required=""></div>
                       </div>
                       <div class="row form-group">
-                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Tanggal Lahir</label></div>
+                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Tanggal Lahir*</label></div>
                           <div class="col-12 col-md-9"><input type="text" name="tgl_lahir" class="form-control floating-label" id="date" value="<?=$tgl_lahir;?>" required=""></div>
                       </div>
                       <div class="row form-group">
                           <div class="col col-md-3"><label for="disabled-input" class=" form-control-label">Alamat</label></div>
                           <div class="col-12 col-md-9">
-                            <textarea name="alamat" class="form-control" cols="10" rows="5" required=""><?=$alamat;?></textarea>
+                            <textarea name="alamat" class="form-control" cols="10" rows="5"><?=$alamat;?></textarea>
                           </div>
                       </div>
                       <div class="row form-group">
                           <div class="col col-md-3"><label for="text-input" class=" form-control-label">Email</label></div>
-                          <div class="col-12 col-md-9"><input type="text" name="email" class="form-control" value="<?=$email;?>" required=""></div>
+                          <div class="col-12 col-md-9"><input type="text" name="email" class="form-control" value="<?=$email;?>"></div>
                       </div>
                       <div class="row form-group">
-                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">No Hp</label></div>
+                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">No Hp*</label></div>
                           <div class="col-12 col-md-9"><input type="text" name="nohp" class="form-control" value="<?=$nohp;?>" required=""></div>
                       </div>
                       <div class="row form-group">
                           <div class="col col-md-3"><label for="text-input" class=" form-control-label">Pendidikan Terakhir</label></div>
-                          <div class="col-12 col-md-9"><input type="text" name="pendidikan_terakhir" class="form-control" value="<?=$pendidikan_terakhir;?>" required=""></div>
+                          <div class="col-12 col-md-9"><input type="text" name="pendidikan_terakhir" class="form-control" value="<?=$pendidikan_terakhir;?>" ></div>
                       </div>
                       <div class="row form-group">
                           <div class="col col-md-3"><label for="text-input" class=" form-control-label">Bidang Ajar</label></div>
@@ -120,6 +120,8 @@ if ($page == "Edit")
                               }
                             ?>
                       </div>
+                      <div><small style="color: red">* wajib isi</small></div>
+
                 </div>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary btn-sm">

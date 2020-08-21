@@ -1,14 +1,9 @@
 <?php
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-// Export
-require('./application/third_party/phpoffice/vendor/autoload.php');
-
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 
-class Santri extends CI_Controller 
+class Tahfidz extends CI_Controller 
 {
     public function __construct() 
     {
@@ -17,12 +12,10 @@ class Santri extends CI_Controller
       is_login();
 
       // library and model
-      $this->load->model("M_santri");
+      $this->load->model("M_tahfidz");
       $this->load->helper('global');
       $this->load->helper('config');
       $this->load->library('session');
-      $this->load->library('excel'); // Import excel
-      $this->load->library('uuid');
 
       // session 
       $this->sess['users_id']    = $this->session->userdata('users_id');
@@ -32,14 +25,14 @@ class Santri extends CI_Controller
  
     public function index()
     {
-      $data["page"]      = "Santri";
-      $data["content"]   = "santri/v_index";
+      $data["page"]      = "Tahfidz";
+      $data["content"]   = "tahfidz/v_index"; // i am here
       $this->load->view("app_template", $data);
     } 
 
     public function ajax_list()
     {
-      $list = $this->M_santri->getData();
+      $list = $this->M_tahfidz->getData();
      
       $data = array();
       $no   = $_POST['start'];
@@ -52,7 +45,7 @@ class Santri extends CI_Controller
           $ttl   = $row['tempat_lahir'].", ".date("Y-m-d", strtotime($row['tgl_lahir']));
 
 
-          $content[] = "<a href='".base_url('santri/detail/'.$uuid)."'>".$row['nama']."</a>";
+          $content[] = "<a href='".base_url('tahfidz/detail/'.$uuid)."'>".$row['nama']."</a>";
           $content[] = $row['no_induk'];
           $content[] = $row['nisn'];
           $content[] = ($row['jk'] == "F") ? "Wanita" : "Pria";
@@ -63,8 +56,8 @@ class Santri extends CI_Controller
 
           
           $btn = "
-                  <a class='table-action hover-primary' href='".base_url('santri/edit/'.$uuid)."'><i class='ti-pencil'></i> Edit </a> | 
-                  <a class='table-action hover-danger' href='".base_url('santri/delete/'.$uuid)."' onclick='return confirm(\"HAPUS DATA ?\")'><i class='ti-trash'></i> Del</a>
+                  <a class='table-action hover-primary' href='".base_url('tahfidz/edit/'.$uuid)."'><i class='ti-pencil'></i> Edit </a> | 
+                  <a class='table-action hover-danger' href='".base_url('tahfidz/delete/'.$uuid)."' onclick='return confirm(\"HAPUS DATA ?\")'><i class='ti-trash'></i> Del</a>
                 ";
           $content[]  = $btn;
 
@@ -73,8 +66,8 @@ class Santri extends CI_Controller
 
       $output = array(
                       "draw" => $_POST['draw'],
-                      "recordsTotal" => $this->M_santri->count_all(),
-                      "recordsFiltered" => $this->M_santri->count_filtered(),
+                      "recordsTotal" => $this->M_tahfidz->count_all(),
+                      "recordsFiltered" => $this->M_tahfidz->count_filtered(),
                       "data" => $data,
               );
 
@@ -84,7 +77,7 @@ class Santri extends CI_Controller
     public function create()
     {
       $data["page"]       = "Create";
-      $data["content"]    = "santri/v_create";
+      $data["content"]    = "tahfidz/v_create";
       
       $this->load->view("app_template", $data);
     }
@@ -94,11 +87,11 @@ class Santri extends CI_Controller
       $post   = $this->input->post();
       
       $msg  = "Failed, try again!";
-      $url  = "santri";
+      $url  = "tahfidz";
 
       if (count($post) > 0) 
       {
-        $process  = $this->M_santri->save($post, $this->sess['users_id']);
+        $process  = $this->M_tahfidz->save($post, $this->sess['users_id']);
         if ($process > 0) 
         {
           $msg      = "Data saved successfully";
@@ -109,38 +102,38 @@ class Santri extends CI_Controller
       redirect(base_url($url));
     }
 
-    public function detail($santri_uuid="") 
+    public function detail($tahfidz_uuid="") 
     {
-      $rowData            = $this->M_santri->edit($santri_uuid);
+      $rowData            = $this->M_tahfidz->edit($tahfidz_uuid);
       $data["page"]       = "Detail ".$rowData['nama'];
-      $data["content"]    = "santri/v_detail";
+      $data["content"]    = "tahfidz/v_detail";
 
       if (count($rowData) > 0) 
       {
-        $data["data"]       = $this->M_santri->detail($rowData);
+        $data["data"]       = $this->M_tahfidz->detail($rowData);
         
         $this->load->view("app_template", $data); 
       }
       else 
       {
-        redirect(base_url('santri'));  
+        redirect(base_url('tahfidz'));  
       }
     }
 
-    public function edit($santri_uuid="")
+    public function edit($tahfidz_uuid="")
     {
-      if ($santri_uuid != "") 
+      if ($tahfidz_uuid != "") 
       {
         $data["page"]       = "Edit";
-        $data["content"]    = "santri/v_create";
-        $data["row"]        = $this->M_santri->edit($santri_uuid);
+        $data["content"]    = "tahfidz/v_create";
+        $data["row"]        = $this->M_tahfidz->edit($tahfidz_uuid);
 
         $this->load->view("app_template", $data);
       }
       else
       {
         $this->session->set_flashdata("msg", "Data not found");
-        return redirect(base_url("santri"));
+        return redirect(base_url("tahfidz"));
       }
     }
 
@@ -149,11 +142,11 @@ class Santri extends CI_Controller
       $post   = $this->input->post();
       
       $msg  = "Failed, try again!";
-      $url  = "santri";
+      $url  = "tahfidz";
 
       if (count($post) > 0) 
       {
-        $process  = $this->M_santri->update($post, $this->sess['users_id']);
+        $process  = $this->M_tahfidz->update($post, $this->sess['users_id']);
         if ($process > 0) 
         {
           $msg      = "Data has been changed";
@@ -164,11 +157,11 @@ class Santri extends CI_Controller
       redirect(base_url($url));
     }
 
-    public function delete($santri_uuid="")
+    public function delete($tahfidz_uuid="")
     {
-      if ($santri_uuid != "") 
+      if ($tahfidz_uuid != "") 
       {
-        $process = $this->M_santri->delete($santri_uuid);
+        $process = $this->M_tahfidz->delete($tahfidz_uuid);
         if ($process == TRUE) 
         {
           $msg = "Data deleted";
@@ -183,7 +176,7 @@ class Santri extends CI_Controller
       }
 
       $this->session->set_flashdata("danger", $msg);
-      return redirect(base_url("santri"));
+      return redirect(base_url("tahfidz"));
     }    
     /* END CRUD */
     
@@ -191,7 +184,7 @@ class Santri extends CI_Controller
     public function export() 
     {
       $data["page"]       = "Export";
-      $data["content"]    = "santri/v_export";
+      $data["content"]    = "tahfidz/v_export";
       
       $this->load->view("app_template", $data);
     }
@@ -211,7 +204,7 @@ class Santri extends CI_Controller
 
     public function exportProcess($limit=0)
     {
-      $list = $this->M_santri->exportAll($limit);
+      $list = $this->M_tahfidz->exportAll($limit);
      
       $spreadsheet = new Spreadsheet;
 
@@ -272,7 +265,7 @@ class Santri extends CI_Controller
       $writer = new Xlsx($spreadsheet);
 
       header('Content-Type: application/vnd.ms-excel');
-      header('Content-Disposition: attachment;filename="santri.xlsx"');
+      header('Content-Disposition: attachment;filename="tahfidz.xlsx"');
       header('Cache-Control: max-age=0');
 
       $writer->save('php://output');
@@ -282,16 +275,16 @@ class Santri extends CI_Controller
     public function import() 
     {
       $data["page"]       = "Import";
-      $data["content"]    = "santri/v_import";
+      $data["content"]    = "tahfidz/v_import";
       
       $this->load->view("app_template", $data);
     }
 
     public function importSubmit()
     {
-      if(isset($_FILES["file_santri"]["name"]))
+      if(isset($_FILES["file_tahfidz"]["name"]))
       {
-        $path = $_FILES["file_santri"]["tmp_name"];
+        $path = $_FILES["file_tahfidz"]["tmp_name"];
 
         $object = PHPExcel_IOFactory::load($path);
 
@@ -410,7 +403,7 @@ class Santri extends CI_Controller
         $result = array(
                 "table" => $output, 
                 "data"  => json_encode($data),
-                "link"  => base_url("santri/importSave/".json_encode($data))
+                "link"  => base_url("tahfidz/importSave/".json_encode($data))
               );
 
         echo json_encode($result);
@@ -419,12 +412,12 @@ class Santri extends CI_Controller
 
     public function importSave($data="")
     {
-      $list = $this->input->post("text_santri");
+      $list = $this->input->post("text_tahfidz");
       $listDecode = json_decode($list, TRUE);
 
       if (count($listDecode) > 0) 
       {
-        $this->M_santri->exportSave($listDecode);
+        $this->M_tahfidz->exportSave($listDecode);
         $this->session->set_flashdata("msg", "Import data has been saved!");
       }
       else
@@ -432,7 +425,7 @@ class Santri extends CI_Controller
         $this->session->set_flashdata("danger", "No data available, try again!");
       }
 
-      return redirect(base_url("santri"));
+      return redirect(base_url("tahfidz"));
     }
 
  

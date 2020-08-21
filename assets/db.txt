@@ -1,0 +1,28 @@
+> tahfidz
+id
+santri_id
+tipe_setoran 	0=hafalan | 1=murojaah
+juz
+surat
+ayat awal
+ayat akhir
+catatan
+dibuat_tgl
+dibuat_oleh
+diubah_tgl
+diubah_oleh
+deleted
+
+> pelanggaran
+id
+santri_id
+kelas
+peristiwa
+kronologi
+motif_melanggar
+solusi
+dibuat_tgl
+dibuat_oleh
+diubah_tgl
+diubah_oleh
+deleted
