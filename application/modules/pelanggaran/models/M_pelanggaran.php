@@ -1,25 +1,26 @@
 <?php
 
 /**
-* Model tahfidz
+* Model pelanggaran
 */
-class M_tahfidz extends CI_Model
+class M_pelanggaran extends CI_Model
 {
 
-	var $table = 'tahfidz';
+	var $table = 'pelanggaran';
   var $column_order 	= array(
-  								'tahfidz.id', 
-                  'tahfidz.kelas',
-                  'tahfidz.tipe_setoran', 
-                  'tahfidz.juz',
-                  'tahfidz.dibuat_tgl' 
+  								'pelanggaran.id', 
+                  'pelanggaran.kelas',
+                  'pelanggaran.peristiwa', 
+                  'pelanggaran.solusi',
+                  'santri.nama' 
   							); 
   var $column_search 	= array(
-  								'tahfidz.id', 
-                  'tahfidz.kelas',
-                  'tahfidz.tipe_setoran', 
-                  'tahfidz.juz',
-                  'tahfidz.dibuat_tgl' 
+  								'pelanggaran.id', 
+                  'pelanggaran.kelas',
+                  'pelanggaran.peristiwa', 
+                  'pelanggaran.solusi',
+                  'pelanggaran.dibuat_tgl', 
+                  'santri.nama',
   							);
   var $order = array('dibuat_tgl' => 'DESC'); // default order 
 
@@ -48,10 +49,10 @@ class M_tahfidz extends CI_Model
 
 	public function _query()
   {
-    $this->db->select("tahfidz.*, santri.nama as nama_santri");
-    $this->db->from("tahfidz");
-    $this->db->join("santri", "tahfidz.santri_id=santri.id", "LEFT");
-    $this->db->where("tahfidz.deleted", config("NOT_DELETED"));
+    $this->db->select("pelanggaran.*, santri.nama as santri_nama");
+    $this->db->from("pelanggaran");
+    $this->db->join("santri", "pelanggaran.santri_id=santri.id", "LEFT");
+    $this->db->where("pelanggaran.deleted", config("NOT_DELETED"));
 
     $i = 0;
  
@@ -110,18 +111,16 @@ class M_tahfidz extends CI_Model
 			$data 	= array(
 				"santri_id"       => $post['santri_id'], 
         "kelas"           => $post['kelas'], 
-        "tipe_setoran"    => $post['tipe_setoran'], 
-        "juz"             => $post['juz'], 
-        "surat"           => $post['surat'],
-        "ayat_awal"       => $post['ayat_awal'], 
-        "ayat_akhir"      => $post['ayat_akhir'],
-        "catatan"         => $post['catatan'],
+        "peristiwa"       => $post['peristiwa'], 
+        'kronologi'       => $post['kronologi'], 
+        'motif_melanggar' => $post['motif_melanggar'],
+        "solusi"          => $post['solusi'],
 				"dibuat_oleh"			=> $users_id, 
 				"dibuat_tgl"		  => $datenow, 
 			);
 
 			$this->db->set("uuid", "UUID()", FALSE); 
-			$saved = $this->db->insert("tahfidz", $data);
+			$saved = $this->db->insert("pelanggaran", $data);
 			
 			return $saved;
 		}
@@ -132,11 +131,11 @@ class M_tahfidz extends CI_Model
     $result   = array();
     if ($uuid !="") 
     {
-      $this->db->select("tahfidz.*, santri.nama as santri_nama, santri.no_induk");
-      $this->db->from("tahfidz");
-      $this->db->join("santri", "santri.id=tahfidz.santri_id", "LEFT");
-      $this->db->where("tahfidz.uuid", $uuid);
-      $this->db->where("tahfidz.deleted", config("NOT_DELETED"));
+      $this->db->select("pelanggaran.*, santri.nama as santri_nama, santri.no_induk");
+      $this->db->from("pelanggaran");
+      $this->db->join("santri", "pelanggaran.santri_id=santri.id", "LEFT");
+      $this->db->where("pelanggaran.uuid", $uuid);
+      $this->db->where("pelanggaran.deleted", config("NOT_DELETED"));
       $query    = $this->db->get();
       $result   = $query->row_array();
     }
@@ -154,18 +153,16 @@ class M_tahfidz extends CI_Model
       $data 	= array(
 				"santri_id"       => $post['santri_id'], 
         "kelas"           => $post['kelas'], 
-        "tipe_setoran"    => $post['tipe_setoran'], 
-        "juz"             => $post['juz'], 
-        "surat"           => $post['surat'],
-        "ayat_awal"       => $post['ayat_awal'], 
-        "ayat_akhir"      => $post['ayat_akhir'],
-        "catatan"         => $post['catatan'],
+        "peristiwa"       => $post['peristiwa'], 
+        'kronologi'       => $post['kronologi'], 
+        'motif_melanggar' => $post['motif_melanggar'],
+        "solusi"          => $post['solusi'],
 				"diubah_oleh"			=> $users_id, 
 				"diubah_tgl"			=> $datenow, 
 			);
       
       $this->db->where("uuid", $post['uuid']);
-      $update = $this->db->update("tahfidz", $data);
+      $update = $this->db->update("pelanggaran", $data);
       
       return $update;
     }
@@ -189,7 +186,7 @@ class M_tahfidz extends CI_Model
     {
       $this->db->set("deleted", 1);
       $this->db->where("uuid", $uuid);
-      $delete   = $this->db->update("tahfidz");
+      $delete   = $this->db->update("pelanggaran");
 
       return TRUE;
     }

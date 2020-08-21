@@ -1,30 +1,26 @@
 
 <?php
 
-$action           = "tahfidz/save";
+$action           = "pelanggaran/save";
 $uuid             = "";
 $santri_id        = "";
 $kelas            = "";
-$tipe_setoran     = "";
-$juz              = "";
-$surat            = "";
-$ayat_awal        = "";
-$ayat_akhir       = "";
-$catatan          = "";
+$peristiwa        = "";
+$kronologi        = "";
+$motif_melanggar  = "";
+$solusi           = "";
 
 
 if ($page == "Edit") 
 {
-    $action           = "tahfidz/update";
+    $action           = "pelanggaran/update";
     $uuid             = $row['uuid'];
     $santri_id        = $row["santri_id"];
     $kelas            = $row["kelas"];
-    $tipe_setoran     = $row["tipe_setoran"];
-    $juz              = $row["juz"];
-    $surat            = $row["surat"];
-    $ayat_awal        = $row["ayat_awal"];
-    $ayat_akhir       = $row["ayat_akhir"];
-    $catatan          = $row["catatan"];
+    $peristiwa        = $row["peristiwa"];
+    $kronologi        = $row["kronologi"];
+    $motif_melanggar  = $row["motif_melanggar"];
+    $solusi           = $row["solusi"];
 }
 ?>
 
@@ -36,7 +32,7 @@ if ($page == "Edit")
         <div class="col-lg-8">
           <div class="card">
               <div class="card-header">
-                  <strong><?=$page;?></strong> Tahfidz
+                  <strong><?=$page;?></strong> Pelanggaran
               </div>
 
               <form action="<?=base_url($action);?>" method="post" class="form-horizontal">
@@ -70,33 +66,20 @@ if ($page == "Edit")
                           <div class="col-12 col-md-9"><input type="text" name="kelas" class="form-control" value="<?=$kelas;?>" required=""></div>
                       </div>
                       <div class="row form-group">
-                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Tipe Setoran*</label></div>
-                          <div class="col-12 col-md-9">
-                            <select name="tipe_setoran" id="tipe_setoran" class="form-control">
-                                  <option value="0" <?= ($tipe_setoran == "0") ? "selected" : "" ?> >Hafalan</option>
-                                  <option value="1" <?= ($tipe_setoran == "1") ? "selected" : "" ?> >Murojaah</option>
-                              </select>
-                          </div>
+                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Peristiwa*</label></div>
+                          <div class="col-12 col-md-9"><textarea class="form-control" name="peristiwa" rows="7"><?=$peristiwa;?></textarea></div>
                       </div>
                       <div class="row form-group">
-                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Juz</label></div>
-                          <div class="col-12 col-md-9"><input type="text" name="juz" class="form-control" value="<?=$juz;?>" required=""></div>
+                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Kronologi*</label></div>
+                          <div class="col-12 col-md-9"><textarea class="form-control" name="kronologi" rows="7"><?=$kronologi;?></textarea></div>
                       </div>
                       <div class="row form-group">
-                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Surat</label></div>
-                          <div class="col-12 col-md-9"><input type="text" name="surat" class="form-control" value="<?=$surat;?>" required=""></div>
+                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Motif Melanggar*</label></div>
+                          <div class="col-12 col-md-9"><textarea class="form-control" name="motif_melanggar" rows="7"><?=$motif_melanggar;?></textarea></div>
                       </div>
                       <div class="row form-group">
-                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Ayat Awal*</label></div>
-                          <div class="col-12 col-md-9"><input type="text" name="ayat_awal" class="form-control" value="<?=$ayat_awal;?>" required=""></div>
-                      </div>
-                      <div class="row form-group">
-                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Ayat Akhir*</label></div>
-                          <div class="col-12 col-md-9"><input type="text" name="ayat_akhir" class="form-control" value="<?=$ayat_akhir;?>" required=""></div>
-                      </div>
-                      <div class="row form-group">
-                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Catatan*</label></div>
-                          <div class="col-12 col-md-9"><textarea class="form-control" name="catatan"><?=$catatan;?></textarea></div>
+                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Solusi*</label></div>
+                          <div class="col-12 col-md-9"><textarea class="form-control" name="solusi" rows="7"><?=$solusi;?></textarea></div>
                       </div>
                       <div><small style="color: red">* wajib isi</small></div>
                 </div>

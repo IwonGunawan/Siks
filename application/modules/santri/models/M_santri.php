@@ -262,5 +262,20 @@ class M_santri extends CI_Model
     $this->db->insert_batch('santri', $data);
   }
 
+
+  /* ======================== GLOBAL ======================== */
+  public function santriList() 
+  {
+    $this->db->select("id as santri_id, uuid as santri_uuid, nama as santri_nama, no_induk");
+    $this->db->from("santri");
+    $this->db->where("deleted", config("NOT_DELETED"));
+    $this->db->order_by("nama", "ASC");
+
+    $query = $this->db->get();
+    $result = $query->result_array();
+
+    return $result;
+  }
+
 	
 }

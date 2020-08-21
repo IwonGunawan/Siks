@@ -23,7 +23,7 @@
               ?>
 
               <div class="card-header">
-                  <a href="<?=base_url('tahfidz/create'); ?>" class="btn btn-primary"><i class="fa fa-plus"></i>&nbsp; Create New</a>
+                  <a href="<?=base_url('pelanggaran/create'); ?>" class="btn btn-primary"><i class="fa fa-plus"></i>&nbsp; Create New</a>
               </div>
               <div class="card-body">
                   <table id="datatable" class="table table-bordered dt-responsive nowrap">
@@ -31,8 +31,8 @@
                         <tr>
                             <th>Nama Santri</th>
                             <th>Kelas</th>
-                            <th>Tipe Setoran</th>
-                            <th>Juz</th>
+                            <th>Peristiwa</th>
+                            <th>Solusi</th>
                             <th>Tgl dibuat</th>
                             <th></th>
                         </tr>
@@ -69,7 +69,7 @@
 
       // Load data for the table's content from an Ajax source
       "ajax": {
-          "url": "<?php echo site_url('tahfidz/ajax_list'); ?>",
+          "url": "<?php echo site_url('pelanggaran/ajax_list'); ?>",
           "type": "POST"
       },
 

@@ -26,12 +26,12 @@
 
                 <li class="menu-title">Transaksi</li>
                 <li>
-                    <a href="<?=base_url('page_not_found');?>" class="waves-effect">
+                    <a href="<?=base_url('tahfidz');?>" class="waves-effect">
                         <i class="mdi mdi-barcode-scan"></i><span> Penilaian Hafalan </span>
                     </a>
                 </li>
                 <li>
-                    <a href="<?=base_url('page_not_found');?>" class="waves-effect">
+                    <a href="<?=base_url('pelanggaran');?>" class="waves-effect">
                         <i class="mdi mdi-file-plus"></i><span> Pencatatan Sanksi </span>
                     </a>
                 </li>

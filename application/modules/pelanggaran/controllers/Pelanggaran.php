@@ -3,7 +3,7 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 
 
-class Tahfidz extends CI_Controller 
+class Pelanggaran extends CI_Controller 
 {
     public function __construct() 
     {
@@ -12,7 +12,7 @@ class Tahfidz extends CI_Controller
       is_login();
 
       // library and model
-      $this->load->model("M_tahfidz");
+      $this->load->model("M_pelanggaran");
       $this->load->model("santri/M_santri");
       $this->load->helper('global');
       $this->load->helper('config');
@@ -26,14 +26,14 @@ class Tahfidz extends CI_Controller
  
     public function index()
     {
-      $data["page"]      = "Tahfidz";
-      $data["content"]   = "tahfidz/v_index"; // i am here
+      $data["page"]      = "Pelanggaran";
+      $data["content"]   = "pelanggaran/v_index"; // i am here
       $this->load->view("app_template", $data);
     } 
 
     public function ajax_list()
     {
-      $list = $this->M_tahfidz->getData();
+      $list = $this->M_pelanggaran->getData();
      
       $data = array();
       $no   = $_POST['start'];
@@ -44,16 +44,16 @@ class Tahfidz extends CI_Controller
 
           $uuid  = $row['uuid'];
 
-          $content[] = "<a href='".base_url('tahfidz/detail/'.$uuid)."'>".$row['nama_santri']."</a>";
+          $content[] = "<a href='".base_url('pelanggaran/detail/'.$uuid)."'>".$row['santri_nama']."</a>";
           $content[] = $row['kelas'];
-          $content[] = ($row['tipe_setoran'] == '0') ? "Hafalan" : "Murojaah";
-          $content[] = $row['juz'];
+          $content[] = $row['peristiwa'];
+          $content[] = $row['solusi'];
           $content[] = date("d/m/Y H:i", strtotime($row['dibuat_tgl']));
 
           
           $btn = "
-                  <a class='table-action hover-primary' href='".base_url('tahfidz/edit/'.$uuid)."'><i class='ti-pencil'></i> Edit </a> | 
-                  <a class='table-action hover-danger' href='".base_url('tahfidz/delete/'.$uuid)."' onclick='return confirm(\"HAPUS DATA ?\")'><i class='ti-trash'></i> Del</a>
+                  <a class='table-action hover-primary' href='".base_url('pelanggaran/edit/'.$uuid)."'><i class='ti-pencil'></i> Edit </a> | 
+                  <a class='table-action hover-danger' href='".base_url('pelanggaran/delete/'.$uuid)."' onclick='return confirm(\"HAPUS DATA ?\")'><i class='ti-trash'></i> Del</a>
                 ";
           $content[]  = $btn;
 
@@ -62,8 +62,8 @@ class Tahfidz extends CI_Controller
 
       $output = array(
                       "draw" => $_POST['draw'],
-                      "recordsTotal" => $this->M_tahfidz->count_all(),
-                      "recordsFiltered" => $this->M_tahfidz->count_filtered(),
+                      "recordsTotal" => $this->M_pelanggaran->count_all(),
+                      "recordsFiltered" => $this->M_pelanggaran->count_filtered(),
                       "data" => $data,
               );
 
@@ -73,7 +73,7 @@ class Tahfidz extends CI_Controller
     public function create()
     {
       $data["page"]       = "Create";
-      $data["content"]    = "tahfidz/v_create";
+      $data["content"]    = "pelanggaran/v_create";
       $data["santriList"] = $this->M_santri->santriList();
       
       $this->load->view("app_template", $data);
@@ -84,11 +84,11 @@ class Tahfidz extends CI_Controller
       $post   = $this->input->post();
       
       $msg  = "Failed, try again!";
-      $url  = "tahfidz";
+      $url  = "pelanggaran";
 
       if (count($post) > 0) 
       {
-        $process  = $this->M_tahfidz->save($post, $this->sess['users_id']);
+        $process  = $this->M_pelanggaran->save($post, $this->sess['users_id']);
         if ($process > 0) 
         {
           $msg      = "Data saved successfully";
@@ -99,38 +99,38 @@ class Tahfidz extends CI_Controller
       redirect(base_url($url));
     }
 
-    public function detail($tahfidz_uuid="") 
+    public function detail($pelanggaran_uuid="") 
     {
-      $rowData            = $this->M_tahfidz->edit($tahfidz_uuid);
+      $rowData            = $this->M_pelanggaran->edit($pelanggaran_uuid);
       $data["page"]       = "Detail ".$rowData['santri_nama'];
-      $data["content"]    = "tahfidz/v_detail";
+      $data["content"]    = "pelanggaran/v_detail";
 
       if (count($rowData) > 0) 
       {
-        $data["data"]       = $this->M_tahfidz->detail($rowData);
+        $data["data"]       = $this->M_pelanggaran->detail($rowData);
         $this->load->view("app_template", $data); 
       }
       else 
       {
-        redirect(base_url('tahfidz'));  
+        redirect(base_url('pelanggaran'));  
       }
     }
 
-    public function edit($tahfidz_uuid="")
+    public function edit($pelanggaran_uuid="")
     {
-      if ($tahfidz_uuid != "") 
+      if ($pelanggaran_uuid != "") 
       {
         $data["page"]       = "Edit";
-        $data["content"]    = "tahfidz/v_create";
+        $data["content"]    = "pelanggaran/v_create";
         $data["santriList"] = $this->M_santri->santriList();
-        $data["row"]        = $this->M_tahfidz->edit($tahfidz_uuid);
+        $data["row"]        = $this->M_pelanggaran->edit($pelanggaran_uuid);
 
         $this->load->view("app_template", $data);
       }
       else
       {
         $this->session->set_flashdata("msg", "Data not found");
-        return redirect(base_url("tahfidz"));
+        return redirect(base_url("pelanggaran"));
       }
     }
 
@@ -139,11 +139,11 @@ class Tahfidz extends CI_Controller
       $post   = $this->input->post();
       
       $msg  = "Failed, try again!";
-      $url  = "tahfidz";
+      $url  = "pelanggaran";
 
       if (count($post) > 0) 
       {
-        $process  = $this->M_tahfidz->update($post, $this->sess['users_id']);
+        $process  = $this->M_pelanggaran->update($post, $this->sess['users_id']);
         if ($process > 0) 
         {
           $msg      = "Data has been changed";
@@ -154,11 +154,11 @@ class Tahfidz extends CI_Controller
       redirect(base_url($url));
     }
 
-    public function delete($tahfidz_uuid="")
+    public function delete($pelanggaran_uuid="")
     {
-      if ($tahfidz_uuid != "") 
+      if ($pelanggaran_uuid != "") 
       {
-        $process = $this->M_tahfidz->delete($tahfidz_uuid);
+        $process = $this->M_pelanggaran->delete($pelanggaran_uuid);
         if ($process == TRUE) 
         {
           $msg = "Data deleted";
@@ -173,7 +173,7 @@ class Tahfidz extends CI_Controller
       }
 
       $this->session->set_flashdata("danger", $msg);
-      return redirect(base_url("tahfidz"));
+      return redirect(base_url("pelanggaran"));
     }    
     /* END CRUD */
     

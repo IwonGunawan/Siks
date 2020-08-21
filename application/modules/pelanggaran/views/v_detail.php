@@ -28,7 +28,7 @@ else {
         <div class="col-lg-12">
           <div class="card">
               <div class="card-header">
-                  <strong><?=$page;?></strong> Tahfidz
+                  <strong><?=$page;?></strong> Pelanggaran
               </div>
 
                 <div class="card-body">
@@ -52,39 +52,28 @@ else {
                           </div>
                         </div>
 
+
                         <div class="row form-group">
-                          <div class="col col-md-3"><label class=" form-control-label font-bold">Tipe Setoran</label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=($data['tipe_setoran']=="0") ? "Hafalan" : "Murojaah";?></p>
+                          <div class="col col-md-3"><label class=" form-control-label font-bold">Peristiwa</label></div>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['peristiwa'];?></p>
                           </div>
                         </div>
 
                         <div class="row form-group">
-                          <div class="col col-md-3"><label class=" form-control-label font-bold">Juz</label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['juz'];?></p>
+                          <div class="col col-md-3"><label class=" form-control-label font-bold">Kronologi</label></div>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['kronologi'];?></p>
                           </div>
                         </div>
 
                         <div class="row form-group">
-                          <div class="col col-md-3"><label class=" form-control-label font-bold">Surat</label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['surat'];?></p>
+                          <div class="col col-md-3"><label class=" form-control-label font-bold">Motif Melanggar</label></div>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['motif_melanggar'];?></p>
                           </div>
                         </div>
 
                         <div class="row form-group">
-                          <div class="col col-md-3"><label class=" form-control-label font-bold">Ayat Awal</label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['ayat_awal'];?></p>
-                          </div>
-                        </div>
-
-                        <div class="row form-group">
-                          <div class="col col-md-3"><label class=" form-control-label font-bold">Ayat Akhir</label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['ayat_akhir'];?></p>
-                          </div>
-                        </div>
-
-                        <div class="row form-group">
-                          <div class="col col-md-3"><label class=" form-control-label font-bold">Catatan</label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['catatan'];?></p>
+                          <div class="col col-md-3"><label class=" form-control-label font-bold">Solusi</label></div>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['solusi'];?></p>
                           </div>
                         </div>
                     </div>
