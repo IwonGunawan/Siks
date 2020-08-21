@@ -5,11 +5,11 @@
         <div id="sidebar-menu">
             <!-- Left Menu Start -->
             <ul class="metismenu" id="side-menu">
-                <li class="active">
+                <!-- <li class="active">
                     <a href="<?=base_url('home');?>" class="waves-effect">
                         <i class="mdi mdi-home"></i><span> Dashboard </span>
                     </a>
-                </li>
+                </li> -->
 
                 <li class="menu-title">Master</li>
                 <li>
