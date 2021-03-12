@@ -16,6 +16,7 @@
       <link href="<?=base_url('assets/vendor/app/assets/css/metismenu.min.css');?>" rel="stylesheet" type="text/css">
       <link href="<?=base_url('assets/vendor/app/assets/css/icons.css');?>" rel="stylesheet" type="text/css">
       <link href="<?=base_url('assets/vendor/app/assets/css/style.css');?>" rel="stylesheet" type="text/css">
+      <link href="<?=base_url('assets/css/custom.css');?>" rel="stylesheet" type="text/css">
       
       <!-- Jquery -->
       <script src="<?=base_url('assets/vendor/app/assets/js/jquery.min.js');?>"></script>

@@ -67,7 +67,7 @@ class Login extends CI_Controller
         $this->session->set_userdata($data_session);
 
 
-        redirect(base_url("santri"));
+        redirect(base_url("home"));
 
       }
 

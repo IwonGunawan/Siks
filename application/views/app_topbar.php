@@ -2,9 +2,12 @@
 
     <!-- LOGO -->
     <div class="topbar-left">
-        <a href="index.html" class="logo">
+        <a href="#" class="logo">
             <span>
-                <img src="<?=base_url('assets/img/logo.png');?>" alt="" height="24">
+                <!-- <img src="<?php //base_url('assets/img/logo.png');?>" alt="" height="24"> -->
+                <p class="login-name">السلام عليكم ورحمة الله وبركاته<br/> 
+                    <small><?= get_session("users_name");?></small>
+                </p>
             </span>
             <i>
                 <img src="<?=base_url('assets/img/logo-sm.png');?>" alt="" height="22">
@@ -15,20 +18,20 @@
     <nav class="navbar-custom">
 
         <ul class="navbar-right d-flex list-inline float-right mb-0">
-            <li class="dropdown notification-list d-none d-sm-block">
+           <!--  <li class="dropdown notification-list d-none d-sm-block">
                 <form role="search" class="app-search">
                     <div class="form-group mb-0"> 
                         <input type="text" class="form-control" placeholder="Search..">
                         <button type="submit"><i class="fa fa-search"></i></button>
                     </div>
                 </form> 
-            </li>
+            </li> -->
 
             
             <li class="dropdown notification-list">
                 <div class="dropdown notification-list nav-pro-img">
                     <a class="dropdown-toggle nav-link arrow-none waves-effect nav-user waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                        <img src="<?=base_url('assets/vendor/app/assets/images/users/user-4.jpg');?>" alt="user" class="rounded-circle">
+                        <img src="<?=base_url('assets/img/user.png');?>" alt="user" class="rounded-circle">
                     </a>
                     <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                         <!-- item-->

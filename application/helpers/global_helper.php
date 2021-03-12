@@ -32,6 +32,28 @@
 		return $result[$type];
 	}
 
+	function whoIsLogin()
+	{
+		$ci = get_instance();
+
+		$result 			= "";
+		$users_level 	= $ci->session->userdata("users_level");
+		if ($users_level == config("LEVEL_ADMIN")) 
+		{
+			$result = config("LEVEL_ADMIN");
+		}
+		else if ($users_level == config("LEVEL_USTADZ")) 
+		{
+			$result = config("LEVEL_USTADZ");
+		}
+		else if ($users_level == config("LEVEL_SANTRI"))
+		{
+			$result = config("LEVEL_SANTRI");
+		}
+
+		return $result;
+	}
+
 
 
 	function menu_active($menu="")

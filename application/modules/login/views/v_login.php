@@ -5,7 +5,7 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-        <title>SIKS - Sistem Informasi Kontrol Santri</title>
+        <title>SIKS - Login</title>
         <meta content="SIKS is a application for manage activity santri among other tahfiz and punishment" name="description" />
         <meta content="yayi" name="author" />
         <link rel="shortcut icon" href="<?=base_url('assets/img/logo-sm.png');?>">
@@ -42,26 +42,26 @@
 
                     <div class="p-3">
                         <h4 class="text-muted font-18 m-b-5 text-center">Welcome Back !</h4>
-                        <p class="text-muted text-center">Sign in to continue to SIKS.</p>
+                        <p class="text-muted text-center">Sistem Informasi Kontrol Santri</p>
 
                         <form class="form-horizontal m-t-30" action="<?=base_url('login/process');?>" method="POST">
 
                             <div class="form-group">
-                                <label for="username">Email</label>
-                                <input type="text" class="form-control" id="users_email" name="users_email" placeholder="Enter Email">
+                                <label for="username">NIK/NISN</label>
+                                <input type="text" class="form-control" id="users_email" name="users_email" placeholder="Enter NIK/NISN" value="admin@gmail.com">
                             </div>
 
                             <div class="form-group">
                                 <label for="userpassword">Password</label>
-                                <input type="password" class="form-control" id="users_password" name="users_password" placeholder="Enter password">
+                                <input type="password" class="form-control" id="users_password" name="users_password" placeholder="Enter password" value="demo">
                             </div>
 
                             <div class="form-group row m-t-20">
                                 <div class="col-6">
-                                    <div class="custom-control custom-checkbox">
+                                    <!-- <div class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" id="customControlInline">
                                         <label class="custom-control-label" for="customControlInline">Remember me</label>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="col-6 text-right">
                                     <button class="btn btn-primary w-md waves-effect waves-light" type="submit">Log In</button>
