@@ -49,7 +49,7 @@ class Santri extends CI_Controller
           $content = array();
 
           $uuid  = $row['uuid'];
-          $ttl   = $row['tempat_lahir'].", ".date("Y-m-d", strtotime($row['tgl_lahir']));
+          $ttl   = $row['tempat_lahir'].", ".date("M d Y", strtotime($row['tgl_lahir']));
 
 
           $content[] = "<a href='".base_url('santri/detail/'.$uuid)."'>".$row['nama']."</a>";
@@ -59,7 +59,7 @@ class Santri extends CI_Controller
           $content[] = $ttl;
           $content[] = $row['ayah'];
           $content[] = $row['ibu'];
-          $content[] = date("d/m/Y H:i", strtotime($row['dibuat_tgl']));
+          $content[] = date("M d,Y H:i", strtotime($row['created_date']));
 
           
           $btn = "
@@ -373,8 +373,8 @@ class Santri extends CI_Controller
                                 'ibu_pekerjaan' => $ibu_pekerjaan, 
                                 'wali'          => $wali, 
                                 'wali_pekerjaan'      => $wali_pekerjaan, 
-                                'dibuat_tgl'    => date("Y-m-d H:i:s"), 
-                                'dibuat_oleh'   => $this->sess['users_id']
+                                'created_date'    => date("Y-m-d H:i:s"), 
+                                'created_by'   => $this->sess['users_id']
                               );
 
           $output .= '

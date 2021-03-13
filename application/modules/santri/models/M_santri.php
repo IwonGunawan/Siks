@@ -17,7 +17,7 @@ class M_santri extends CI_Model
                   'ayah', 
                   'ibu',
                   'wali', 
-                  'dibuat_tgl' 
+                  'created_date' 
   							); 
   var $column_search 	= array(
   								'no_induk',
@@ -30,7 +30,7 @@ class M_santri extends CI_Model
                   'ibu',
                   'wali'
   							);
-  var $order = array('dibuat_tgl' => 'DESC'); // default order 
+  var $order = array('created_date' => 'DESC'); // default order 
 
 
 
@@ -128,17 +128,17 @@ class M_santri extends CI_Model
         "alamat"          => $post['alamat'], 
         "asal_sekolah"    => $post['asal_sekolah'],
         "diterima_dikelas"  => $post['diterima_dikelas'], 
-        "tgl_terima"      => $post['tgl_terima'],
+        "tgl_terima"      => ($post['tgl_terima'] != "") ? $post['tgl_terima'] : null,
         "ayah"            => $post['ayah'], 
         "ayah_pekerjaan"  => $post['ayah_pekerjaan'],
         "ibu"             => $post['ibu'], 
         "ibu_pekerjaan"   => $post['ibu_pekerjaan'], 
         "wali"            => $post['wali'],
         "wali_pekerjaan"  => $post['wali_pekerjaan'],
-				"dibuat_oleh"			=> $users_id, 
-				"dibuat_tgl"		  => $datenow, 
+				"created_by"			=> $users_id, 
+				"created_date"		  => $datenow, 
 			);
-		
+		 
 			$this->db->set("uuid", "UUID()", FALSE); 
 			$saved = $this->db->insert("santri", $data);
 			
@@ -187,8 +187,8 @@ class M_santri extends CI_Model
         "ibu_pekerjaan"   => $post['ibu_pekerjaan'], 
         "wali"            => $post['wali'],
         "wali_pekerjaan"  => $post['wali_pekerjaan'],
-				"diubah_oleh"			=> $users_id, 
-				"diubah_tgl"			=> $datenow, 
+				"modified_by"			=> $users_id, 
+				"modified_date"			=> $datenow, 
 			);
       
       $this->db->where("uuid", $post['uuid']);
@@ -203,8 +203,8 @@ class M_santri extends CI_Model
   	
   	if (count($rowData) > 0) 
   	{
-  		$rowData['dibuat_oleh']		= $this->changeBy($rowData['dibuat_oleh']);
-  		$rowData['diubah_oleh']	  = ($rowData['diubah_oleh'] == null) ? "" : $this->changeBy($rowData['diubah_oleh']);
+  		$rowData['created_by']		= $this->changeBy($rowData['created_by']);
+  		$rowData['modified_by']	  = ($rowData['modified_by'] == null) ? "" : $this->changeBy($rowData['modified_by']);
   	}
 
   	return $rowData;

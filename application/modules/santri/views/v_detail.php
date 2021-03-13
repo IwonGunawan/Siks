@@ -1,12 +1,12 @@
 
 
 <?php
-$diubah_tgl = $data['diubah_tgl'];
-if ($diubah_tgl != NULL) {
-  $diubah_tgl = date("d-m-Y H:i:s", strtotime($data['diubah_tgl']));
+$modified_date = $data['modified_date'];
+if ($modified_date != NULL) {
+  $modified_date = date("M d, Y H:i", strtotime($data['modified_date']));
 }
 else {
-  $diubah_tgl = "-";
+  $modified_date = "-";
 }
 ?>
 
@@ -60,7 +60,7 @@ else {
 
                         <div class="row form-group">
                           <div class="col col-md-3"><label class=" form-control-label font-bold">Tempat, Tgl Lahir</label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['tempat_lahir'].", ".date("d-m-Y", strtotime($data['tgl_lahir']));?></p>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['tempat_lahir'].", ".date("M d, Y", strtotime($data['tgl_lahir']));?></p>
                           </div>
                         </div>
 
@@ -104,7 +104,7 @@ else {
 
                         <div class="row form-group">
                           <div class="col col-md-3"><label class=" form-control-label font-bold">Tanggal diterima</label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['tgl_terima'];?></p>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=date("M d, Y", strtotime($data['tgl_terima']));?></p>
                           </div>
                         </div>
 
@@ -146,13 +146,13 @@ else {
 
                         <div class="row form-group">
                           <div class="col col-md-3"><label class=" form-control-label font-bold">Tanggal dibuat</label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=date("d-m-Y H:i:s", strtotime($data['dibuat_tgl']));?></p>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=date("M d, Y H:i", strtotime($data['created_date']));?></p>
                           </div>
                         </div>
 
                         <div class="row form-group">
                           <div class="col col-md-3"><label class=" form-control-label font-bold">Tanggal diubah </label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$diubah_tgl; ?></p>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$modified_date; ?></p>
                           </div>
                         </div>
                     </div>
