@@ -31,11 +31,9 @@
                         <tr>
                             <th>Nama Santri</th>
                             <th>Kelas</th>
-                            <th>Waktu</th>
-                            <th>Juz - Surat - Ayat</th> <!-- juz, surat dan ayat -->
-                            <th>Status</th>
-                            <th>Petugas</th>
-                            <th>Tanggal</th>
+                            <th>Tipe Setoran</th>
+                            <th>Juz</th>
+                            <th>Tgl dibuat</th>
                             <th></th>
                         </tr>
                       </thead>
@@ -78,7 +76,7 @@
       //Set column definition initialisation properties.
       "columnDefs": [
       { 
-          "targets": [ 7 ], //first column / numbering column
+          "targets": [ 5 ], //first column / numbering column
           "orderable": false, //set not orderable
       },
       ],

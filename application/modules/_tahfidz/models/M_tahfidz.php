@@ -3,30 +3,25 @@
 /**
 * Model tahfidz
 */
-
-
-
 class M_tahfidz extends CI_Model
 {
 
 	var $table = 'tahfidz';
   var $column_order 	= array(
-  								'santri.nama',
-                  'santri.kelas',
-                  'tahfidz.tahfidz_waktu',
-                  'tahfidz.tahfidz_status', 
-                  'tahfidz.created_by',
-                  'tahfidz.created_date' 
+  								'tahfidz.id', 
+                  'tahfidz.kelas',
+                  'tahfidz.tipe_setoran', 
+                  'tahfidz.juz',
+                  'tahfidz.dibuat_tgl' 
   							); 
   var $column_search 	= array(
-  								'santri.nama',
-                  'santri.kelas',
-                  'tahfidz.tahfidz_waktu',
-                  'tahfidz.tahfidz_status', 
-                  'tahfidz.created_by',
-                  'tahfidz.created_date' 
+  								'tahfidz.id', 
+                  'tahfidz.kelas',
+                  'tahfidz.tipe_setoran', 
+                  'tahfidz.juz',
+                  'tahfidz.dibuat_tgl' 
   							);
-  var $order = array('tahfidz_id' => 'DESC'); // default order 
+  var $order = array('dibuat_tgl' => 'DESC'); // default order 
 
 
 
@@ -51,32 +46,11 @@ class M_tahfidz extends CI_Model
     return $query->result_array();
   }
 
-  function _selected()
-  {
-    $fields =  array(
-            "santri.id",
-            "santri.nama",
-            "santri.kelas", 
-            "tahfidz.tahfidz_uuid", 
-            "tahfidz.tahfidz_waktu",
-            "tahfidz.tahfidz_juz", 
-            "tahfidz.tahfidz_surat", 
-            "tahfidz.tahfidz_ayat", 
-            "tahfidz.tahfidz_status",
-            "tahfidz.created_date", 
-            "tahfidz.created_by",
-            "users.users_name"
-    );
-
-    return implode(",", $fields);
-  }
-
 	public function _query()
   {
-    $this->db->select($this->_selected());
+    $this->db->select("tahfidz.*, santri.nama as nama_santri");
     $this->db->from("tahfidz");
     $this->db->join("santri", "tahfidz.santri_id=santri.id", "LEFT");
-    $this->db->join("users", "tahfidz.created_by=users.users_id", "LEFT");
     $this->db->where("tahfidz.deleted", config("NOT_DELETED"));
 
     $i = 0;
@@ -135,18 +109,18 @@ class M_tahfidz extends CI_Model
 
 			$data 	= array(
 				"santri_id"       => $post['santri_id'], 
-        "tahfidz_waktu"   => $post['tahfidz_waktu'],
-        "tahfidz_juz"     => $post['tahfidz_juz'], 
-        "tahfidz_surat"   => $post['tahfidz_surat'],
-        "tahfidz_ayat"    => $post['tahfidz_ayat'], 
-        "tahfidz_status"  => $post['tahfidz_status'],
-        "tahfidz_nilai"   => $post['tahfidz_nilai'],
-        "tahfidz_catatan" => $post['tahfidz_catatan'],
-				"created_by"			=> $users_id, 
-				"created_date"		  => $datenow, 
+        "kelas"           => $post['kelas'], 
+        "tipe_setoran"    => $post['tipe_setoran'], 
+        "juz"             => $post['juz'], 
+        "surat"           => $post['surat'],
+        "ayat_awal"       => $post['ayat_awal'], 
+        "ayat_akhir"      => $post['ayat_akhir'],
+        "catatan"         => $post['catatan'],
+				"dibuat_oleh"			=> $users_id, 
+				"dibuat_tgl"		  => $datenow, 
 			);
 
-			$this->db->set("tahfidz_uuid", "UUID()", FALSE); 
+			$this->db->set("uuid", "UUID()", FALSE); 
 			$saved = $this->db->insert("tahfidz", $data);
 			
 			return $saved;
@@ -158,10 +132,10 @@ class M_tahfidz extends CI_Model
     $result   = array();
     if ($uuid !="") 
     {
-      $this->db->select("tahfidz.*, santri.id, santri.nama, santri.kelas");
+      $this->db->select("tahfidz.*, santri.nama as santri_nama, santri.no_induk");
       $this->db->from("tahfidz");
       $this->db->join("santri", "santri.id=tahfidz.santri_id", "LEFT");
-      $this->db->where("tahfidz.tahfidz_uuid", $uuid);
+      $this->db->where("tahfidz.uuid", $uuid);
       $this->db->where("tahfidz.deleted", config("NOT_DELETED"));
       $query    = $this->db->get();
       $result   = $query->row_array();
@@ -179,18 +153,18 @@ class M_tahfidz extends CI_Model
 
       $data 	= array(
 				"santri_id"       => $post['santri_id'], 
-        "tahfidz_waktu"   => $post['tahfidz_waktu'],
-        "tahfidz_juz"     => $post['tahfidz_juz'], 
-        "tahfidz_surat"   => $post['tahfidz_surat'],
-        "tahfidz_ayat"    => $post['tahfidz_ayat'], 
-        "tahfidz_status"  => $post['tahfidz_status'],
-        "tahfidz_nilai"   => $post['tahfidz_nilai'],
-        "tahfidz_catatan" => $post['tahfidz_catatan'],
-				"modified_by"			=> $users_id, 
-				"modified_date"			=> $datenow, 
+        "kelas"           => $post['kelas'], 
+        "tipe_setoran"    => $post['tipe_setoran'], 
+        "juz"             => $post['juz'], 
+        "surat"           => $post['surat'],
+        "ayat_awal"       => $post['ayat_awal'], 
+        "ayat_akhir"      => $post['ayat_akhir'],
+        "catatan"         => $post['catatan'],
+				"diubah_oleh"			=> $users_id, 
+				"diubah_tgl"			=> $datenow, 
 			);
       
-      $this->db->where("tahfidz_uuid", $post['tahfidz_uuid']);
+      $this->db->where("uuid", $post['uuid']);
       $update = $this->db->update("tahfidz", $data);
       
       return $update;
@@ -202,8 +176,8 @@ class M_tahfidz extends CI_Model
   	
   	if (count($rowData) > 0) 
   	{
-  		$rowData['created_by']		= $this->changeBy($rowData['created_by']);
-  		$rowData['modified_by']	  = ($rowData['modified_by'] == null) ? "" : $this->changeBy($rowData['modified_by']);
+  		$rowData['dibuat_oleh']		= $this->changeBy($rowData['dibuat_oleh']);
+  		$rowData['diubah_oleh']	  = ($rowData['diubah_oleh'] == null) ? "" : $this->changeBy($rowData['diubah_oleh']);
   	}
 
   	return $rowData;
@@ -214,7 +188,7 @@ class M_tahfidz extends CI_Model
     if ($uuid != "") 
     {
       $this->db->set("deleted", 1);
-      $this->db->where("tahfidz_uuid", $uuid);
+      $this->db->where("uuid", $uuid);
       $delete   = $this->db->update("tahfidz");
 
       return TRUE;

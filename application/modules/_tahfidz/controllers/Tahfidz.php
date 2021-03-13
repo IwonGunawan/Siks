@@ -34,7 +34,7 @@ class Tahfidz extends CI_Controller
     public function ajax_list()
     {
       $list = $this->M_tahfidz->getData();
-
+     
       $data = array();
       $no   = $_POST['start'];
       foreach ($list as $key => $row) 
@@ -42,15 +42,13 @@ class Tahfidz extends CI_Controller
           $no++;
           $content = array();
 
-          $uuid  = $row['tahfidz_uuid'];
+          $uuid  = $row['uuid'];
 
-          $content[] = "<a href='".base_url('tahfidz/detail/'.$uuid)."'>".$row['nama']."</a>";
+          $content[] = "<a href='".base_url('tahfidz/detail/'.$uuid)."'>".$row['nama_santri']."</a>";
           $content[] = $row['kelas'];
-          $content[] = $this->_tahfidz_waktu($row['tahfidz_waktu']);
-          $content[] = $row['tahfidz_juz']." - ".$row['tahfidz_surat']." - ".$row['tahfidz_ayat'];
-          $content[] = $row['tahfidz_status'];
-          $content[] = $row['users_name'];
-          $content[] = date("M d,Y H:i", strtotime($row['created_date']));
+          $content[] = ($row['tipe_setoran'] == '0') ? "Hafalan" : "Murojaah";
+          $content[] = $row['juz'];
+          $content[] = date("d/m/Y H:i", strtotime($row['dibuat_tgl']));
 
           
           $btn = "
@@ -104,7 +102,7 @@ class Tahfidz extends CI_Controller
     public function detail($tahfidz_uuid="") 
     {
       $rowData            = $this->M_tahfidz->edit($tahfidz_uuid);
-      $data["page"]       = "Detail Tahfidz Santri : ".$rowData['nama'];
+      $data["page"]       = "Detail ".$rowData['santri_nama'];
       $data["content"]    = "tahfidz/v_detail";
 
       if (count($rowData) > 0) 
@@ -178,13 +176,6 @@ class Tahfidz extends CI_Controller
       return redirect(base_url("tahfidz"));
     }    
     /* END CRUD */
-
-    function _tahfidz_waktu($index=0)
-    {
-      $data = array("Pagi", "Siang", "Sore");
-
-      return $data[$index];
-    }
     
 
  

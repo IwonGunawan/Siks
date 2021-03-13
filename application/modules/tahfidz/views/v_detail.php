@@ -1,12 +1,38 @@
 
-
 <?php
-$diubah_tgl = $data['diubah_tgl'];
-if ($diubah_tgl != NULL) {
-  $diubah_tgl = date("d-m-Y H:i:s", strtotime($data['diubah_tgl']));
+$modified_date = $data['modified_date'];
+if ($modified_date != NULL) 
+{
+  $modified_date = date("M d, Y H:i", strtotime($data['modified_date']));
 }
 else {
-  $diubah_tgl = "-";
+  $modified_date = "-";
+}
+
+// tahfidz_waktu
+$arr_waktu = array("Pagi", "Siang", "Sore");
+
+// tahfidz_status
+$tahfidz_status = $data['tahfidz_status'];
+if ($tahfidz_status == "S") 
+{
+  $tahfidz_status = "Setoran";
+} 
+else if ($tahfidz_status == "M") 
+{
+  $tahfidz_status = "Muroja'ah";
+} 
+else if ($tahfidz_status == "T") 
+{
+  $tahfidz_status = "Tilawah Quran";
+} 
+else if ($tahfidz_status == "TS") 
+{
+  $tahfidz_status = "Tasmi";
+}
+else if ($tahfidz_status == "MZ") 
+{
+  $tahfidz_status = "Mumtaz";
 }
 ?>
 
@@ -25,85 +51,75 @@ else {
   <div class="animated fadeIn">
     <div class="row">
 
-        <div class="col-lg-12">
+        <div class="col-lg-6">
           <div class="card">
               <div class="card-header">
-                  <strong><?=$page;?></strong> Tahfidz
+                  <strong><?=$page;?></strong>
               </div>
 
                 <div class="card-body">
                   <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="row form-group">
-                          <div class="col col-md-3"><label class="form-control-label font-bold">Nama Santri</label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['santri_nama'];?></p>
+                          <div class="col col-md-4"><label class="form-control-label font-bold">Nama Santri</label></div>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['nama'];?></p>
                           </div>
                         </div>
 
                         <div class="row form-group">
-                          <div class="col col-md-3"><label class=" form-control-label font-bold">No Induk</label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['no_induk'];?></p>
-                          </div>
-                        </div>
-
-                        <div class="row form-group">
-                          <div class="col col-md-3"><label class=" form-control-label font-bold">Kelas</label></div>
+                          <div class="col col-md-4"><label class=" form-control-label font-bold">Kelas</label></div>
                           <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['kelas'];?></p>
                           </div>
                         </div>
 
                         <div class="row form-group">
-                          <div class="col col-md-3"><label class=" form-control-label font-bold">Tipe Setoran</label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=($data['tipe_setoran']=="0") ? "Hafalan" : "Murojaah";?></p>
+                          <div class="col col-md-4"><label class=" form-control-label font-bold">Tanggal & Waktu</label></div>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=date("M d, Y", strtotime($data['created_date'])). " - (".$arr_waktu[$data['tahfidz_waktu']].")"; ?></p>
                           </div>
                         </div>
 
                         <div class="row form-group">
-                          <div class="col col-md-3"><label class=" form-control-label font-bold">Juz</label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['juz'];?></p>
+                          <div class="col col-md-4"><label class=" form-control-label font-bold">Juz</label></div>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['tahfidz_juz'];?></p>
                           </div>
                         </div>
 
                         <div class="row form-group">
-                          <div class="col col-md-3"><label class=" form-control-label font-bold">Surat</label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['surat'];?></p>
+                          <div class="col col-md-4"><label class=" form-control-label font-bold">Surat</label></div>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['tahfidz_surat'];?></p>
                           </div>
                         </div>
 
                         <div class="row form-group">
-                          <div class="col col-md-3"><label class=" form-control-label font-bold">Ayat Awal</label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['ayat_awal'];?></p>
+                          <div class="col col-md-4"><label class=" form-control-label font-bold">Ayat</label></div>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['tahfidz_ayat'];?></p>
                           </div>
                         </div>
 
                         <div class="row form-group">
-                          <div class="col col-md-3"><label class=" form-control-label font-bold">Ayat Akhir</label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['ayat_akhir'];?></p>
+                          <div class="col col-md-4"><label class=" form-control-label font-bold">Status</label></div>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$tahfidz_status;?></p>
                           </div>
                         </div>
 
                         <div class="row form-group">
-                          <div class="col col-md-3"><label class=" form-control-label font-bold">Catatan</label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['catatan'];?></p>
+                          <div class="col col-md-4"><label class=" form-control-label font-bold">Nilai</label></div>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['tahfidz_nilai'];?></p>
+                          </div>
+                        </div>
+
+                        <div class="row form-group">
+                          <div class="col col-md-4"><label class=" form-control-label font-bold">Catatan</label></div>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['tahfidz_catatan'];?></p>
+                          </div>
+                        </div>
+
+                        <div class="row form-group">
+                          <div class="col col-md-4"><label class=" form-control-label font-bold">Diubah Tgl </label></div>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$modified_date; ?></p>
                           </div>
                         </div>
                     </div>
-
-                    <div class="col-md-6">
-                        <div class="row form-group">
-                          <div class="col col-md-3"><label class=" form-control-label font-bold">Tanggal dibuat</label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=date("d-m-Y H:i:s", strtotime($data['dibuat_tgl']));?></p>
-                          </div>
-                        </div>
-
-                        <div class="row form-group">
-                          <div class="col col-md-3"><label class=" form-control-label font-bold">Tanggal diubah </label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$diubah_tgl; ?></p>
-                          </div>
-                        </div>
-                    </div>
-
-                    
                   </div>
 
                       

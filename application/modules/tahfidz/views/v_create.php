@@ -2,29 +2,31 @@
 <?php
 
 $action           = "tahfidz/save";
-$uuid             = "";
+$tahfidz_uuid     = "";
 $santri_id        = "";
-$kelas            = "";
-$tipe_setoran     = "";
-$juz              = "";
-$surat            = "";
-$ayat_awal        = "";
-$ayat_akhir       = "";
-$catatan          = "";
+$santri_kelas     = "";
+$tahfidz_waktu    = "";
+$tahfidz_juz      = "";
+$tahfidz_surat    = "";
+$tahfidz_ayat     = "";
+$tahfidz_status   = "";
+$tahfidz_nilai    = "";
+$tahfidz_catatan  = "";
 
 
 if ($page == "Edit") 
 {
     $action           = "tahfidz/update";
-    $uuid             = $row['uuid'];
-    $santri_id        = $row["santri_id"];
-    $kelas            = $row["kelas"];
-    $tipe_setoran     = $row["tipe_setoran"];
-    $juz              = $row["juz"];
-    $surat            = $row["surat"];
-    $ayat_awal        = $row["ayat_awal"];
-    $ayat_akhir       = $row["ayat_akhir"];
-    $catatan          = $row["catatan"];
+    $tahfidz_uuid     = $row['tahfidz_uuid'];
+    $santri_id        = $row["id"];
+    $santri_kelas     = $row["kelas"];
+    $tahfidz_waktu    = $row["tahfidz_waktu"];
+    $tahfidz_juz      = $row["tahfidz_juz"];
+    $tahfidz_surat    = $row["tahfidz_surat"];
+    $tahfidz_ayat     = $row["tahfidz_ayat"];
+    $tahfidz_status   = $row["tahfidz_status"];
+    $tahfidz_nilai    = $row["tahfidz_nilai"];
+    $tahfidz_catatan  = $row["tahfidz_catatan"];
 }
 ?>
 
@@ -36,18 +38,18 @@ if ($page == "Edit")
         <div class="col-lg-8">
           <div class="card">
               <div class="card-header">
-                  <strong><?=$page;?></strong> Tahfidz
+                  <strong><?=$page;?></strong> Data
               </div>
 
               <form action="<?=base_url($action);?>" method="post" class="form-horizontal">
 
-                <input type="hidden" name="uuid" value="<?=$uuid;?>">
+                <input type="hidden" name="tahfidz_uuid" value="<?=$tahfidz_uuid;?>">
 
                 <div class="card-body card-block">
                       <div class="row form-group">
                           <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama Santri*</label></div>
                           <div class="col-12 col-md-9">
-                            <select name="santri_id" class="form-control">
+                            <select name="santri_id" class="form-control" onchange="showClass(this)">
                               <option style="display: none;">-select-</option>
                               <?php
                               if (count($santriList) > 0) 
@@ -66,37 +68,65 @@ if ($page == "Edit")
                           </div>
                       </div>
                       <div class="row form-group">
-                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Kelas*</label></div>
-                          <div class="col-12 col-md-9"><input type="text" name="kelas" class="form-control" value="<?=$kelas;?>" required=""></div>
+                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Kelas</label></div>
+                          <div class="col-12 col-md-9"><input type="text" class="form-control" id="santri_kelas" value="<?=$santri_kelas;?>" readonly="true"></div>
                       </div>
                       <div class="row form-group">
-                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Tipe Setoran*</label></div>
+                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Waktu*</label></div>
                           <div class="col-12 col-md-9">
-                            <select name="tipe_setoran" id="tipe_setoran" class="form-control">
-                                  <option value="0" <?= ($tipe_setoran == "0") ? "selected" : "" ?> >Hafalan</option>
-                                  <option value="1" <?= ($tipe_setoran == "1") ? "selected" : "" ?> >Murojaah</option>
+                            <select name="tahfidz_waktu" id="tahfidz_waktu" class="form-control">
+                                  <option value="0" <?= ($tahfidz_waktu == "0") ? "selected" : "" ?> >Pagi</option>
+                                  <option value="1" <?= ($tahfidz_waktu == "1") ? "selected" : "" ?> >Siang</option>
+                                  <option value="2" <?= ($tahfidz_waktu == "2") ? "selected" : "" ?> >Sore</option>
                               </select>
                           </div>
                       </div>
                       <div class="row form-group">
                           <div class="col col-md-3"><label for="text-input" class=" form-control-label">Juz</label></div>
-                          <div class="col-12 col-md-9"><input type="text" name="juz" class="form-control" value="<?=$juz;?>" required=""></div>
+                          <div class="col-12 col-md-9">
+                            <select name="tahfidz_juz" class="form-control">
+                              <?php
+                                for ($i=1; $i <=30; $i++) 
+                                { 
+                                  $selected = "";
+                                  if ($i == $tahfidz_juz) 
+                                  {
+                                    $selected = "selected";
+                                  }
+                                  echo "<option ".$selected." value='".$i."'>Juz ".$i."</option>";
+                                }
+
+                              ?>
+                            </select>
+                          </div>
                       </div>
                       <div class="row form-group">
-                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Surat</label></div>
-                          <div class="col-12 col-md-9"><input type="text" name="surat" class="form-control" value="<?=$surat;?>" required=""></div>
+                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Surat*</label></div>
+                          <div class="col-12 col-md-9"><input type="text" name="tahfidz_surat" class="form-control" value="<?=$tahfidz_surat;?>" required=""></div>
                       </div>
                       <div class="row form-group">
-                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Ayat Awal*</label></div>
-                          <div class="col-12 col-md-9"><input type="text" name="ayat_awal" class="form-control" value="<?=$ayat_awal;?>" required=""></div>
+                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Ayat*</label></div>
+                          <div class="col-12 col-md-9"><input type="text" name="tahfidz_ayat" class="form-control" value="<?=$tahfidz_ayat;?>" required=""></div>
                       </div>
                       <div class="row form-group">
-                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Ayat Akhir*</label></div>
-                          <div class="col-12 col-md-9"><input type="text" name="ayat_akhir" class="form-control" value="<?=$ayat_akhir;?>" required=""></div>
+                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Status</label></div>
+                          <div class="col-12 col-md-9">
+                            <select name="tahfidz_status" class="form-control">
+                              <option <?= ($tahfidz_status == "S") ? "selected" : ""; ?> value="S">Setoran</option>  
+                              <option <?= ($tahfidz_status == "M") ? "selected" : ""; ?> value="M">Muroja'ah</option>
+                              <option <?= ($tahfidz_status == "T") ? "selected" : ""; ?> value="T">Tilawah Quran</option>
+                              <option <?= ($tahfidz_status == "TS") ? "selected" : ""; ?> value="TS">Tasmi</option>
+                              <option <?= ($tahfidz_status == "MZ") ? "selected" : ""; ?> value="MZ">Mumtaz</option>
+                            </select>
+                          </div>
                       </div>
                       <div class="row form-group">
-                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Catatan*</label></div>
-                          <div class="col-12 col-md-9"><textarea class="form-control" name="catatan"><?=$catatan;?></textarea></div>
+                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nilai*</label></div>
+                          <div class="col-12 col-md-9"><input type="number" name="tahfidz_nilai" class="form-control" value="<?=$tahfidz_nilai;?>" required=""></div>
+                      </div>
+                      <div class="row form-group">
+                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Catatan</label></div>
+                          <div class="col-12 col-md-9"><textarea class="form-control" name="tahfidz_catatan" rows="5"><?=$tahfidz_catatan;?></textarea></div>
                       </div>
                       <div><small style="color: red">* wajib isi</small></div>
                 </div>
@@ -117,11 +147,21 @@ if ($page == "Edit")
   </div><!-- .animated -->
 </div>
 
+<script type="text/javascript">
+  function showClass(object)
+  {
+    var santriID = object.value;
 
-<!-- Datepicker -->
-<script src="<?=base_url('assets/vendor/plugins/bootstrap-md-datetimepicker/js/moment-with-locales.min.js');?>"></script>
-<script src="<?=base_url('assets/vendor/plugins/bootstrap-md-datetimepicker/js/bootstrap-material-datetimepicker.js');?>"></script>
-<script src="<?=base_url('assets/vendor/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js');?>"></script>
+    $.ajax({
+      url     : "<?php echo base_url('santri/getClassByID');?>",
+      method  : "GET",
+      data    : "santri_id=" + santriID,
 
-<!-- Plugins Init js -->
-<script src="<?=base_url('assets/vendor/app/assets/pages/form-advanced.js');?>"></script>
+      success:function(result)
+      {
+        document.getElementById('santri_kelas').value = result
+      }
+    });
+  }
+
+</script>
