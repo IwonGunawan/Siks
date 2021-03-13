@@ -6,6 +6,7 @@ $uuid             = "";
 $nama             = "";
 $no_induk         = "";
 $nisn             = "";
+$kelas            = "";
 $jk               = "";
 $tempat_lahir     = "";
 $tgl_lahir        = "";
@@ -31,6 +32,7 @@ if ($page == "Edit")
     $nama             = $row['nama'];
     $no_induk         = $row['no_induk'];
     $nisn             = $row['nisn'];
+    $kelas            = $row['kelas'];
     $jk               = $row['jk'];
     $tempat_lahir     = $row['tempat_lahir'];
     $tgl_lahir        = $row['tgl_lahir'];
@@ -80,6 +82,16 @@ if ($page == "Edit")
                       <div class="row form-group">
                           <div class="col col-md-3"><label for="text-input" class=" form-control-label">NISN*</label></div>
                           <div class="col-12 col-md-9"><input type="text" name="nisn" class="form-control" value="<?=$nisn;?>" required=""></div>
+                      </div>
+                      <div class="row form-group">
+                          <div class="col col-md-3"><label for="text-input" class=" form-control-label">Kelas</label></div>
+                          <div class="col-12 col-md-9">
+                            <select name="kelas" id="kelas" class="form-control">
+                                <option value="VII" <?= ($kelas == "VII") ? "selected" : "" ?> >VII</option>
+                                <option value="VIII" <?= ($kelas == "VIII") ? "selected" : "" ?> >VIII</option>
+                                <option value="IX" <?= ($kelas == "IX") ? "selected" : "" ?> >IX</option>
+                            </select>
+                          </div>
                       </div>
                       <div class="row form-group">
                           <div class="col col-md-3"><label for="text-input" class=" form-control-label">Jenis Kelamin</label></div>

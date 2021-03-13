@@ -55,10 +55,9 @@ class Santri extends CI_Controller
           $content[] = "<a href='".base_url('santri/detail/'.$uuid)."'>".$row['nama']."</a>";
           $content[] = $row['no_induk'];
           $content[] = $row['nisn'];
+          $content[] = $row['kelas'];
           $content[] = ($row['jk'] == "F") ? "Wanita" : "Pria";
           $content[] = $ttl;
-          $content[] = $row['ayah'];
-          $content[] = $row['ibu'];
           $content[] = date("M d,Y H:i", strtotime($row['created_date']));
 
           

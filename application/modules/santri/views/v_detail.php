@@ -53,6 +53,12 @@ else {
                         </div>
 
                         <div class="row form-group">
+                          <div class="col col-md-3"><label class=" form-control-label font-bold">Kelas</label></div>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['kelas'];?></p>
+                          </div>
+                        </div>
+
+                        <div class="row form-group">
                           <div class="col col-md-3"><label class=" form-control-label font-bold">Jenis Kelamin</label></div>
                           <div class="col-12 col-md-8"><p class="form-control-static"><?=($data['jk']=="M") ? "Pria" : "Wanita";?></p>
                           </div>

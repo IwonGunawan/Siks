@@ -34,10 +34,9 @@
                             <th>Nama Lengkap</th>
                             <th>No Induk</th>
                             <th>NISN</th>
+                            <th>Kelas</th>
                             <th>JK</th>
                             <th>Tanggal Lahir</th>
-                            <th>Ayah</th>
-                            <th>Ibu</th>
                             <th>Tgl dibuat</th>
                             <th></th>
                         </tr>
@@ -81,7 +80,7 @@
       //Set column definition initialisation properties.
       "columnDefs": [
       { 
-          "targets": [ 8 ], //first column / numbering column
+          "targets": [ 7 ], //first column / numbering column
           "orderable": false, //set not orderable
       },
       ],

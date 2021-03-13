@@ -8,7 +8,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-xl-8 border-right">
-                            <h4 class="mt-0 header-title mb-4">Sales Report</h4>
+                            <h4 class="mt-0 header-title mb-4">Tahun Ajaran Saat ini : <b style="color: blue">2020 / 2021</b></h4>
                             <div id="morris-area-example" class="dashboard-charts morris-charts"></div>
                         </div>
                         <div class="col-xl-4">
