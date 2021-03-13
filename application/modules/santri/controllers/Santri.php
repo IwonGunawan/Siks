@@ -434,5 +434,21 @@ class Santri extends CI_Controller
       return redirect(base_url("santri"));
     }
 
+
+    // PUBLIC 
+    public function getClassByID()
+    {
+      if (isset($_GET['santri_id'])) 
+      {
+        if ($_GET['santri_id'] != "" && $_GET['santri_id'] > 0) 
+        {
+          $santri_id = $_GET['santri_id'];
+          $get = $this->M_santri->getClassByID($santri_id);
+
+          echo $get['kelas'];
+        }
+      }
+    }
+
  
 }

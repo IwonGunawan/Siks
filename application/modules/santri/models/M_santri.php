@@ -281,5 +281,21 @@ class M_santri extends CI_Model
     return $result;
   }
 
+  public function getClassByID($santri_id=0)
+  {
+    $result = array();
+    if ($santri_id > 0) 
+    {
+      $this->db->select("kelas");
+      $this->db->from("santri");
+      $this->db->where("id", $santri_id);
+
+      $query  = $this->db->get();
+      $result = $query->row_array(); 
+    }
+
+    return $result;
+  }
+
 	
 }
