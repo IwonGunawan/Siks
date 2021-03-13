@@ -19,7 +19,7 @@
                 <?php if($whoIsLogin == config("LEVEL_ADMIN")){ ?>
                 <li class="menu-title">Data Master</li>
                 <li>
-                    <a href="<?=base_url('guru');?>" class="waves-effect">
+                    <a href="<?=base_url('ustadz');?>" class="waves-effect">
                         <i class="mdi mdi-account-settings"></i><span> Data Ustadz </span>
                     </a>
                 </li>
