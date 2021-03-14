@@ -8,7 +8,7 @@
       <title><?=$page." - SIKS";?></title>
       <meta content="SIKS is a application for manage activity santri among other tahfiz and punishment" name="description" />
       <meta content="yayi" name="author" />
-      <link rel="shortcut icon" href="<?=base_url('assets/img/logo-sm.png');?>">
+      <link rel="shortcut icon" href="<?=base_url('assets/img/logo-s.png');?>">
 
       <link rel="stylesheet" href="<?=base_url('assets/vendor/plugins/morris/morris.css');?>">
 

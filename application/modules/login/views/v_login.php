@@ -8,7 +8,7 @@
         <title>SIKS - Login</title>
         <meta content="SIKS is a application for manage activity santri among other tahfiz and punishment" name="description" />
         <meta content="yayi" name="author" />
-        <link rel="shortcut icon" href="<?=base_url('assets/img/logo-sm.png');?>">
+        <link rel="shortcut icon" href="<?=base_url('assets/img/logo-s.png');?>">
 
         <link href="<?=base_url('assets/vendor/app/assets/css/bootstrap.min.css');?>" rel="stylesheet" type="text/css">
         <link href="<?=base_url('assets/vendor/app/assets/css/metismenu.min.css');?>" rel="stylesheet" type="text/css">
@@ -79,10 +79,10 @@
                 </div>
             </div>
 
-            <div class="m-t-40 text-center">
+            <!-- <div class="m-t-40 text-center">
                 <p class="text-white-50">Don't have an account ? <a href="pages-register.html" class="text-white"> Signup Now </a> </p>
                 
-            </div>
+            </div> -->
 
         </div>
 

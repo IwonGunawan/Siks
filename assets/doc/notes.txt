@@ -1,2 +1,6 @@
 Batasan :
 - tidak mencakup tentang tahun ajaran baru
+
+laporan nilai tahfidz
+- default berdasarkan kelas : total nilai/ jumlah santri
+- bisa filter berdasarkan santri

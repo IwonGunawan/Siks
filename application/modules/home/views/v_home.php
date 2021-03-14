@@ -14,7 +14,7 @@
                         <div class="col-xl-4">
                             <h4 class="header-title mb-4"><h2>Pon-Pes Baron</h2></h4>
                             <div class="p-3"> 
-                                <p class="text-muted">adalah Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus Nullam quis ante.</p>
+                                <p class="text-muted">Ponpes Baron adalah lembaga Pondok Pesantren yang menciptakan program pendidikan yang kreatif dan inovatif berbasis Al-Qur’an, As-Sunnah,  Ijma’, dan Qiyas.</p>
                             </div>
                         </div>
                     </div>
