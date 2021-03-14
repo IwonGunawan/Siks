@@ -35,8 +35,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                         <!-- item-->
-                        <a class="dropdown-item" href="#"><i class="mdi mdi-account-circle m-r-5"></i> Profile</a>
-                        <a class="dropdown-item d-block" href="#"><i class="mdi mdi-settings m-r-5"></i> Settings</a>
+                        <a class="dropdown-item" href="<?=base_url('users/password');?>"><i class="mdi mdi-lock-open-outline m-r-5"></i> Ubah Password</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item text-danger" href="<?=base_url('logout');?>"><i class="mdi mdi-power text-danger"></i> Logout</a>
                     </div>                                                                    

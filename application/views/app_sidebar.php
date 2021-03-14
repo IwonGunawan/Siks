@@ -58,14 +58,19 @@
 
                 <?php if($whoIsLogin == config("LEVEL_ADMIN")) { ?>
                 <li class="menu-title">Settings</li>
-                <li>
+                <!-- <li>
                     <a href="#" class="waves-effect">
                         <i class="mdi mdi-calendar-multiple"></i><span> Tahun Ajaran </span>
                     </a>
-                </li>
+                </li> -->
                 <li>
-                    <a href="#" class="waves-effect">
+                    <a href="<?=base_url('users');?>" class="waves-effect">
                         <i class="mdi mdi-settings"></i><span> Management User</span>
+                    </a>
+                </li> 
+                <li>
+                    <a href="<?=base_url('users/password');?>" class="waves-effect">
+                        <i class="mdi mdi-lock-open-outline"></i><span> Ubah Password</span>
                     </a>
                 </li>  
                 <?php } ?> 
