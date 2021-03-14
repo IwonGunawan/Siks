@@ -1,13 +1,12 @@
 
 
 <?php
-$modified_date = $data['modified_date'];
-if ($modified_date != NULL) 
-{
-  $modified_date = date("M d, Y H:i", strtotime($data['modified_date']));
+$diubah_tgl = $data['diubah_tgl'];
+if ($diubah_tgl != NULL) {
+  $diubah_tgl = date("d-m-Y H:i:s", strtotime($data['diubah_tgl']));
 }
 else {
-  $modified_date = "-";
+  $diubah_tgl = "-";
 }
 ?>
 
@@ -26,7 +25,7 @@ else {
   <div class="animated fadeIn">
     <div class="row">
 
-        <div class="col-lg-8">
+        <div class="col-lg-12">
           <div class="card">
               <div class="card-header">
                   <strong><?=$page;?></strong> Pelanggaran
@@ -34,10 +33,16 @@ else {
 
                 <div class="card-body">
                   <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="row form-group">
                           <div class="col col-md-3"><label class="form-control-label font-bold">Nama Santri</label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['nama'];?></p>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['santri_nama'];?></p>
+                          </div>
+                        </div>
+
+                        <div class="row form-group">
+                          <div class="col col-md-3"><label class=" form-control-label font-bold">No Induk</label></div>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['no_induk'];?></p>
                           </div>
                         </div>
 
@@ -50,40 +55,43 @@ else {
 
                         <div class="row form-group">
                           <div class="col col-md-3"><label class=" form-control-label font-bold">Peristiwa</label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['pelanggaran_peristiwa'];?></p>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['peristiwa'];?></p>
                           </div>
                         </div>
 
                         <div class="row form-group">
                           <div class="col col-md-3"><label class=" form-control-label font-bold">Kronologi</label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['pelanggaran_kronologi'];?></p>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['kronologi'];?></p>
                           </div>
                         </div>
 
                         <div class="row form-group">
                           <div class="col col-md-3"><label class=" form-control-label font-bold">Motif Melanggar</label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['pelanggaran_motif'];?></p>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['motif_melanggar'];?></p>
                           </div>
                         </div>
 
                         <div class="row form-group">
                           <div class="col col-md-3"><label class=" form-control-label font-bold">Solusi</label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['pelanggaran_solusi'];?></p>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$data['solusi'];?></p>
                           </div>
                         </div>
+                    </div>
 
+                    <div class="col-md-6">
                         <div class="row form-group">
                           <div class="col col-md-3"><label class=" form-control-label font-bold">Tanggal dibuat</label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=date("M d, Y H:i", strtotime($data['created_date']));?></p>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=date("d-m-Y H:i:s", strtotime($data['dibuat_tgl']));?></p>
                           </div>
                         </div>
 
                         <div class="row form-group">
                           <div class="col col-md-3"><label class=" form-control-label font-bold">Tanggal diubah </label></div>
-                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$modified_date; ?></p>
+                          <div class="col-12 col-md-8"><p class="form-control-static"><?=$diubah_tgl; ?></p>
                           </div>
                         </div>
                     </div>
+
                     
                   </div>
 

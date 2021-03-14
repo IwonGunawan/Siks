@@ -31,7 +31,6 @@ class Pelanggaran extends CI_Controller
       $this->load->view("app_template", $data);
     } 
 
-
     public function ajax_list()
     {
       $list = $this->M_pelanggaran->getData();
@@ -43,13 +42,13 @@ class Pelanggaran extends CI_Controller
           $no++;
           $content = array();
 
-          $uuid  = $row['pelanggaran_uuid'];
+          $uuid  = $row['uuid'];
 
-          $content[] = "<a href='".base_url('pelanggaran/detail/'.$uuid)."'>".$row['nama']."</a>";
+          $content[] = "<a href='".base_url('pelanggaran/detail/'.$uuid)."'>".$row['santri_nama']."</a>";
           $content[] = $row['kelas'];
-          $content[] = $row['pelanggaran_peristiwa'];
-          $content[] = $row['users_name'];
-          $content[] = date("M d, Y H:i", strtotime($row['created_date']));
+          $content[] = $row['peristiwa'];
+          $content[] = $row['solusi'];
+          $content[] = date("d/m/Y H:i", strtotime($row['dibuat_tgl']));
 
           
           $btn = "
@@ -57,6 +56,7 @@ class Pelanggaran extends CI_Controller
                   <a class='table-action hover-danger' href='".base_url('pelanggaran/delete/'.$uuid)."' onclick='return confirm(\"HAPUS DATA ?\")'><i class='ti-trash'></i> Del</a>
                 ";
           $content[]  = $btn;
+
           $data[] = $content;
       }
 
@@ -102,7 +102,7 @@ class Pelanggaran extends CI_Controller
     public function detail($pelanggaran_uuid="") 
     {
       $rowData            = $this->M_pelanggaran->edit($pelanggaran_uuid);
-      $data["page"]       = "Detail ".$rowData['nama'];
+      $data["page"]       = "Detail ".$rowData['santri_nama'];
       $data["content"]    = "pelanggaran/v_detail";
 
       if (count($rowData) > 0) 

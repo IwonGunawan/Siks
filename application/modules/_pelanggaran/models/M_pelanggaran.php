@@ -8,16 +8,21 @@ class M_pelanggaran extends CI_Model
 
 	var $table = 'pelanggaran';
   var $column_order 	= array(
-  								'b.nama'
+  								'pelanggaran.id', 
+                  'pelanggaran.kelas',
+                  'pelanggaran.peristiwa', 
+                  'pelanggaran.solusi',
+                  'santri.nama' 
   							); 
   var $column_search 	= array(
-                  'a.pelanggaran_peristiwa', 
-                  'a.created_date', 
-                  'b.nama', 
-                  'b.kelas',
-                  'c.users_name',
+  								'pelanggaran.id', 
+                  'pelanggaran.kelas',
+                  'pelanggaran.peristiwa', 
+                  'pelanggaran.solusi',
+                  'pelanggaran.dibuat_tgl', 
+                  'santri.nama',
   							);
-  var $order = array('a.pelanggaran_id' => 'DESC'); // default order 
+  var $order = array('dibuat_tgl' => 'DESC'); // default order 
 
 
 
@@ -42,29 +47,12 @@ class M_pelanggaran extends CI_Model
     return $query->result_array();
   }
 
-  function _selected()
-  {
-    $fields = array(
-        "a.pelanggaran_id",
-        "a.pelanggaran_uuid",
-        "a.pelanggaran_peristiwa",
-        "a.created_by",
-        "a.created_date",
-        "b.nama",
-        "b.kelas",
-        "c.users_name"
-    );
-
-    return implode(",", $fields);
-  }
-
 	public function _query()
   {
-    $this->db->select($this->_selected());
-    $this->db->from("pelanggaran as a");
-    $this->db->join("santri as b", "a.santri_id=b.id", "LEFT");
-    $this->db->join("users as c", "a.created_by=c.users_id", "LEFT");
-    $this->db->where("a.deleted", config("NOT_DELETED"));
+    $this->db->select("pelanggaran.*, santri.nama as santri_nama");
+    $this->db->from("pelanggaran");
+    $this->db->join("santri", "pelanggaran.santri_id=santri.id", "LEFT");
+    $this->db->where("pelanggaran.deleted", config("NOT_DELETED"));
 
     $i = 0;
  
@@ -121,16 +109,17 @@ class M_pelanggaran extends CI_Model
 			$datenow 	= date("Y-m-d H:i:s");
 
 			$data 	= array(
-				"santri_id"                   => $post['santri_id'], 
-        "pelanggaran_peristiwa"       => $post['pelanggaran_peristiwa'], 
-        'pelanggaran_kronologi'       => $post['pelanggaran_kronologi'], 
-        'pelanggaran_motif'           => $post['pelanggaran_motif'],
-        "pelanggaran_solusi"          => $post['pelanggaran_solusi'],
-				"created_by"			=> $users_id, 
-				"created_date"		  => $datenow, 
+				"santri_id"       => $post['santri_id'], 
+        "kelas"           => $post['kelas'], 
+        "peristiwa"       => $post['peristiwa'], 
+        'kronologi'       => $post['kronologi'], 
+        'motif_melanggar' => $post['motif_melanggar'],
+        "solusi"          => $post['solusi'],
+				"dibuat_oleh"			=> $users_id, 
+				"dibuat_tgl"		  => $datenow, 
 			);
 
-			$this->db->set("pelanggaran_uuid", "UUID()", FALSE); 
+			$this->db->set("uuid", "UUID()", FALSE); 
 			$saved = $this->db->insert("pelanggaran", $data);
 			
 			return $saved;
@@ -142,10 +131,10 @@ class M_pelanggaran extends CI_Model
     $result   = array();
     if ($uuid !="") 
     {
-      $this->db->select("pelanggaran.*, santri.id, santri.nama, santri.kelas");
+      $this->db->select("pelanggaran.*, santri.nama as santri_nama, santri.no_induk");
       $this->db->from("pelanggaran");
       $this->db->join("santri", "pelanggaran.santri_id=santri.id", "LEFT");
-      $this->db->where("pelanggaran.pelanggaran_uuid", $uuid);
+      $this->db->where("pelanggaran.uuid", $uuid);
       $this->db->where("pelanggaran.deleted", config("NOT_DELETED"));
       $query    = $this->db->get();
       $result   = $query->row_array();
@@ -162,16 +151,17 @@ class M_pelanggaran extends CI_Model
       $datenow  = date("Y-m-d H:i:s");
 
       $data 	= array(
-				"santri_id"                   => $post['santri_id'], 
-        "pelanggaran_peristiwa"       => $post['pelanggaran_peristiwa'], 
-        'pelanggaran_kronologi'       => $post['pelanggaran_kronologi'], 
-        'pelanggaran_motif'           => $post['pelanggaran_motif'],
-        "pelanggaran_solusi"          => $post['pelanggaran_solusi'],
-				"modified_by"			=> $users_id, 
-				"modified_date"			=> $datenow, 
+				"santri_id"       => $post['santri_id'], 
+        "kelas"           => $post['kelas'], 
+        "peristiwa"       => $post['peristiwa'], 
+        'kronologi'       => $post['kronologi'], 
+        'motif_melanggar' => $post['motif_melanggar'],
+        "solusi"          => $post['solusi'],
+				"diubah_oleh"			=> $users_id, 
+				"diubah_tgl"			=> $datenow, 
 			);
       
-      $this->db->where("pelanggaran_uuid", $post['pelanggaran_uuid']);
+      $this->db->where("uuid", $post['uuid']);
       $update = $this->db->update("pelanggaran", $data);
       
       return $update;
@@ -183,8 +173,8 @@ class M_pelanggaran extends CI_Model
   	
   	if (count($rowData) > 0) 
   	{
-  		$rowData['created_by']		= $this->changeBy($rowData['created_by']);
-  		$rowData['modified_by']	  = ($rowData['modified_by'] == null) ? "" : $this->changeBy($rowData['modified_by']);
+  		$rowData['dibuat_oleh']		= $this->changeBy($rowData['dibuat_oleh']);
+  		$rowData['diubah_oleh']	  = ($rowData['diubah_oleh'] == null) ? "" : $this->changeBy($rowData['diubah_oleh']);
   	}
 
   	return $rowData;
@@ -195,7 +185,7 @@ class M_pelanggaran extends CI_Model
     if ($uuid != "") 
     {
       $this->db->set("deleted", 1);
-      $this->db->where("pelanggaran_uuid", $uuid);
+      $this->db->where("uuid", $uuid);
       $delete   = $this->db->update("pelanggaran");
 
       return TRUE;

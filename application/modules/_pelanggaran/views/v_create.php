@@ -2,25 +2,25 @@
 <?php
 
 $action           = "pelanggaran/save";
-$pelanggaran_uuid             = "";
-$santri_id                    = "";
-$kelas                        = "";
-$pelanggaran_peristiwa        = "";
-$pelanggaran_kronologi        = "";
-$pelanggaran_motif            = "";
-$pelanggaran_solusi           = "";
+$uuid             = "";
+$santri_id        = "";
+$kelas            = "";
+$peristiwa        = "";
+$kronologi        = "";
+$motif_melanggar  = "";
+$solusi           = "";
 
 
 if ($page == "Edit") 
 {
     $action           = "pelanggaran/update";
-    $pelanggaran_uuid             = $row['pelanggaran_uuid'];
-    $santri_id                    = $row["santri_id"];
-    $kelas                        = $row["kelas"];
-    $pelanggaran_peristiwa        = $row["pelanggaran_peristiwa"];
-    $pelanggaran_kronologi        = $row["pelanggaran_kronologi"];
-    $pelanggaran_motif            = $row["pelanggaran_motif"];
-    $pelanggaran_solusi           = $row["pelanggaran_solusi"];
+    $uuid             = $row['uuid'];
+    $santri_id        = $row["santri_id"];
+    $kelas            = $row["kelas"];
+    $peristiwa        = $row["peristiwa"];
+    $kronologi        = $row["kronologi"];
+    $motif_melanggar  = $row["motif_melanggar"];
+    $solusi           = $row["solusi"];
 }
 ?>
 
@@ -37,13 +37,13 @@ if ($page == "Edit")
 
               <form action="<?=base_url($action);?>" method="post" class="form-horizontal">
 
-                <input type="hidden" name="pelanggaran_uuid" value="<?=$pelanggaran_uuid;?>">
+                <input type="hidden" name="uuid" value="<?=$uuid;?>">
 
                 <div class="card-body card-block">
                       <div class="row form-group">
                           <div class="col col-md-3"><label for="text-input" class=" form-control-label">Nama Santri*</label></div>
                           <div class="col-12 col-md-9">
-                            <select name="santri_id" class="form-control" onchange="showClass(this)">
+                            <select name="santri_id" class="form-control">
                               <option style="display: none;">-select-</option>
                               <?php
                               if (count($santriList) > 0) 
@@ -63,23 +63,23 @@ if ($page == "Edit")
                       </div>
                       <div class="row form-group">
                           <div class="col col-md-3"><label for="text-input" class=" form-control-label">Kelas*</label></div>
-                          <div class="col-12 col-md-9"><input type="text" id="santri_kelas" class="form-control" value="<?=$kelas;?>" required="" readonly></div>
+                          <div class="col-12 col-md-9"><input type="text" name="kelas" class="form-control" value="<?=$kelas;?>" required=""></div>
                       </div>
                       <div class="row form-group">
                           <div class="col col-md-3"><label for="text-input" class=" form-control-label">Peristiwa*</label></div>
-                          <div class="col-12 col-md-9"><textarea class="form-control" name="pelanggaran_peristiwa" rows="7" required=""><?=$pelanggaran_peristiwa;?></textarea></div>
+                          <div class="col-12 col-md-9"><textarea class="form-control" name="peristiwa" rows="7"><?=$peristiwa;?></textarea></div>
                       </div>
                       <div class="row form-group">
                           <div class="col col-md-3"><label for="text-input" class=" form-control-label">Kronologi*</label></div>
-                          <div class="col-12 col-md-9"><textarea class="form-control" name="pelanggaran_kronologi" rows="7" required=""><?=$pelanggaran_kronologi;?></textarea></div>
+                          <div class="col-12 col-md-9"><textarea class="form-control" name="kronologi" rows="7"><?=$kronologi;?></textarea></div>
                       </div>
                       <div class="row form-group">
                           <div class="col col-md-3"><label for="text-input" class=" form-control-label">Motif Melanggar*</label></div>
-                          <div class="col-12 col-md-9"><textarea class="form-control" name="pelanggaran_motif" rows="7" required=""><?=$pelanggaran_motif;?></textarea></div>
+                          <div class="col-12 col-md-9"><textarea class="form-control" name="motif_melanggar" rows="7"><?=$motif_melanggar;?></textarea></div>
                       </div>
                       <div class="row form-group">
                           <div class="col col-md-3"><label for="text-input" class=" form-control-label">Solusi*</label></div>
-                          <div class="col-12 col-md-9"><textarea class="form-control" name="pelanggaran_solusi" rows="7" required=""><?=$pelanggaran_solusi;?></textarea></div>
+                          <div class="col-12 col-md-9"><textarea class="form-control" name="solusi" rows="7"><?=$solusi;?></textarea></div>
                       </div>
                       <div><small style="color: red">* wajib isi</small></div>
                 </div>
@@ -100,21 +100,11 @@ if ($page == "Edit")
   </div><!-- .animated -->
 </div>
 
-<script type="text/javascript">
-  function showClass(object)
-  {
-    var santriID = object.value;
 
-    $.ajax({
-      url     : "<?php echo base_url('santri/getClassByID');?>",
-      method  : "GET",
-      data    : "santri_id=" + santriID,
+<!-- Datepicker -->
+<script src="<?=base_url('assets/vendor/plugins/bootstrap-md-datetimepicker/js/moment-with-locales.min.js');?>"></script>
+<script src="<?=base_url('assets/vendor/plugins/bootstrap-md-datetimepicker/js/bootstrap-material-datetimepicker.js');?>"></script>
+<script src="<?=base_url('assets/vendor/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js');?>"></script>
 
-      success:function(result)
-      {
-        document.getElementById('santri_kelas').value = result
-      }
-    });
-  }
-
-</script>
+<!-- Plugins Init js -->
+<script src="<?=base_url('assets/vendor/app/assets/pages/form-advanced.js');?>"></script>

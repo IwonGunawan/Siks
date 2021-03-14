@@ -32,7 +32,7 @@
                             <th>Nama Santri</th>
                             <th>Kelas</th>
                             <th>Peristiwa</th>
-                            <th>Petugas</th>
+                            <th>Solusi</th>
                             <th>Tgl dibuat</th>
                             <th></th>
                         </tr>
