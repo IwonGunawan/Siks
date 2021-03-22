@@ -82,7 +82,7 @@
       <script src="<?=base_url('assets/vendor/plugins/morris/morris.min.js');?>"></script>
       <script src="<?=base_url('assets/vendor/plugins/raphael/raphael-min.js');?>"></script>
 
-      <script src="<?=base_url('assets/vendor/app/assets/pages/dashboard.js');?>"></script>
+      <!-- <script src="<?=base_url('assets/vendor/app/assets/pages/dashboard.js');?>"></script> -->
 
       <!-- App js -->
       <script src="<?=base_url('assets/vendor/app/assets/js/app.js');?>"></script>

@@ -48,7 +48,7 @@ class Tahfidz extends CI_Controller
           $content[] = $row['kelas'];
           $content[] = $this->_tahfidz_waktu($row['tahfidz_waktu']);
           $content[] = $row['tahfidz_juz']." - ".$row['tahfidz_surat']." - ".$row['tahfidz_ayat'];
-          $content[] = $row['tahfidz_status'];
+          $content[] = $row['tahfidz_nilai'];
           $content[] = $row['users_name'];
           $content[] = date("M d,Y H:i", strtotime($row['created_date']));
 

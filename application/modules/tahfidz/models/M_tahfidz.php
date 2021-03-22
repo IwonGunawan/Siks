@@ -14,7 +14,7 @@ class M_tahfidz extends CI_Model
   								'santri.nama',
                   'santri.kelas',
                   'tahfidz.tahfidz_waktu',
-                  'tahfidz.tahfidz_status', 
+                  'tahfidz.tahfidz_nilai', 
                   'tahfidz.created_by',
                   'tahfidz.created_date' 
   							); 
@@ -22,7 +22,7 @@ class M_tahfidz extends CI_Model
   								'santri.nama',
                   'santri.kelas',
                   'tahfidz.tahfidz_waktu',
-                  'tahfidz.tahfidz_status', 
+                  'tahfidz.tahfidz_nilai', 
                   'tahfidz.created_by',
                   'tahfidz.created_date' 
   							);
@@ -62,7 +62,7 @@ class M_tahfidz extends CI_Model
             "tahfidz.tahfidz_juz", 
             "tahfidz.tahfidz_surat", 
             "tahfidz.tahfidz_ayat", 
-            "tahfidz.tahfidz_status",
+            "tahfidz.tahfidz_nilai",
             "tahfidz.created_date", 
             "tahfidz.created_by",
             "users.users_name"

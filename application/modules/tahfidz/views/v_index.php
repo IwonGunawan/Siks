@@ -33,7 +33,7 @@
                             <th>Kelas</th>
                             <th>Waktu</th>
                             <th>Juz - Surat - Ayat</th> <!-- juz, surat dan ayat -->
-                            <th>Status</th>
+                            <th>Nilai</th>
                             <th>Petugas</th>
                             <th>Tanggal</th>
                             <th></th>
