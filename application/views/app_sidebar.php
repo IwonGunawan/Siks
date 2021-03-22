@@ -45,7 +45,7 @@
 
                 <li class="menu-title">Laporan</li>
                 <li>
-                    <a href="<?=base_url('page_not_found');?>" class="waves-effect">
+                    <a href="<?=base_url('reports/tahfidz');?>" class="waves-effect">
                         <i class="mdi mdi-chart-bar-stacked"></i><span>Laporan Nilai Tahfidz </span>
                     </a>
                 </li> 
