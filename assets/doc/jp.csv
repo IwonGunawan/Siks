@@ -1,0 +1,64 @@
+jp_id;jp_kode;jp_judul;jp_bobot;jp_grup_id;isActive
+1;A1;Setiap keterlambatan masuk jam pertama setelah 5 menit bel berbunyi;2;1;0
+2;A2;Setiap keterlambatan mengikuti upacara bendera;2;1;0
+3;A3;Setiap terlambat masuk istirahat;1;1;0
+4;A4;Setiap izin keluar KBM berlangsung dan tidak kembali;3;1;0
+5;B1;Setiap tidak masuk karena izin tidak syari;1;2;0
+6;B2;Setiap tidak masuk karena tanpa keterangan (alpa);3;2;0
+7;B3;Setiap tidak masuk dengan membuat keterangan bohong;10;2;0
+8;B4;Setiap membolos jam belajar awal/akhir ;3;2;0
+9;B5;Setiap membolos tidak mengikuti kegiatan tahfidz, tahsin, ekstrakulikuler atau pramuka.;2;2;0
+10;C1;Setiap memakai seragam sekolah tidak sesuai aturan/jadwal yang telah ditentukan ;5;3;0
+11;C2;Setiap memakai seragam sekolah kotor & tidak rapi;4;3;0
+12;C3;Setiap tidak mengenakan topi dan almamater pada waktu mengikuti upacara;2;3;0
+13;C4;Setiap memakai sandal saat upacara;2;3;0
+14;C5;Setiap memakai peci yang tidak pada jadwalnya begitupula memakai khimar bukan pada jadwalnya;3;3;0
+15;C6;Memakasi bros/menata khimar berlebihan (akhwat);4;3;0
+16;C7;Setiap tidak memakasi sabuk (ikhwan);1;3;0
+17;C8;Setiap memakai pakaian seragam olahraga di KBM bukan penjas;2;3;0
+18;D1;Setiap Memakai parfum yang menyengat (akhwat);3;4;0
+19;D2;Setiap berhias yang menonjolkan kecantikan/tabarruj (akhwat);2;4;0
+20;D3;Setiap santri ikhwan yang gondrong rambut melewati mati/telinga;3;4;0
+21;D4;Setiap santri ikhwan memakai gelang/kalung/anting/tindik;2;4;0
+22;D5;Setiap rambut dipotong tidak rapi;3;4;0
+23;D6;Setiap rambut yang dicat selain hitam;3;4;0
+24;D7;Setiap mengeluarkan kata-kata tidak senonoh/kasar terhadap teman;8;4;0
+25;D8;Setiap mengeluarkan kata-kata tidak senonoh/kasar terhadap guru;10;4;0
+26;D9;Setiap menyakiti perasaan teman/bully;10;4;0
+27;D10;Setiap mengancam teman/guru;25;4;0
+28;D11;Setiap mencuri;50;4;0
+29;D12;Setiap berbohong kepada guru /orangtua;50;4;0
+30;D13;Setiap ketahuan+terbukti berkhalwat atau berikhtilat;50;4;0
+31;D14;Setiap melawan kepada orangtua/guru;50;4;0
+32;D15;Setiap pulang lewat dari jadwal yang ditentukan tanpa alasan syar’i;20;4;0
+33;D16;Setiap tidak mengikuti kegiatan wajib dilingkungan pesantren;20;4;0
+34;D17;Keluar pada saat jam pelajaran;20;4;0
+35;D18;Tidak mengikuti eskul;25;4;0
+36;D19;Tidak membayarkan SPP/amanah yang dititipkan orangtua untuk pihak yang berhak;25;4;0
+37;D20;Makan dan minum sambil berdiri / berjalan;10;4;0
+38;E1;Setiap mengotori, mencorat coret tembok/meja/kursi sekolah;5;5;0
+39;E2;Setiap merusak benda milik sekolah;15;5;0
+40;E3;Setiap bermusuhan dengan teman didalam atau diluar sekolah;15;5;0
+41;E4;Setiap membuat kegaduhan didalam kelas pada saat KBM berlangsung;10;5;0
+42;E5;Setiap melompati pagar sekolah untuk keluar/masuk/kabur dari pesantren;20;5;0
+43;E6;Ke kantin/jajan saat jam pelajaran;20;5;0
+44;E7;Membuang sampah sembarangan;15;5;0
+45;E8;Membiarkan barang pribadi tergeletak di tempat umum;20;5;0
+46;F1;Setiap membawa rokok kedalam lingkungan pesantren;50;6;0
+47;F2;Setiap menghisap rokok didalam/sekitar lingkungan pesantren;50;6;0
+48;G1;Setiap membawa buku, majalah, kaset, CD dan foto yang mengandung porno;80;7;0
+49;G2;Setiap memperjual belikan buku, majalah, kaset, CD, dan foto yang mengandung porno;80;7;0
+50;G3;Setiap melihat foto / video yang mengandung adegan dewasa;80;7;0
+51;G4;Membawa senjata tajam/api tanpa izin;80;8;0
+52;G5;Memperjualbelikan sejata tajam/api;80;8;0
+53;G6;Menggunakan senjata tajam/api untuk melukai orang;80;8;0
+54;I1;Mabuk disekolah;100;9;0
+55;I2;Membawa narkoba/minuman keras ke lingkungan pesantren;100;9;0
+56;I3;Menggunakan narkoba, minuman keras didalam atau diluar lingkungan pesantren;100;9;0
+57;J1;Berkelahi/tawuran dengan siswa sekolah lain;50;10;0
+58;J2;Berkelahi antar santri ponpes al ihsan baron bogor dan berdampak luas;50;10;0
+59;J3;Berkelahi antar santri ponpes al ihsan baron bogor dan tidak berdampak luas;50;10;0
+60;J4;Setiap menjadi provokator perkelahian;50;10;0
+61;K1;Setiap mengancam dan mengintimidasi kepala sekolah dan guru;80;11;0
+62;K2;Menganiaya, mengeroyok ustadz / ustadzah;80;11;0
+63;K3;Setiap menjadi provokator untuk melawan  ustadz / ustadzah;80;11;0

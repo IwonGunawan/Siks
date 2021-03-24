@@ -67,7 +67,48 @@ if ($page == "Edit")
                       </div>
                       <div class="row form-group">
                           <div class="col col-md-3"><label for="text-input" class=" form-control-label">Peristiwa*</label></div>
-                          <div class="col-12 col-md-9"><textarea class="form-control" name="pelanggaran_peristiwa" rows="7" required=""><?=$pelanggaran_peristiwa;?></textarea></div>
+                          <div class="col-12 col-md-9">
+                            <select name="pelanggaran_peristiwa" class="form-control">
+
+                              <?php
+                              if (count($jp) > 0) 
+                              {
+                                foreach ($jp as $key => $row) 
+                                {
+                                  $selected = "";
+                                  if ($row['jp_id'] == $pelanggaran_peristiwa) 
+                                  {
+                                    $selected = "selected";
+                                  }
+
+
+                                  if ($key == 0) // first
+                                  {
+                                    echo "<optgroup label='".$row['jp_grup_judul']."'>";
+                                    echo "<option ".$selected." value='".$row['jp_id']."'>".$row['jp_judul']."</option>";
+                                  }
+                                  else if ($key == count($jp)-1) // last
+                                  {
+                                    echo "<option ".$selected." value='".$row['jp_id']."'>".$row['jp_judul']."</option>";
+                                    echo "</optgroup>";
+                                  }
+                                  else if ($row['jp_grup_id'] == $jp[$key -1]['jp_grup_id']) 
+                                  {
+                                    echo "<option ".$selected." value='".$row['jp_id']."'>".$row['jp_judul']."</option>";
+                                  }
+                                  else if ($row['jp_grup_id'] != $jp[$key -1]['jp_grup_id']) 
+                                  {
+                                    echo "</optgroup>";
+                                    echo "<optgroup label='".$row['jp_grup_judul']."'>";
+                                    echo "<option ".$selected." value='".$row['jp_id']."'>".$row['jp_judul']."</option>";
+                                  }
+                                }
+                              }
+
+                              ?>
+                            </select>
+
+                          </div>
                       </div>
                       <div class="row form-group">
                           <div class="col col-md-3"><label for="text-input" class=" form-control-label">Kronologi*</label></div>

@@ -47,7 +47,7 @@ class Pelanggaran extends CI_Controller
 
           $content[] = "<a href='".base_url('pelanggaran/detail/'.$uuid)."'>".$row['nama']."</a>";
           $content[] = $row['kelas'];
-          $content[] = $row['pelanggaran_peristiwa'];
+          $content[] = $row['jp_judul'];
           $content[] = $row['users_name'];
           $content[] = date("M d, Y H:i", strtotime($row['created_date']));
 
@@ -75,6 +75,7 @@ class Pelanggaran extends CI_Controller
       $data["page"]       = "Create";
       $data["content"]    = "pelanggaran/v_create";
       $data["santriList"] = $this->M_santri->santriList();
+      $data["jp"]         = $this->M_pelanggaran->jpList();
       
       $this->load->view("app_template", $data);
     }
@@ -123,6 +124,7 @@ class Pelanggaran extends CI_Controller
         $data["page"]       = "Edit";
         $data["content"]    = "pelanggaran/v_create";
         $data["santriList"] = $this->M_santri->santriList();
+        $data["jp"]         = $this->M_pelanggaran->jpList();
         $data["row"]        = $this->M_pelanggaran->edit($pelanggaran_uuid);
 
         $this->load->view("app_template", $data);

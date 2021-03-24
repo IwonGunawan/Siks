@@ -11,11 +11,11 @@ class M_pelanggaran extends CI_Model
   								'b.nama'
   							); 
   var $column_search 	= array(
-                  'a.pelanggaran_peristiwa', 
                   'a.created_date', 
                   'b.nama', 
                   'b.kelas',
                   'c.users_name',
+                  "d.jp_judul",
   							);
   var $order = array('a.pelanggaran_id' => 'DESC'); // default order 
 
@@ -47,12 +47,12 @@ class M_pelanggaran extends CI_Model
     $fields = array(
         "a.pelanggaran_id",
         "a.pelanggaran_uuid",
-        "a.pelanggaran_peristiwa",
         "a.created_by",
         "a.created_date",
         "b.nama",
         "b.kelas",
-        "c.users_name"
+        "c.users_name",
+        "d.jp_judul"
     );
 
     return implode(",", $fields);
@@ -64,6 +64,7 @@ class M_pelanggaran extends CI_Model
     $this->db->from("pelanggaran as a");
     $this->db->join("santri as b", "a.santri_id=b.id", "LEFT");
     $this->db->join("users as c", "a.created_by=c.users_id", "LEFT");
+    $this->db->join("jp as d", "a.pelanggaran_peristiwa=d.jp_id", "LEFT");
     $this->db->where("a.deleted", config("NOT_DELETED"));
 
     $i = 0;
@@ -142,9 +143,10 @@ class M_pelanggaran extends CI_Model
     $result   = array();
     if ($uuid !="") 
     {
-      $this->db->select("pelanggaran.*, santri.id, santri.nama, santri.kelas");
+      $this->db->select("pelanggaran.*, santri.id, santri.nama, santri.kelas, jp.jp_judul");
       $this->db->from("pelanggaran");
       $this->db->join("santri", "pelanggaran.santri_id=santri.id", "LEFT");
+      $this->db->join("jp", "pelanggaran.pelanggaran_peristiwa=jp.jp_id", "LEFT");
       $this->db->where("pelanggaran.pelanggaran_uuid", $uuid);
       $this->db->where("pelanggaran.deleted", config("NOT_DELETED"));
       $query    = $this->db->get();
@@ -219,6 +221,17 @@ class M_pelanggaran extends CI_Model
   	}
 
   	return $result;
+  }
+
+  function jpList()
+  {
+    $this->db->select("a.jp_id, a.jp_judul, a.jp_grup_id, b.jp_grup_judul");
+    $this->db->from("jp as a");
+    $this->db->join("jp_grup as b", "a.jp_grup_id=b.jp_grup_id", "LEFT");
+    $this->db->where("a.isActive", 0);
+    $query = $this->db->get();
+
+    return $query->result_array();
   }
 
 	
