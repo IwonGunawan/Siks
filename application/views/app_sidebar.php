@@ -50,8 +50,8 @@
                     </a>
                 </li> 
                 <li>
-                    <a href="<?=base_url('page_not_found');?>" class="waves-effect">
-                        <i class="mdi mdi-chart-pie"></i><span>Laporan Perkembangan Santri</span>
+                    <a href="<?=base_url('reports/pelanggaran');?>" class="waves-effect">
+                        <i class="mdi mdi-chart-pie"></i><span>Laporan Pencatatan Sanksi</span>
                     </a>
                 </li>
                 <?php } ?>
