@@ -14,7 +14,9 @@ class Tahfidz extends CI_Controller
     $this->load->model("reports/M_tahfidz");
     $this->load->helper("config");
 
-    $this->sess['users_id']    = $this->session->userdata("users_id");
+    $this->users_id    = $this->session->userdata("users_id");
+    $this->users_email = $this->session->userdata("users_email");
+    $this->users_level = $this->session->userdata("users_level");
   }
  
   public function index()
@@ -22,8 +24,16 @@ class Tahfidz extends CI_Controller
     $data["page"]      = "Laporan Nilai Tahfidz";
     $data["content"]   = "reports/v_tahfidz";
     $data["curr_month"]      = $this->_curr_month();
-    $data["graph_data"]      = json_encode($this->M_tahfidz->view_avg_all());
-
+    
+    if ($this->users_level == config("LEVEL_SANTRI")) 
+    {
+      $data['graph_data']     = json_encode($this->M_tahfidz->view_per_santri($this->users_email));
+    } 
+    else 
+    {
+      $data["graph_data"]      = json_encode($this->M_tahfidz->view_avg_all());
+    }
+    
     $this->load->view("app_template", $data);
   } 
 

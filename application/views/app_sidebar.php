@@ -78,12 +78,12 @@
                 <?php if($whoIsLogin == config("LEVEL_SANTRI")){ ?>
                 <li class="menu-title">Laporan</li>
                 <li>
-                    <a href="<?=base_url('page_not_found');?>" class="waves-effect">
+                    <a href="<?=base_url('reports/tahfidz');?>" class="waves-effect">
                         <i class="mdi mdi-chart-bar-stacked"></i><span>Nilai Tahfidz </span>
                     </a>
                 </li> 
                 <li>
-                    <a href="<?=base_url('page_not_found');?>" class="waves-effect">
+                    <a href="<?=base_url('reports/pelanggaran');?>" class="waves-effect">
                         <i class="mdi mdi-chart-pie"></i><span>Perkembangan Sikap</span>
                     </a>
                 </li>
