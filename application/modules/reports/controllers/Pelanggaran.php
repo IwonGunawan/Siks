@@ -14,7 +14,9 @@ class Pelanggaran extends CI_Controller
     $this->load->model("reports/M_pelanggaran");
     $this->load->helper("config");
 
-    $this->sess['users_id']    = $this->session->userdata("users_id");
+    $this->users_id    = $this->session->userdata("users_id");
+    $this->users_email = $this->session->userdata("users_email");
+    $this->users_level = $this->session->userdata("users_level");
   }
  
   public function index()
@@ -22,7 +24,16 @@ class Pelanggaran extends CI_Controller
     $data["page"]      = "Laporan Pencatatan Sanksi";
     $data["content"]   = "reports/v_pelanggaran";
     $data["curr_month"]      = $this->_curr_month();
-    $data["graph_data"]      = json_encode($this->M_pelanggaran->view_avg_all());
+    $data["curr_login"]      = $this->users_level;
+
+    if ($this->users_level == config("LEVEL_SANTRI")) 
+    {
+      $data['graph_data']     = json_encode($this->M_pelanggaran->view_per_santri($this->users_email));
+    } 
+    else 
+    {
+      $data["graph_data"]     = json_encode($this->M_pelanggaran->view_avg_all());
+    }
 
     $this->load->view("app_template", $data);
   } 

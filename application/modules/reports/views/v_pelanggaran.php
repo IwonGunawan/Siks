@@ -11,6 +11,7 @@
         <div class="col-md-12">
             <div class="card">
               <div class="card-header">
+                  <?php if($curr_login != config("LEVEL_SANTRI")){ ?> 
                   <form method="GET" action="<?=base_url('reports/tahfidz/view');?>">
                     <div class="col-md-3">
                       <label class="form-label">View By : </label>
@@ -21,8 +22,8 @@
                         <option value="IX">Kelas IX</option>
                       </select>
                     </div>
-
                   </form>
+                <?php } ?>
               </div>
               <div class="card-body">
 
@@ -71,6 +72,9 @@
             plotBorderWidth: null,
             plotShadow: false,
             type: 'pie'
+        },
+        credits: {
+          enabled: false
         },
         title: {
             text: 'Laporan Pencatatan Sanksi : <?php echo $curr_month; ?>'

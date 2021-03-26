@@ -24,6 +24,7 @@ class Tahfidz extends CI_Controller
     $data["page"]      = "Laporan Nilai Tahfidz";
     $data["content"]   = "reports/v_tahfidz";
     $data["curr_month"]      = $this->_curr_month();
+    $data["curr_login"]      = $this->users_level;
     
     if ($this->users_level == config("LEVEL_SANTRI")) 
     {
@@ -33,7 +34,7 @@ class Tahfidz extends CI_Controller
     {
       $data["graph_data"]      = json_encode($this->M_tahfidz->view_avg_all());
     }
-    
+
     $this->load->view("app_template", $data);
   } 
 

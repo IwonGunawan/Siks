@@ -48,12 +48,12 @@
 
                             <div class="form-group">
                                 <label for="username">NIK/NISN</label>
-                                <input type="text" class="form-control" id="users_email" name="users_email" placeholder="Enter NIK/NISN" value="admin@gmail.com">
+                                <input type="text" class="form-control" id="users_email" name="users_email" placeholder="Enter NIK/NISN">
                             </div>
 
                             <div class="form-group">
                                 <label for="userpassword">Password</label>
-                                <input type="password" class="form-control" id="users_password" name="users_password" placeholder="Enter password" value="demo">
+                                <input type="password" class="form-control" id="users_password" name="users_password" placeholder="Enter password">
                             </div>
 
                             <div class="form-group row m-t-20">

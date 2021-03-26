@@ -54,27 +54,27 @@ class M_pelanggaran extends CI_Model
         $result[$key] = array("name" => $row[0], "y" => $row[1]);
       }
     }
-
-    
+ 
     return $result;
   }
 
-
-  function _avg_query($santri_kelas="")
+  function view_per_santri($users_email="")
   {
-    $monthly  = $this->monthly();
+    $result = array();
+    if ($users_email != "") 
+    {
+      // change users_email to santri_id
+      $santri_id = $this->changeEmailToSantriID($users_email);
+      if ($santri_id > 0) 
+      {
+          $content = $this->_get_avg_per_santri($santri_id);
 
-    $this->db->select("b.id, b.nama, b.kelas, a.pelanggaran_peristiwa");
-    $this->db->from("pelanggaran as a");
-    $this->db->join("santri as b", "a.santri_id=b.id", "LEFT");
-    $this->db->where("a.created_date >=", $monthly[0]);
-    $this->db->where("a.created_date <=", $monthly[1]);
-    $this->db->where("b.kelas", $santri_kelas);
-    $this->db->where("a.deleted", config("NOT_DELETED"));
-    $this->db->order_by("b.id", "ASC");
-
-    $query      = $this->db->get();
-    $result = $query->result_array();
+          $result = array(
+                  array("name" => "Poin Pelanggaran", "y" => $content), 
+                  array("name" => "Sisa Poin", "y" => 100 - $content)
+          );
+      }
+    }
 
     return $result;
   }
@@ -218,9 +218,82 @@ class M_pelanggaran extends CI_Model
     return $result;
   }
 
+  function _get_avg_per_santri($santri_id=0)
+  {
+    $result     = array();
+    $arr_result = $this->_avg_query_per_santri($santri_id);
+
+    if (count($arr_result) > 0) 
+    {
+      $container = array();
+      foreach ($arr_result as $key => $row) 
+      {
+        array_push($container, $row['pelanggaran_peristiwa']);
+      }
+
+      $result = array_sum($container);
+    }
+
+    return $result;
+  }
+
+  function _avg_query($santri_kelas="")
+  {
+    $monthly  = $this->monthly();
+
+    $this->db->select("b.id, b.nama, b.kelas, a.pelanggaran_peristiwa");
+    $this->db->from("pelanggaran as a");
+    $this->db->join("santri as b", "a.santri_id=b.id", "LEFT");
+    $this->db->where("a.created_date >=", $monthly[0]);
+    $this->db->where("a.created_date <=", $monthly[1]);
+    $this->db->where("b.kelas", $santri_kelas);
+    $this->db->where("a.deleted", config("NOT_DELETED"));
+    $this->db->order_by("b.id", "ASC");
+
+    $query      = $this->db->get();
+    $result = $query->result_array();
+
+    return $result;
+  }
+
+  function _avg_query_per_santri($santri_id=0)
+  {
+    $monthly  = $this->monthly();
+
+    $this->db->select("santri_id, pelanggaran_peristiwa");
+    $this->db->from("pelanggaran");
+    $this->db->where("created_date >=", $monthly[0]);
+    $this->db->where("created_date <=", $monthly[1]);
+    $this->db->where("santri_id", $santri_id);
+    $this->db->where("deleted", config("NOT_DELETED"));
+    $this->db->order_by("pelanggaran_id", "ASC");
+
+    $query      = $this->db->get();
+    $result = $query->result_array();
+
+    return $result;
+  }
+
   function rounding($val=0)
   {
     return round($val, 1);
+  }
+
+  function changeEmailToSantriID($users_email="")
+  {
+    $this->db->select("id as santri_id");
+    $this->db->from("santri");
+    $this->db->where("nisn", $users_email);
+    $this->db->where("deleted", config("NOT_DELETED"));
+
+    $query = $this->db->get();
+    $result= $query->row_array();
+    if (isset($result['santri_id'])) 
+    {
+      return $result['santri_id'];
+    }
+
+    return 0;
   }
 
 
