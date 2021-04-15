@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 22, 2021 at 09:22 AM
+-- Generation Time: Mar 26, 2021 at 07:49 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.2.31
 
@@ -57,6 +57,117 @@ INSERT INTO `bidang_ajar` (`id`, `judul`, `deleted`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `jp`
+--
+
+CREATE TABLE `jp` (
+  `jp_id` smallint(5) NOT NULL,
+  `jp_kode` varchar(10) NOT NULL,
+  `jp_judul` varchar(225) NOT NULL,
+  `jp_bobot` tinyint(3) NOT NULL,
+  `jp_grup_id` tinyint(3) NOT NULL,
+  `isActive` char(1) NOT NULL COMMENT '0=active, 1=non active'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `jp`
+--
+
+INSERT INTO `jp` (`jp_id`, `jp_kode`, `jp_judul`, `jp_bobot`, `jp_grup_id`, `isActive`) VALUES
+(1, 'A1', 'Setiap keterlambatan masuk jam pertama setelah 5 menit bel berbunyi', 2, 1, '0'),
+(2, 'A2', 'Setiap keterlambatan mengikuti upacara bendera', 2, 1, '0'),
+(3, 'A3', 'Setiap terlambat masuk istirahat', 1, 1, '0'),
+(4, 'A4', 'Setiap izin keluar KBM berlangsung dan tidak kembali', 3, 1, '0'),
+(5, 'B1', 'Setiap tidak masuk karena izin tidak syari', 1, 2, '0'),
+(6, 'B2', 'Setiap tidak masuk karena tanpa keterangan (alpa)', 3, 2, '0'),
+(7, 'B3', 'Setiap tidak masuk dengan membuat keterangan bohong', 10, 2, '0'),
+(8, 'B4', 'Setiap membolos jam belajar awal/akhir ', 3, 2, '0'),
+(9, 'B5', 'Setiap membolos tidak mengikuti kegiatan tahfidz, tahsin, ekstrakulikuler atau pramuka.', 2, 2, '0'),
+(10, 'C1', 'Setiap memakai seragam sekolah tidak sesuai aturan/jadwal yang telah ditentukan ', 5, 3, '0'),
+(11, 'C2', 'Setiap memakai seragam sekolah kotor & tidak rapi', 4, 3, '0'),
+(12, 'C3', 'Setiap tidak mengenakan topi dan almamater pada waktu mengikuti upacara', 2, 3, '0'),
+(13, 'C4', 'Setiap memakai sandal saat upacara', 2, 3, '0'),
+(14, 'C5', 'Setiap memakai peci yang tidak pada jadwalnya begitupula memakai khimar bukan pada jadwalnya', 3, 3, '0'),
+(15, 'C6', 'Memakasi bros/menata khimar berlebihan (akhwat)', 4, 3, '0'),
+(16, 'C7', 'Setiap tidak memakasi sabuk (ikhwan)', 1, 3, '0'),
+(17, 'C8', 'Setiap memakai pakaian seragam olahraga di KBM bukan penjas', 2, 3, '0'),
+(18, 'D1', 'Setiap Memakai parfum yang menyengat (akhwat)', 3, 4, '0'),
+(19, 'D2', 'Setiap berhias yang menonjolkan kecantikan/tabarruj (akhwat)', 2, 4, '0'),
+(20, 'D3', 'Setiap santri ikhwan yang gondrong rambut melewati mati/telinga', 3, 4, '0'),
+(21, 'D4', 'Setiap santri ikhwan memakai gelang/kalung/anting/tindik', 2, 4, '0'),
+(22, 'D5', 'Setiap rambut dipotong tidak rapi', 3, 4, '0'),
+(23, 'D6', 'Setiap rambut yang dicat selain hitam', 3, 4, '0'),
+(24, 'D7', 'Setiap mengeluarkan kata-kata tidak senonoh/kasar terhadap teman', 8, 4, '0'),
+(25, 'D8', 'Setiap mengeluarkan kata-kata tidak senonoh/kasar terhadap guru', 10, 4, '0'),
+(26, 'D9', 'Setiap menyakiti perasaan teman/bully', 10, 4, '0'),
+(27, 'D10', 'Setiap mengancam teman/guru', 25, 4, '0'),
+(28, 'D11', 'Setiap mencuri', 50, 4, '0'),
+(29, 'D12', 'Setiap berbohong kepada guru /orangtua', 50, 4, '0'),
+(30, 'D13', 'Setiap ketahuan+terbukti berkhalwat atau berikhtilat', 50, 4, '0'),
+(31, 'D14', 'Setiap melawan kepada orangtua/guru', 50, 4, '0'),
+(33, 'D16', 'Setiap tidak mengikuti kegiatan wajib dilingkungan pesantren', 20, 4, '0'),
+(34, 'D17', 'Keluar pada saat jam pelajaran', 20, 4, '0'),
+(35, 'D18', 'Tidak mengikuti eskul', 25, 4, '0'),
+(36, 'D19', 'Tidak membayarkan SPP/amanah yang dititipkan orangtua untuk pihak yang berhak', 25, 4, '0'),
+(37, 'D20', 'Makan dan minum sambil berdiri / berjalan', 10, 4, '0'),
+(38, 'E1', 'Setiap mengotori, mencorat coret tembok/meja/kursi sekolah', 5, 5, '0'),
+(39, 'E2', 'Setiap merusak benda milik sekolah', 15, 5, '0'),
+(40, 'E3', 'Setiap bermusuhan dengan teman didalam atau diluar sekolah', 15, 5, '0'),
+(41, 'E4', 'Setiap membuat kegaduhan didalam kelas pada saat KBM berlangsung', 10, 5, '0'),
+(42, 'E5', 'Setiap melompati pagar sekolah untuk keluar/masuk/kabur dari pesantren', 20, 5, '0'),
+(43, 'E6', 'Ke kantin/jajan saat jam pelajaran', 20, 5, '0'),
+(44, 'E7', 'Membuang sampah sembarangan', 15, 5, '0'),
+(45, 'E8', 'Membiarkan barang pribadi tergeletak di tempat umum', 20, 5, '0'),
+(46, 'F1', 'Setiap membawa rokok kedalam lingkungan pesantren', 50, 6, '0'),
+(47, 'F2', 'Setiap menghisap rokok didalam/sekitar lingkungan pesantren', 50, 6, '0'),
+(48, 'G1', 'Setiap membawa buku, majalah, kaset, CD dan foto yang mengandung porno', 80, 7, '0'),
+(49, 'G2', 'Setiap memperjual belikan buku, majalah, kaset, CD, dan foto yang mengandung porno', 80, 7, '0'),
+(50, 'G3', 'Setiap melihat foto / video yang mengandung adegan dewasa', 80, 7, '0'),
+(51, 'G4', 'Membawa senjata tajam/api tanpa izin', 80, 8, '0'),
+(52, 'G5', 'Memperjualbelikan sejata tajam/api', 80, 8, '0'),
+(53, 'G6', 'Menggunakan senjata tajam/api untuk melukai orang', 80, 8, '0'),
+(54, 'I1', 'Mabuk disekolah', 100, 9, '0'),
+(55, 'I2', 'Membawa narkoba/minuman keras ke lingkungan pesantren', 100, 9, '0'),
+(56, 'I3', 'Menggunakan narkoba, minuman keras didalam atau diluar lingkungan pesantren', 100, 9, '0'),
+(57, 'J1', 'Berkelahi/tawuran dengan siswa sekolah lain', 50, 10, '0'),
+(58, 'J2', 'Berkelahi antar santri ponpes al ihsan baron bogor dan berdampak luas', 50, 10, '0'),
+(59, 'J3', 'Berkelahi antar santri ponpes al ihsan baron bogor dan tidak berdampak luas', 50, 10, '0'),
+(60, 'J4', 'Setiap menjadi provokator perkelahian', 50, 10, '0'),
+(61, 'K1', 'Setiap mengancam dan mengintimidasi kepala sekolah dan guru', 80, 11, '0'),
+(62, 'K2', 'Menganiaya, mengeroyok ustadz / ustadzah', 80, 11, '0'),
+(63, 'K3', 'Setiap menjadi provokator untuk melawan  ustadz / ustadzah', 80, 11, '0');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jp_grup`
+--
+
+CREATE TABLE `jp_grup` (
+  `jp_grup_id` tinyint(3) NOT NULL,
+  `jp_grup_judul` varchar(225) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `jp_grup`
+--
+
+INSERT INTO `jp_grup` (`jp_grup_id`, `jp_grup_judul`) VALUES
+(1, 'KETERLAMBATAN'),
+(2, 'KEHADIRAN'),
+(3, 'PAKAIAN'),
+(4, 'KEPRIBADIAN'),
+(5, 'KETERTIBAN'),
+(6, 'MEROKOK'),
+(7, 'PORNOGRAFI'),
+(8, 'SENJATA TAJAM'),
+(9, 'NARKOBA DAN MINUMAN KERAS'),
+(10, 'BERKELAHI'),
+(11, 'INTIMIDASI/ANCAMAN DENGAN KEKERASAN');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `pelanggaran`
 --
 
@@ -80,8 +191,14 @@ CREATE TABLE `pelanggaran` (
 --
 
 INSERT INTO `pelanggaran` (`pelanggaran_id`, `pelanggaran_uuid`, `santri_id`, `pelanggaran_peristiwa`, `pelanggaran_kronologi`, `pelanggaran_motif`, `pelanggaran_solusi`, `created_date`, `created_by`, `modified_date`, `modified_by`, `deleted`) VALUES
-(1, 'b6cb663f-846e-11eb-9585-f3322214fcb3', 5, 'tidur dikelas2', 'setelah makan siang2', 'ngantuk2', 'kasih kopi2', '2021-03-14 09:41:01', 1, '2021-03-14 09:42:07', 1, '0'),
-(2, '1d3873e1-8471-11eb-9585-f3322214fcb3', 4, 'Merokok', 'ketahuan meroko dikantin', 'ikut ikutan', 'ganti permen', '2021-03-14 09:58:11', 1, '2021-03-14 09:58:39', 1, '0');
+(1, 'c9aa229e-8c74-11eb-a999-8c8590927d1f', 5, '12', 'ketika pagi senin pas upacara', 'lupa alasan nya', 'di ingatkan dan diberikan hukuman ringan', '2021-03-24 14:44:39', 1, '2021-03-24 14:51:53', 1, '0'),
+(2, 'ebd509b0-8c74-11eb-a999-8c8590927d1f', 4, '46', 'ketika pagi setelah upacara', 'bosen', 'dilaporkan kepada orang tua', '2021-03-24 14:45:36', 1, NULL, NULL, '0'),
+(3, '3556cd1c-8d6f-11eb-a999-8c8590927d1f', 1, '5', 'lorem ipsum lorem ipsum lorem ipsum', 'lorem ipsum lorem ipsum lorem ipsum', 'lorem ipsum lorem ipsum lorem ipsum', '2021-03-25 20:37:14', 1, NULL, NULL, '0'),
+(4, '3e381350-8d6f-11eb-a999-8c8590927d1f', 1, '1', 'lorem ipsum lorem ipsum lorem ipsum', 'lorem ipsum lorem ipsum lorem ipsum', 'lorem ipsum lorem ipsum lorem ipsum', '2021-03-25 20:37:28', 1, NULL, NULL, '0'),
+(5, '59673bec-8d6f-11eb-a999-8c8590927d1f', 1, '11', 'lorem ipsum lorem ipsum lorem ipsum', 'lorem ipsum lorem ipsum lorem ipsum', 'lorem ipsum lorem ipsum lorem ipsum', '2021-03-25 20:38:14', 1, NULL, NULL, '0'),
+(6, '7d9e5e46-8d6f-11eb-a999-8c8590927d1f', 2, '16', 'lorem ipsum lorem ipsum lorem ipsum', 'lorem ipsum lorem ipsum lorem ipsum', 'lorem ipsum lorem ipsum lorem ipsum', '2021-03-25 20:39:15', 1, NULL, NULL, '0'),
+(7, '059021ee-8d71-11eb-a999-8c8590927d1f', 2, '8', 'lorem ipsum lorem ipsum lorem ipsum', 'lorem ipsum lorem ipsum lorem ipsum', 'lorem ipsum lorem ipsum lorem ipsum', '2021-03-25 20:50:12', 1, NULL, NULL, '0'),
+(8, '0d9a0f26-8d71-11eb-a999-8c8590927d1f', 5, '13', 'lorem ipsum lorem ipsum lorem ipsum', 'lorem ipsum lorem ipsum lorem ipsum', 'lorem ipsum lorem ipsum lorem ipsum', '2021-03-25 20:50:26', 1, NULL, NULL, '0');
 
 -- --------------------------------------------------------
 
@@ -124,7 +241,7 @@ CREATE TABLE `santri` (
 --
 
 INSERT INTO `santri` (`id`, `uuid`, `no_induk`, `nisn`, `nama`, `kelas`, `jk`, `tempat_lahir`, `tgl_lahir`, `agama`, `status`, `anak_ke`, `alamat`, `asal_sekolah`, `diterima_dikelas`, `tgl_terima`, `ayah`, `ayah_pekerjaan`, `ibu`, `ibu_pekerjaan`, `wali`, `wali_pekerjaan`, `created_date`, `created_by`, `modified_date`, `modified_by`, `deleted`) VALUES
-(1, 'e4d99f85-e0e6-11ea-8996-d19c9a2f1bfb', '112233445566', '23454321', 'Abdullah Syafi\'i', 'VII', 'M', 'Bogor', '1994-08-18', 'Islam', 'Anak Kandung', 3, 'Jl. Raya Bogor - Jakarta no 109', 'SMA Pandu', 'X', '2020-08-10', 'Mamat', 'Petani', 'Aminah', 'Ibu Rumah Tangga', 'Budiman', 'Karyawan Swasta', '2020-08-18 07:07:39', 1, NULL, NULL, '0'),
+(1, 'e4d99f85-e0e6-11ea-8996-d19c9a2f1bfb', '112233445566', '0069456691', 'Abdullah Syafii', 'VII', 'M', 'Bogor', '1994-08-18', 'Islam', 'Anak Kandung', 3, 'Jl. Raya Bogor - Jakarta no 109', 'SMA Pandu', 'X', '2020-08-10', 'Mamat', 'Petani', 'Aminah', 'Ibu Rumah Tangga', 'Budiman', 'Karyawan Swasta', '2020-08-18 07:07:39', 1, '2021-03-25 21:22:40', 1, '0'),
 (2, '8355b5a8-e0e8-11ea-8996-d19c9a2f1bfb', '9988776655', '9998881112', 'Muhammad Rahman', 'IX', 'M', 'Bogor', '2001-07-11', 'Islam', 'Anak Kandung', 2, 'Jalan Raya Parung', 'SMK bina nusantara', 'X', '2020-08-10', 'Ja\'i', 'Guru', 'Soimah', 'Ibu Rumah Tangga', 'Syakur', 'Pedagang', '2020-08-18 07:19:14', 1, '2021-03-19 09:31:55', 1, '0'),
 (3, '14781aae-83ab-11eb-9585-f3322214fcb3', '11', '22', 'aa', 'VIII', 'M', 'Bogor', '1995-04-13', 'islam', '', 0, '', '', '', '0000-00-00', '', '', '', '', '', '', '2021-03-13 10:20:37', 1, NULL, NULL, '1'),
 (4, '9692a1bf-83ab-11eb-9585-f3322214fcb3', '222', '333', 'Budi Darmawan', 'VII', 'M', 'Bogor', '2021-03-13', 'islam', 'kandung', 4, 'bogor', 'SD', '7', '2021-03-13', 'aaa', 'bbb', 'teaa', 'a', 'a', 'a', '2021-03-13 10:24:15', 1, '2021-03-19 14:46:55', 1, '0'),
@@ -197,9 +314,9 @@ INSERT INTO `users` (`users_id`, `users_uuid`, `users_name`, `users_email`, `use
 (1, '152d48e7-a68f-3620-94fb-e78e639f1bad', 'Yayi Suaidah', 'admin@gmail.com', '$2y$10$TsfEBqjcc6GnMeQApuveGumCUIQw/o7ubXQ2iFVdNMrPveawXEGra', '0', '0', '2018-07-25 06:38:19', 'yayi', NULL, '0', '0'),
 (2, '152d48e7-a68f-3620-94fb-e78e639fb002', 'KH. Wendy Asswan Cahyadi, S.TP., M.Pd.I\r\n', '3271032806750011', '$2y$10$TsfEBqjcc6GnMeQApuveGumCUIQw/o7ubXQ2iFVdNMrPveawXEGra', '1', '0', '2018-07-25 06:38:19', 'yayi', NULL, '0', '0'),
 (3, '152d48e7-a68f-3620-94fb-e78e639fb003', 'Ahmad Azkaa Taqiyuddin', '0069456691', '$2y$10$TsfEBqjcc6GnMeQApuveGumCUIQw/o7ubXQ2iFVdNMrPveawXEGra', '2', '0', '2018-07-25 06:38:19', 'yayi', '2021-03-14 10:08:06', 'Yayi Suaidah', '0'),
-(4, '0b60bb0f-8474-11eb-9585-f3322214fcb3', 'Sobirin', '11223344', '$2y$10$Zqo5Hx8IhfRCrVIbRVERO.g4s4G4kMYF1qm29ehzsoMe1ucNRjv8i', '1', '0', '2021-03-14 10:19:10', 'Yayi Suaidah', '2021-03-14 10:51:17', 'Yayi Suaidah', '1'),
-(5, '7acd0b6f-8478-11eb-9585-f3322214fcb3', 'sobur', '1122', '$2y$10$CpD09nBKIhlSDU9DDGVOjuv0rGKAxgJb1gjUpjy81wM1mjtEGI0ym', '2', '0', '2021-03-14 10:50:55', 'Yayi Suaidah', '2021-03-14 10:51:13', 'Yayi Suaidah', '1'),
-(6, '454584e6-84cd-11eb-9585-f3322214fcb3', 'H. Lupiyanto, S.E., M.Pd', '3271040502790029', '$2y$10$noYHwmKmLDaH7TvPlmU3Subs0InzI2mU5fKcmrbQJIxHsIxW/YtGS', '2', '0', '2021-03-14 20:57:52', 'Yayi Suaidah', '2021-03-14 21:07:24', 'Yayi Suaidah', '0');
+(4, '0b60bb0f-8474-11eb-9585-f3322214fcb3', 'Muhammad Rahman', '9998881112', '$2y$10$TsfEBqjcc6GnMeQApuveGumCUIQw/o7ubXQ2iFVdNMrPveawXEGra', '2', '0', '2021-03-14 10:19:10', 'Yayi Suaidah', '2021-03-14 10:51:17', 'Yayi Suaidah', '0'),
+(5, '7acd0b6f-8478-11eb-9585-f3322214fcb3', 'sobur', '1122', '$2y$10$CpD09nBKIhlSDU9DDGVOjuv0rGKAxgJb1gjUpjy81wM1mjtEGI0ym', '1', '0', '2021-03-14 10:50:55', 'Yayi Suaidah', '2021-03-14 10:51:13', 'Yayi Suaidah', '1'),
+(6, '454584e6-84cd-11eb-9585-f3322214fcb3', 'H. Lupiyanto, S.E., M.Pd', '3271040502790029', '$2y$10$noYHwmKmLDaH7TvPlmU3Subs0InzI2mU5fKcmrbQJIxHsIxW/YtGS', '1', '0', '2021-03-14 20:57:52', 'Yayi Suaidah', '2021-03-14 21:07:24', 'Yayi Suaidah', '0');
 
 -- --------------------------------------------------------
 
@@ -245,6 +362,22 @@ INSERT INTO `ustadz` (`ustadz_id`, `ustadz_uuid`, `ustadz_nik`, `ustadz_nama`, `
 ALTER TABLE `bidang_ajar`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id` (`id`);
+
+--
+-- Indexes for table `jp`
+--
+ALTER TABLE `jp`
+  ADD PRIMARY KEY (`jp_id`),
+  ADD UNIQUE KEY `jp_id` (`jp_id`),
+  ADD KEY `jp_id_2` (`jp_id`);
+
+--
+-- Indexes for table `jp_grup`
+--
+ALTER TABLE `jp_grup`
+  ADD PRIMARY KEY (`jp_grup_id`),
+  ADD UNIQUE KEY `jp_grup_id` (`jp_grup_id`),
+  ADD KEY `jp_grup_id_2` (`jp_grup_id`);
 
 --
 -- Indexes for table `pelanggaran`
@@ -295,10 +428,22 @@ ALTER TABLE `bidang_ajar`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
+-- AUTO_INCREMENT for table `jp`
+--
+ALTER TABLE `jp`
+  MODIFY `jp_id` smallint(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+
+--
+-- AUTO_INCREMENT for table `jp_grup`
+--
+ALTER TABLE `jp_grup`
+  MODIFY `jp_grup_id` tinyint(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
 -- AUTO_INCREMENT for table `pelanggaran`
 --
 ALTER TABLE `pelanggaran`
-  MODIFY `pelanggaran_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `pelanggaran_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `santri`
